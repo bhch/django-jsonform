@@ -1,0 +1,192 @@
+.rjf-add-button {
+    background: url(./img/icon-addlink.svg) 0 1px no-repeat;
+    padding-left: 16px;
+    font-size: 12px;
+    color: #447e9b;
+    cursor: pointer;
+    margin-top: 8px;
+    border: 0px none;
+}
+.rjf-add-button:hover {
+    color: #036;
+    background-color: #f0faff;
+}
+
+.rjf-form-group-wrapper {
+    position: relative;
+    width: 100%;
+    max-width: 39em;
+}
+.rjf-form-group {
+    margin-bottom: 15px;
+    position: relative;
+    width: 100%;
+    max-width: 39em;
+}
+.rjf-form-group-wrapper > .rjf-form-group {
+    max-width: 100%;
+}
+.rjf-form-group-inner {
+    box-sizing: border-box;
+    position: relative;
+    width: 100%;
+    margin-bottom: 10px;
+    border: 1px solid #e5e5e5;
+    border-radius: 4px;
+    padding: 10px;
+    box-shadow: 0 0 2px rgba(0,0,0,0.075);
+    transition: background-color 0.12s ease-in-out;
+}
+.rjf-form-row {
+    padding: 5px 0;
+    display: table;
+    width: 100%;
+    position: relative;
+}
+.rjf-form-row-inner {
+    transition: background-color 0.12s ease-in-out;
+    padding: 5px;
+}
+
+.rjf-form-row input {
+    width: 20em;
+}
+
+.rjf-form-row label + div {
+    margin-left: 170px;
+}
+
+.rjf-file-field {
+    color: #666;
+}
+
+.rjf-file-field .rjf-file-field-input {
+    display: inline-block;
+}
+.rjf-file-field .rjf-file-field-input input {
+    max-width: 18em;
+}
+
+.rjf-current-file-name {
+    color: #666;
+    max-width: 20em;
+    margin-bottom: 0.5em;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+.rjf-current-file-name > span {
+    background-color: #eaf9ff;
+    color: #071d1f;
+    padding: 1px 4px;
+    border-radius: 3px;
+}
+
+.rjf-form-row label input[type="checkbox"] {
+    margin-top: 0;
+    vertical-align: 0;
+    display: inline-block;
+    width: auto;
+}
+
+.rjf-remove-button {
+    position: absolute;
+    top: 2px;
+    right: 5px;
+    text-indent: -9999px;
+    background: url(./img/icon-deletelink.svg) 0 1px no-repeat;
+    width: 3px;
+    height: 16px;
+    border: 0px none;
+    cursor: pointer;
+    z-index: 2;
+}
+.rjf-form-row > .rjf-remove-button {
+    top: 50%;
+    transform: translateY(-50%);
+}
+.rjf-remove-button:hover + .rjf-form-row-inner,
+.rjf-remove-button:hover + .rjf-form-group > .rjf-form-group-inner {
+    background-color: #fff3f3;
+}
+
+.rjf-edit-button {
+    text-indent: -9999px;
+    background: url(./img/icon-changelink.svg) 0 1px no-repeat;
+    width: 3px;
+    height: 16px;
+    border: 0px none;
+    cursor: pointer;
+}
+
+.rjf-file-field-loading {
+    margin-top: 0.6em;
+    vertical-align: middle;
+    display: inline-block;
+}
+.rjf-loader {
+    clear: both;
+    display: inline-block;
+    margin-right: 0.1em;
+    height: 0.9em;
+    width: 0.9em;
+    vertical-align: middle;;
+    border: 2px #a7e6f0 solid;
+    border-top-color: #2d6c8b;
+    border-radius: 50%;
+    -webkit-animation: loaderRotate .4s infinite linear;
+    animation: loaderRotate .4s infinite linear;
+}
+
+@-webkit-keyframes loaderRotate {
+    from {
+        -webkit-transform: rotate(0deg);
+    }
+    to {
+        -webkit-transform: rotate(359deg);
+    }
+}
+@keyframes loaderRotate {
+    from {
+        transform: rotate(0deg);
+    }
+    to {
+        transform: rotate(359deg);
+    }
+}
+
+@media(max-width: 767px) {
+    .rjf-form-group {
+        width: calc(100vw - 30px);
+        max-width: 100%;
+    }
+
+    .rjf-form-row input {
+        width: 100%;
+    }
+
+    .rjf-form-row label input[type="checkbox"] {
+        width: auto;
+    }
+
+    .rjf-form-row > .rjf-remove-button {
+        top: 5px;
+        transform: none;
+    }
+
+    .rjf-form-row label + div {
+        margin-left: auto;
+    }
+
+    .rjf-current-file-name {
+        width: 100%;
+        max-width: 100%;
+        white-space: unset;
+        word-wrap: anywhere;
+        word-break: break-all;
+    }
+
+    .rjf-file-field-loading {
+        margin-top: 0;
+    }
+}
