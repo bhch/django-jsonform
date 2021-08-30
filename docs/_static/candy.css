@@ -1,0 +1,568 @@
+/*
+ * candy.css
+ * ---------
+ *
+ * Overrides sphinx_rtd_theme.
+ *
+ * :copyright: Copyright 2021 Bharat Chauhan
+ * :license: BSD-3-Clause
+ *
+ */
+
+/*
+
+Colours
+-------
+
+$text-color: #323130;
+
+$color-primary-shade-30: #004a41;
+$color-primary-shade-20: #006256;
+$color-primary-shade-10: #0a766c;
+$color-primary: #008374;
+$color-primary-tint-10: #1e958a;
+$color-primary-tint-20: #c9f2ed;
+$color-primary-tint-30: #dff8f6;
+$color-primary-tint-40: #f0fbfa;
+
+$color-accent-shade-20: #be1932;
+$color-accent-shade-10: #d7213c;
+$color-accent: #ea2643;
+$color-accent-tint-10: #ff3855;
+
+$color-black: #000000;
+$color-gray-190: #201f1e;
+$color-gray-160: #323130;
+$color-gray-150: #3b3a39;
+$color-gray-130: #605e5c;
+$color-gray-120: #797775;
+$color-gray-90: #a19f9d;
+$color-gray-60: #c8c6c4;
+$color-gray-50: #d2d0ce;
+$color-gray-40: #e1dfdd;
+$color-gray-30: #edebe9;
+$color-gray-20: #f3f2f1;
+$color-gray-10: #faf9f8;
+$color-white: #ffffff;
+
+$color-error-dark : #d83b01;
+$color-error-light : #f55215;
+$color-success-dark : #107c10;
+$color-success-light : #3cb43c;
+*/
+
+
+body {
+    font-family: Inter, 'Open Sans', Roboto, Lato, proxima-nova, Helvetica Neue,
+        Arial, sans-serif;
+    color: #323130;
+}
+
+.rst-content .toctree-wrapper > p.caption, 
+h1, h2, h3, h4, h5, h6, legend {
+    font-family: 'IBM Plex Sans', Roboto, 'Roboto Slab', ff-tisa-web-pro,
+        Georgia, Arial, sans-serif;
+    font-weight: 500;
+}
+
+input[type="color"], 
+input[type="date"], 
+input[type="datetime-local"], 
+input[type="datetime"], 
+input[type="email"], 
+input[type="month"], 
+input[type="number"], 
+input[type="password"], 
+input[type="search"], 
+input[type="tel"], 
+input[type="text"], 
+input[type="time"], 
+input[type="url"], 
+input[type="week"] {
+    font-family: inherit;
+    box-shadow: none;
+}
+
+a {
+    text-decoration: none;
+}
+a, a:visited {
+    color: #ea2643;
+}
+
+a:hover {
+    color: #be1932;
+    text-decoration: underline;
+}
+
+hr {
+    border-color: #e1dfdd;
+}
+
+.wy-body-for-nav {
+    background-color: #f3f2f1;
+}
+
+.wy-nav-top {
+    background: #ff373b;
+}
+.wy-nav-top a, 
+.wy-nav-top a:visited  {
+    color: #fff;
+    text-decoration: none;
+}
+
+.wy-side-nav-search .wy-dropdown > a img.logo, 
+.wy-side-nav-search > a img.logo {
+    max-width: 150px;
+}
+.wy-side-nav-search {
+    background-color: transparent;
+}
+.wy-side-nav-search input[type="text"] {
+    border-color: #d2d0ce;
+    border-radius: 4px;
+}
+.wy-side-nav-search input[type="text"]:focus {
+    border-color: #008374;
+}
+.wy-nav-side {
+    background-color: #f3f2f1;
+    border-right: 1px solid #e1dfdd;
+}
+.wy-menu-vertical header, 
+.wy-menu-vertical p.caption,
+.wy-side-nav-search > div.version {
+    color: #a19f9d;
+}
+.wy-menu-vertical a {
+    color: #323130;
+    font-family: 'Roboto', sans-serif;
+    border-left: 4px solid transparent;
+    font-size: 95%;
+    text-decoration: none;
+}
+.wy-menu-vertical a,
+.wy-menu-vertical li.current > a, 
+.wy-menu-vertical li.on a {
+    padding-top: 0.7em;
+    padding-bottom: 0.7em;
+}
+.wy-menu-vertical a:hover,
+.wy-menu-vertical li.current a:hover {
+    background-color: #e1dfdd;
+}
+.wy-menu-vertical a:active {
+    color: #fff;
+    background-color: #ff3c37;
+}
+span.toctree-expand {
+    color: inherit !important;
+}
+.wy-menu-vertical li.current > a, 
+.wy-menu-vertical li.on a {
+    color: #ea2643;
+    font-weight: normal;
+}
+.wy-menu-vertical li.current a {
+    border-right: none;
+}
+.wy-menu-vertical li.toctree-l1.current > a {
+    border-top: none;
+    border-bottom: none;
+    background: linear-gradient(to bottom right, #ff5722, #ff1259);
+    color: #fff;
+}
+.wy-menu-vertical li.current {
+    background: #f0fbfa;
+}
+.wy-menu-vertical li.toctree-l2.current > a, 
+.wy-menu-vertical li.toctree-l2.current li.toctree-l3 > a {
+    background-color: transparent;
+}
+.wy-menu-vertical li.toctree-l3.current > a, 
+.wy-menu-vertical li.toctree-l3.current li.toctree-l4 > a {
+    background-color: transparent;
+}
+
+.wy-nav-content-wrap {
+    background: transparent;
+}
+.wy-nav-content {
+    background-color: #fcfcfc;
+    border-right: 1px solid #e1dfdd;
+    padding: 25px 50px;
+    min-height: 100vh;
+    position: relative;
+}
+
+.wy-nav-content > .rst-content {
+    margin-bottom: 200px;
+} 
+.wy-breadcrumbs {
+    font-size: 85%;
+}
+
+div.deprecated {
+    background: #ffdec6;
+    padding: 10px 10px 2px;
+    border-radius: 2px;
+}
+div.admonition {
+    margin-left: -50px;
+    margin-right: -50px;
+    padding: 25px 50px !important;
+    border-top: 1px solid #e1dfdd;
+    border-bottom: 1px solid #e1dfdd;
+}
+p.admonition-title {
+    background-color: transparent !important;
+    color: inherit !important;
+}
+.admonition.warning,
+.admonition.danger,
+.admonition.error,
+.admonition.caution,
+.admonition.attention,
+.admonition.important {
+    background: #ffdec6;
+    color: #510f00;
+    border-color: #eed3c0;
+}
+
+.btn,
+.btn-neutral,
+.btn-neutral:visited {
+    border: 1px solid #ea2643;
+    color: #ea2643 !important;
+    background-color: #fff !important;
+    box-shadow: none;
+}
+.btn:hover,
+.btn-neutral:hover,
+.btn-neutral:visited:hover {
+    color: #fff !important;
+    background-color: #ea2643 !important;
+    box-shadow: none;
+    text-decoration: none;
+}
+
+.rst-content .highlighted {
+    background: #fffbbb;
+    box-shadow: none;
+}
+
+.rst-content .code-block-caption .headerlink::after, 
+.rst-content .toctree-wrapper > p.caption:hover .headerlink::after, 
+.rst-content dl dt .headerlink::after, 
+.rst-content h1 .headerlink::after, 
+.rst-content h2 .headerlink::after, 
+.rst-content h3 .headerlink::after, 
+.rst-content h4 .headerlink::after, 
+.rst-content h5 .headerlink::after, 
+.rst-content h6 .headerlink::after, 
+.rst-content p.caption .headerlink::after, 
+.rst-content table > caption .headerlink::after {
+    display: none;
+}
+
+.rst-content .code-block-caption .headerlink, 
+.rst-content .toctree-wrapper > p.caption .headerlink, 
+.rst-content dl dt .headerlink, 
+.rst-content h1 .headerlink, 
+.rst-content h2 .headerlink, 
+.rst-content h3 .headerlink, 
+.rst-content h4 .headerlink, 
+.rst-content h5 .headerlink, 
+.rst-content h6 .headerlink, 
+.rst-content p.caption .headerlink, 
+.rst-content table > caption .headerlink {
+    margin-left: 0.25em;
+    font-size: 1em;
+    color: #a19f9d;
+    text-decoration: none;
+}
+
+.rst-content .code-block-caption .headerlink:hover, 
+.rst-content .toctree-wrapper > p.caption .headerlink:hover, 
+.rst-content dl dt .headerlink:hover, 
+.rst-content h1 .headerlink:hover, 
+.rst-content h2 .headerlink:hover, 
+.rst-content h3 .headerlink:hover, 
+.rst-content h4 .headerlink:hover, 
+.rst-content h5 .headerlink:hover, 
+.rst-content h6 .headerlink:hover, 
+.rst-content p.caption .headerlink:hover, 
+.rst-content table > caption .headerlink:hover {
+    color: #008374;
+}
+
+.rst-content .code-block-caption:hover .headerlink, 
+.rst-content .toctree-wrapper > p.caption:hover .headerlink, 
+.rst-content dl dt:hover .headerlink, 
+.rst-content h1:hover .headerlink, 
+.rst-content h2:hover .headerlink, 
+.rst-content h3:hover .headerlink, 
+.rst-content h4:hover .headerlink, 
+.rst-content h5:hover .headerlink, 
+.rst-content h6:hover .headerlink, 
+.rst-content p.caption:hover .headerlink, 
+.rst-content table > caption:hover .headerlink {
+    visibility: visible;
+}
+
+dl {
+    margin-bottom: 1.5rem;
+    margin-top: 1.5rem;
+}
+dt {
+    margin-bottom: 0.5rem;
+}
+dd p {
+    margin-bottom: 0.5rem;
+}
+html.writer-html4 .rst-content dl:not(.docutils) > dt, 
+html.writer-html5 .rst-content dl[class]:not(.option-list):not(.field-list):not(.footnote):not(.glossary):not(.simple) > dt {
+    background: none;
+    color: #008374;
+    border: none;
+}
+html.writer-html4 .rst-content dl:not(.docutils) dl:not(.field-list) > dt, 
+html.writer-html5 .rst-content dl[class]:not(.option-list):not(.field-list):not(.footnote):not(.glossary):not(.simple) dl:not(.field-list) > dt {
+    background: none;
+    color: #008374;
+    border: none;
+}
+
+.rst-content code, .rst-content tt {
+    color: #008374;
+}
+.rst-content code, 
+.rst-content tt,
+code {
+    border: none;
+    background-color: none;
+}
+
+a > .rst-content code, 
+a > .rst-content tt,
+a > code {
+    color: #d7213c !important;
+}
+
+a:hover > .rst-content code, 
+a:hover > .rst-content tt,
+a:hover > code {
+    background-color: #dff8f6;
+}
+
+.rst-content code,
+.rst-content tt,
+code,
+kbd,
+pre,
+samp,
+.rst-content .linenodiv pre,
+.rst-content div[class^="highlight"] pre,
+.rst-content pre.literal-block {
+    font-family: 'IBM Plex Mono', SFMono-Regular, Menlo, Monaco, Consolas,
+        Liberation Mono, monospace;
+}
+
+.rst-content code.literal, 
+.rst-content tt.literal {
+    color: #0a766c;
+    font-size: 90%;
+}
+
+.highlight {
+    background-color: transparent;
+}
+
+.rst-content div[class^="highlight"],  
+.rst-content pre.literal-block {
+    margin-left: -50px;
+    margin-right: -50px;
+    padding: 30px 50px;
+    border-top: 1px solid #e1dfdd;
+    border-bottom: 1px solid #e1dfdd;
+    border-right: none;
+    border-left: none;
+    border-radius: 0;
+    background-color: #faf9f8;
+    overflow: auto;
+}
+
+.rst-content dl div[class^="highlight"],
+.rst-content dl pre.literal-block {
+    margin-left: 0;
+    margin-right: 0;
+    padding: 15px 15px;
+    border: 1px solid #e1dfdd;
+    border-radius: 2px;
+}
+
+.rst-content div[class^="highlight"] > div.highlight {
+    overflow: visible;
+}
+
+.rst-content div[class^="highlight"] pre {
+    padding: 0;
+    overflow: visible;
+}
+
+.rst-content .linenodiv pre, 
+.rst-content div[class^="highlight"] pre, 
+.rst-content pre.literal-block {
+    font-size: 87%;
+}
+
+table.highlighttable {
+    padding-left: 0;
+}
+table.highlighttable .highlight {
+    padding-left: 0;
+    margin: 0;
+    border: none;
+}
+.highlight > pre {
+    margin-bottom: 0;
+}
+.highlight pre span {
+    font-weight: normal !important;
+}
+.highlight .hll {
+    display: block;
+    width: 100%;
+}
+.highlighttable .linenos {
+    background-color: #f3f2f1;
+    padding-left: 15px;
+    padding-right: 15px;
+    padding-top: 15px;
+}
+.highlighttable .code {
+    width: 100%;
+}
+
+.wy-nav-content footer {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    padding: 25px 50px;
+    border-top: 1px solid #e1dfdd;
+    background-color: #f3f2f1;
+    color: #797775;
+}
+footer p {
+    font-size: 85%;
+}
+
+.wy-breadcrumbs + hr,
+footer hr {
+    margin-left: -50px;
+    margin-right: -50px;
+}
+
+@media screen and (max-width:768px) {
+    .wy-nav-content-wrap .wy-nav-content {
+        padding: 25px;
+        border: none;
+    }
+
+    .wy-nav-content > .rst-content {
+        margin-bottom: 240px;
+    } 
+    
+    div.admonition {
+        margin-left: -25px;
+        margin-right: -25px;
+        padding: 25px 25px !important;
+    }
+
+    .headerlink {
+        visibility: visible !important;
+    }
+
+    .rst-content div[class^="highlight"], 
+    .rst-content pre.literal-block {
+        margin-left: -25px;
+        margin-right: -25px;
+        padding: 25px 25px;
+    }
+
+    .wy-nav-content footer {
+        padding: 25px 25px;
+    }
+
+    .wy-breadcrumbs + hr,
+    footer hr {
+        margin-left: -25px;
+        margin-right: -25px;
+    }
+}
+
+/*
+ * Pygments code highlight theme
+*/
+
+.highlight, .highlighttable .code {
+    background-color: #f7f7f9; 
+}
+
+/* Highlited line */
+.highlight .hll { 
+    background-color: #edebe9; 
+}
+
+/* Comments */
+.highlight .c,
+.highlight .cm,
+.highlight .cp,
+.highlight .c1,
+.highlight .cs {
+    color: #999;
+}
+
+/* Strings */
+.highlight .s,
+.highlight .sb,
+.highlight .sc,
+.highlight .sd,
+.highlight .s2,
+.highlight .se,
+.highlight .sh,
+.highlight .si,
+.highlight .sx,
+.highlight .sr,
+.highlight .s1,
+.highlight .ss {
+    color: #489741;
+}
+
+/* Keywords */
+.highlight .k,
+.highlight .kn,
+.highlight .kd {
+    color: #df115e;
+}
+
+/* Class name, functions, methods, builtins, imported module */
+.highlight .nn, 
+.highlight .nf,
+.highlight .na,
+.highlight .nt,
+.highlight .fm, 
+.highlight .nc {
+    color: #0e84b5;
+}
+
+/* self */
+.highlight .bp {
+    color: #007020;
+}
+
+.highlight .ow {
+    color: #d96600;
+}

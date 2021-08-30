@@ -1,0 +1,7 @@
+django-jsonform 1.0.0 release notes
+===================================
+
+Aug 30, 2021
+------------
+
+The first release.
