@@ -230,6 +230,16 @@ p.admonition-title {
     border-color: #eed3c0;
 }
 
+.admonition code {
+    background-color: rgba(255, 255, 255, 0.55);
+}
+.admonition a {
+    text-decoration: underline dotted;
+}
+.admonition a:hover {
+    text-decoration: underline;
+}
+
 .btn,
 .btn-neutral,
 .btn-neutral:visited {

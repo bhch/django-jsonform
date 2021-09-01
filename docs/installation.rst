@@ -13,6 +13,7 @@ Update your project's settings:
 .. code-block:: python
 
     # settings.py
+    
     INSTALLED_APPS = [
         # ...
         'django_jsonform'
