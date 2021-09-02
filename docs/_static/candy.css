@@ -192,15 +192,46 @@ span.toctree-expand {
     background-color: #fcfcfc;
     border-right: 1px solid #e1dfdd;
     padding: 25px 50px;
+    padding-bottom: 0;
     min-height: 100vh;
     position: relative;
+    display: -webkit-box;
+    display: -webkit-flex;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-orient: vertical;
+    -webkit-box-direction: normal;
+    -webkit-flex-direction: column;
+    -ms-flex-direction: column;
+    flex-direction: column;
 }
 
 .wy-nav-content > .rst-content {
-    margin-bottom: 200px;
+    display: -webkit-box;
+    display: -webkit-flex;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-orient: vertical;
+    -webkit-box-direction: normal;
+    -webkit-flex-direction: column;
+    -ms-flex-direction: column;
+    flex-direction: column;
+    -webkit-box-flex: 1;
+    -webkit-flex: 1 0 auto;
+    -ms-flex: 1 0 auto;
+    flex: 1 0 auto;    height: 100%;
+    min-height: 100%;
 } 
 .wy-breadcrumbs {
     font-size: 85%;
+}
+
+.wy-nav-content .rst-content > .document {
+    -webkit-box-flex: 1;
+    -webkit-flex: 1 0 auto;
+    -ms-flex: 1 0 auto;
+    flex: 1 0 auto;
+    margin-bottom: 25px;
 }
 
 div.deprecated {
@@ -456,14 +487,16 @@ table.highlighttable .highlight {
 }
 
 .wy-nav-content footer {
-    position: absolute;
-    bottom: 0;
-    left: 0;
-    right: 0;
     padding: 25px 50px;
+    margin-right: -50px;
+    margin-left: -50px;
     border-top: 1px solid #e1dfdd;
     background-color: #f3f2f1;
     color: #797775;
+    -webkit-box-flex: 0;
+    -webkit-flex: none;
+    -ms-flex: none;
+    flex: none;
 }
 footer p {
     font-size: 85%;
@@ -478,12 +511,9 @@ footer hr {
 @media screen and (max-width:768px) {
     .wy-nav-content-wrap .wy-nav-content {
         padding: 25px;
+        padding-bottom: 0;
         border: none;
     }
-
-    .wy-nav-content > .rst-content {
-        margin-bottom: 240px;
-    } 
     
     div.admonition {
         margin-left: -25px;
@@ -504,6 +534,8 @@ footer hr {
 
     .wy-nav-content footer {
         padding: 25px 25px;
+        margin-right: -25px;
+        margin-left: -25px;
     }
 
     .wy-breadcrumbs + hr,
