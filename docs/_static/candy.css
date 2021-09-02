@@ -234,6 +234,15 @@ span.toctree-expand {
     margin-bottom: 25px;
 }
 
+/* remove flex from these elements to avoid shrinking */
+.wy-nav-content .rst-content > div[role="navigation"],
+.wy-nav-content .rst-content > footer {
+    -webkit-box-flex: 0;
+    -webkit-flex: none;
+    -ms-flex: none;
+    flex: none;
+}
+
 div.deprecated {
     background: #ffdec6;
     padding: 10px 10px 2px;
@@ -492,11 +501,7 @@ table.highlighttable .highlight {
     margin-left: -50px;
     border-top: 1px solid #e1dfdd;
     background-color: #f3f2f1;
-    color: #797775;
-    -webkit-box-flex: 0;
-    -webkit-flex: none;
-    -ms-flex: none;
-    flex: none;
+    color: #797775
 }
 footer p {
     font-size: 85%;
