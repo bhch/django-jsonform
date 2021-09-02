@@ -24,4 +24,6 @@ Table of contents
    installation
    quickstart
    guide/index
+   schema
+   examples
    releases/index

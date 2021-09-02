@@ -85,5 +85,7 @@ look something like this:
 Next steps
 ----------
 
-The :doc:`User's guide <guide/index>` contains further details about various
-input types, uploading files and other features.
+- The :doc:`User's guide <guide/index>` contains further details about various
+  input types, uploading files and other features.
+- See :doc:`schema` for a reference on the supported schema.
+- See :doc:`examples` for sample schemas for declaring complex data structures.

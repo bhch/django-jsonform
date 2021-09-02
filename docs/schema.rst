@@ -1,52 +1,200 @@
-Schema Guide
+Schema guide
 ============
+
+django-jsonform currently implements a custom JSON Schema spec.
+
+You should also read the standard spec at
+`https://json-schema.org <https://json-schema.org/learn/getting-started-step-by-step>`_.
+
+At this moment, a lot of the features declared in the standard spec are not
+supported by django-jsonform.
+
+For some complex schema examples, see :doc:`Examples page <examples>`.
 
 
 Types
 -----
 
-``array``:
-    Equivalent of a list in Python.
-    Requires an ``items`` key.
-``object``:
-    Equivalent of a dict in Python.
-    Requires a ``keys`` key.
-``string``:
-    A string input.
-``number``:
-    A number.
-``float``:
-    A floating point number.
+Currently, only these six types are supported:
 
-Candy provides its own :class:`~django_candy.admin.ModelAdmin` and :class:`AdminSite` 
-classes. You can't use Django's ``ModelAdmin`` with Candy.
+.. contents::
+    :depth: 1
+    :local:
+    :backlinks: none
 
-Import ``admin`` from ``django_candy``:
+
+``array`` (alias ``list``)
+~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+A JSON array (similar to Python list).
+
+Keywords:
+
+- ``items`` (**required**) - Specifies the type of items allowed in the list.
+- ``minItems`` (alias ``min_items``) - Limit the minimum number of items in a list.
+- ``maxItems`` (alias ``max_items``) - Limit the maximum number of items in a list.
+
+This example shows a schema of a list containing string items:
 
 .. code-block:: python
 
-    from django_candy import admin
+    # Schema
+    {
+        'type': 'list', # or 'array'
+        'items': {
+            'type': 'string'
+        },
+        'min_items': 1,
+        'max_items': 5
+    }
 
 
-``array``
----------
-
-``search_fields`` and ``get_search_results`` don't work in Candy.
-
-Use :meth:`~django_candy.admin.ModelAdmin.get_filtered_queryset` to implement 
-searching and filtering. 
-
-See :ref:`Usage docs on list search <usage-list-search>` for details.
+    # Output data
+    ['one', 'two', 'three', ...]
 
 
-List filters
-------------
+``object`` (alias ``dict``)
+~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-Django admin's ``list_filter`` doesn't work. Instead, use ``list_filters`` 
-(note the extra "**s**" at the end).
+A JSON object (similar to Python dict).
 
-And Candy doesn't provide automatic filtering. You're required to filter the 
-results yourself using :meth:`~django_candy.admin.ModelAdmin`. 
+Keywords:
 
-See :ref:`Usage docs on list filters <usage-list-filters>` for details.
+- ``properties`` (alias ``keys``; **required**) - Specifies the keys (or fields)
+  in a dict/object.
+- ``additionalProperties`` - Allow users to add extra keys not delclared in the
+  schema.
 
+This example shows a schema of a basic dict:
+
+.. code-block:: python
+
+    # Schema
+    {
+        'type': 'dict': # or 'object'
+        'keys': { # or 'properties'
+            'name': {
+                'type': 'string'
+            },
+            'email': {
+                'type': 'string'
+            },
+            'age': {
+                'type': 'number',
+                'title': 'Age in years'
+            }
+        }
+    }
+
+
+    # Output data
+    {
+        'name': 'John Doe',
+        'email': 'john@example.com',
+        'age': 99
+    }
+
+
+Additional keys
+^^^^^^^^^^^^^^^
+
+By default, an object's data can only contain keys declared in the schema.
+But you can allow users to add extra keys using the ``additionalProperties``
+key:
+
+.. code-block:: python
+
+    # Schema
+    {
+        'type': 'dict': # or 'object'
+        'keys': { # or 'properties'
+            'name': {
+                'type': 'string'
+            },
+        },
+        'additionalProperties': True
+    }
+
+
+    # Output data
+    {
+        'name': 'John Doe',
+        'Gender': 'Male',
+    }
+
+The keys added by the user will only be of ``string`` type.
+
+
+``string``
+~~~~~~~~~~
+
+A string.
+
+This can't be at the top level of the schema. If you only want to save
+a string, you should use Django's ``CharField``.
+
+Keywords:
+
+- ``title`` - Specify the label for the input field.
+- ``choices`` - Specify choices for the field. A ``select`` input will be rendered.
+  See the :doc:`document on Choices <guide/choices>` for details.
+- ``format`` - Use this to specify the input field type. See :ref:`inputs for string type`
+  for more.
+- ``widget`` - Use this to specify the input field type. Only use this with ``choices``
+  keyword. For other cases, prefer the ``format`` keyword.
+
+
+``number``
+~~~~~~~~~~
+
+A number (including floats).
+
+This can't be at the top level of the schema. If you only want to save a number,
+you should use Django's ``FloatField``.
+
+Keywords:
+
+- ``title`` - Specify the label for the input field.
+- ``choices`` - Specify choices for the field. A ``select`` input will be rendered.
+  See the :doc:`document on Choices <guide/choices>` for details.
+
+It gets a ``number`` HTML input by default. It can't be overriden.
+
+
+``integer``
+~~~~~~~~~~~
+
+An integer.
+
+This can't be at the top level of the schema. If you only want to save an integer,
+you should use Django's ``IntegerField``.
+
+Keywords:
+
+- ``title`` - Specify the label for the input field.
+- ``choices`` - Specify choices for the field. A ``select`` input will be rendered.
+  See the :doc:`document on Choices <guide/choices>` for details.
+
+It gets a ``number`` HTML input by default. It can't be overriden.
+
+
+``boolean``
+~~~~~~~~~~~
+
+A boolean.
+
+This can't be at the top level of the schema. If you only want to save an boolean,
+you should use Django's ``BooleanField``.
+
+Keywords:
+
+- ``title`` - Specify the label for the input field.
+
+It gets a ``checkbox`` HTML input by default. It can't be overriden.
+
+
+Unsupported features
+--------------------
+
+Recursion and validation are the two major features which are not supported at
+present.

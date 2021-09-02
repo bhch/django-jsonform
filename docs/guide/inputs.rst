@@ -3,13 +3,15 @@ Input field types
 
 These four values for the ``type`` keyword which have an input field:
 
- 1. ``string`` - For text, email, date, file, and other inputs.
- 2. ``number`` - For number input (including floats).
- 3. ``integer`` - For integer only number input.
- 4. ``boolean`` - For ``True`` - ``False`` inputs (checkbox by default).
+1. ``string`` - For text, email, date, file, and other inputs.
+2. ``number`` - For number input (including floats).
+3. ``integer`` - For integer only number input.
+4. ``boolean`` - For ``True`` - ``False`` inputs (checkbox by default).
 
 We've excluded ``array`` and ``object`` types as they can't have input fields.
 
+
+.. _inputs for string type:
 
 Inputs for ``string`` type
 --------------------------
@@ -45,8 +47,8 @@ File inputs
 
 There two ``format`` values for file uploads: 
 
-    1. ``data-url`` - for embedding base64 encoded data in the JSON object.
-    2. ``file-url`` - for keeping only the link to the file in JSON object.
+1. ``data-url`` - for embedding base64 encoded data in the JSON object.
+2. ``file-url`` - for keeping only the link to the file in JSON object.
 
 Read :doc:`Uploading files <upload>` document for a full guide on uploading files.
 

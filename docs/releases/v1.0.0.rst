@@ -1,7 +1,14 @@
 django-jsonform 1.0.0 release notes
 ===================================
 
-Aug 30, 2021
-------------
+Sep 2, 2021
+-----------
 
 The first release.
+
+This version (v1.0.0) supports Django >= 2.0 and Python >= 3.4.
+
+react-json-form (JavaScript)
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+Uses `react-json-form <https://github.com/bhch/react-json-form>`_ version 1.2.0.
