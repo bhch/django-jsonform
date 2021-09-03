@@ -6,6 +6,12 @@
     A user-friendly JSON editing form for django admin.
 </p>
 
+## Screenshots
+
+Here's a screenshot of items being added to a shopping list (JSON array) dynamically:
+
+![django-jsonform screenshot](docs/_static/quickstart.gif)
+
 ## Install
 
 Install via pip:
@@ -36,12 +42,6 @@ Quickstart and usage docs can be found at [http://django-jsonform.rtfd.io](http:
  - [x] UI matches with Django admin's
  - [ ] Validation
  - [ ] Recursion (nesting with self references)
-
-## Screenshots
-
-Here's a screenshot of items being added to a shopping list (JSON array) dynamically:
-
-![django-jsonform screenshot](docs/_static/quickstart.gif)
 
 ## License
 
