@@ -93,13 +93,15 @@
     position: absolute;
     top: 2px;
     right: 5px;
-    text-indent: -9999px;
     background: url(./img/icon-deletelink.svg) 0 1px no-repeat;
     width: 3px;
     height: 16px;
     border: 0px none;
     cursor: pointer;
     z-index: 2;
+}
+.rjf-remove-button > span {
+    display: none;
 }
 .rjf-form-row > .rjf-remove-button {
     top: 50%;
