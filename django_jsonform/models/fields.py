@@ -25,6 +25,7 @@ class JSONField(DjangoJSONField):
         return super().formfield(**{
             'form_class': JSONFormField,
             'schema': self.schema,
+            'model_name': self.model.__name__,
             **kwargs
         })
 

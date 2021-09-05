@@ -20,8 +20,11 @@ from django.forms.widgets import TextInput
 
 
 class JSONFormField(DjangoJSONFormField):
-    def __init__(self, *, schema=None, encoder=None, decoder=None, **kwargs):
-        self.widget = JSONFormWidget(schema=schema)
+    def __init__(
+        self, *, schema=None, encoder=None, decoder=None, model_name='',
+        **kwargs
+    ):
+        self.widget = JSONFormWidget(schema=schema, model_name=model_name)
         kwargs['widget'] = self.widget
         super().__init__(**kwargs)
 
