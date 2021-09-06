@@ -127,5 +127,6 @@ Usage:
 
 
 
-This widget can also be used for an ``ArrayField``, but you'll have to provide a
-schema declaring the structure of the ``ArrayField``.
+This widget can not be used directly with Django's ``ArrayField`` because Django's
+``ArrayField`` converts the value from array to a string before passing it to
+the widget whereas it expects a list or a dict.
