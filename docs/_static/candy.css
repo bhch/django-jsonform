@@ -64,6 +64,9 @@ h1, h2, h3, h4, h5, h6, legend {
         Georgia, Arial, sans-serif;
     font-weight: 500;
 }
+h1 code, h2 code, h3 code, h4 code, h5 code, h6 code, legend code {
+    font-weight: 700;
+}
 
 input[type="color"], 
 input[type="date"], 
@@ -359,6 +362,32 @@ p.admonition-title {
 .rst-content p.caption:hover .headerlink, 
 .rst-content table > caption:hover .headerlink {
     visibility: visible;
+}
+
+p:not(.topic-title) + ul,
+p:not(.topic-title) + ol,
+p + .contents {
+    margin-top: -16px;
+}
+
+html.writer-html5 .rst-content table.docutils th {
+    border: 1px solid #e1dfdd;
+}
+.rst-content table.docutils thead th, 
+.rst-content table.field-list thead th, 
+.wy-table thead th {
+    color: #605e5c;
+}
+.rst-content table.docutils td, 
+.wy-table-bordered-all td {
+    border-bottom: 1px solid #e1dfdd;
+    border-left: 1px solid #e1dfdd;
+}
+.rst-content table.docutils:not(.field-list) tr:nth-child(2n-1) td, 
+.wy-table-backed, 
+.wy-table-odd td, 
+.wy-table-striped tr:nth-child(2n-1) td {
+    background-color: #faf9f8;
 }
 
 dl {

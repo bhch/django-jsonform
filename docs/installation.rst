@@ -1,6 +1,11 @@
 Installation
 ============
 
+Requirements:
+
+- Python >= 3.4
+- Django >= 2.0
+
 Install using pip:
 
 .. code-block:: sh

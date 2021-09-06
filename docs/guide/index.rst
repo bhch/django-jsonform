@@ -7,3 +7,4 @@ User's guide
     inputs
     choices
     upload
+    arrayfield

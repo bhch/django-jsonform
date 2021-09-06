@@ -18,6 +18,21 @@ Inputs for ``string`` type
 
 The input fields for ``string`` values can be customized using the ``format`` keyword.
 
+Possible values for ``format`` keyword are:
+
+============ ===========
+Format       Description
+============ ===========
+``color``    A colour input
+``date``     A date input
+``email``    An email input
+``password`` A password input
+``range``    A range input
+``time``     A time input
+``data-url`` A file input. See :ref:`File inputs` for details.
+``file-url`` A file input. See :ref:`File inputs` for details.
+============ ===========
+
 Examples:
 
 .. code-block:: python
@@ -41,6 +56,7 @@ Examples:
         'format': 'email'
     }
 
+    # ...
 
 File inputs
 ~~~~~~~~~~~

@@ -4,8 +4,10 @@ django-jsonform
 **django-jsonform** provides a user-friendly form interface for editing JSON data
 in Django admin.
 
-It implements a custom JSON schema spec which was written from scratch specifically
-for Django.
+You declare your data structure using JSON schema and it will generate a dynamic
+form for creating and editing the data.
+
+It also supports Postgres ``ArrayField`` with multiple levels of nesting.
 
 
 Project links
@@ -25,5 +27,6 @@ Table of contents
    quickstart
    guide/index
    schema
+   fields-and-widgets
    examples
    releases/index

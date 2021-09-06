@@ -158,6 +158,8 @@ In the schema, the ``type`` should be ``string`` and ``format`` should be ``'fil
     }
 
 
+.. _file-upload-request-parameters:
+
 Additional request parameters
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 

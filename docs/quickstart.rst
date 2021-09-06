@@ -1,31 +1,34 @@
 Quickstart
 ==========
 
-``django-jsonform`` allows you to edit JSON data by supplying a schema for the
+``django-jsonform`` allows you to edit JSON data by supplying a *schema* for the
 data structure.
 
 Shopping list
 -------------
 
 Suppose we want to create a model for saving shopping lists. A typical shopping
-list looks like this: ``['eggs', 'milk', 'juice']``.
-
-We can efficiently store these items in a JSON array (list).
+list looks like this: ``['eggs', 'milk', 'juice']``. It is basically a
+**list of strings**.
 
 Sample model
 ------------
 
-Basically, the structure of the JSON data for a shopping list is a 
-**list containing strings**. So, well define a schema accordingly.
+``django-jsonform`` provides a custom :class:`~django_jsonform.models.fields.JSONField`
+for your convenience. You can also use the :class:`widget <django_jsonform.widgets.JSONFormWidget>`
+but it requires a little more work to set up.
+
+Here's a model with sample schema:
 
 .. code-block:: python
 
     # models.py
 
-    class ShoppingList(models.Model):
-        items = models.JSONField() # you can also use a TextField
-        date_created = models.DateTimeField(auto_now_add=True)
+    from django.db import models
+    from django_jsonform.models.fields import JSONField
 
+
+    class ShoppingList(models.Model):
         ITEMS_SCHEMA = {
             'type': 'array', # a list which will contain the items
             'items': {
@@ -33,47 +36,25 @@ Basically, the structure of the JSON data for a shopping list is a
             }
         }
 
+        items = JSONField(schema=ITEMS_SCHEMA)
+        date_created = models.DateTimeField(auto_now_add=True)
 
 
+Admin
+-----
 
-JSON form widget
-----------------
-
-By default, Django will render the ``JSONField`` as a ``textarea``. But we can
-use the ``JSONFormWidget`` for the ``items`` field to get a dyanamic, user-friendly
-input.
-
-
-Add this to the **admin.py** file:
+Register your model for the admin site:
 
 .. code-block:: python
 
     # admin.py
 
     from django.contrib import admin
-    from django import forms
-    from django_jsonform.widgets import JSONFormWidget
     from myapp.models import ShoppingList
 
 
-    class ShoppingListForm(forms.ModelForm):
-        model = ShoppingList
-        fields = '__all__'
-        widgets = {
-            'items': JSONFormWidget(schema=ShoppingList.ITEMS_SCHEMA)
-        }
+    admin.site.register(ShoppingList)
 
-    class ShoppingListAdmin(admin.ModelAdmin):
-        form = ShoppingListForm
-
-    admin.site.register(ShoppingList, ShoppingListAdmin)
-
-
-By the way, you can also keep the form in a **forms.py** file to keep code better
-organised.
-
-Admin site
-----------
 
 Now go the admin site and visit the *"Add new"* shopping list page. The form should
 look something like this:
@@ -88,4 +69,5 @@ Next steps
 - The :doc:`User's guide <guide/index>` contains further details about various
   input types, uploading files and other features.
 - See :doc:`schema` for a reference on the supported schema.
+- See :doc:`fields-and-widgets` for available fields and widgets.
 - See :doc:`examples` for sample schemas for declaring complex data structures.
