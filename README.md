@@ -6,6 +6,20 @@
     A user-friendly JSON editing form for django admin.
 </p>
 
+<p align="center">
+    <a href="http://django-jsonform.rtfd.io">Documentation</a> &bull;
+    <code>Django &gt;= 2.0</code>
+</p>
+
+## Features
+
+ - [x] File uploads
+ - [x] Postgres `ArrayField`
+ - [x] Many inputs and field types
+ - [x] UI matches with Django admin's
+ - [ ] Validation
+ - [ ] Recursion (nesting with self references)
+
 ## Screenshots
 
 Here's a screenshot of items being added to a shopping list (JSON array) dynamically:
@@ -35,13 +49,6 @@ INSTALLED_APPS = [
 
 Quickstart and usage docs can be found at [http://django-jsonform.rtfd.io](http://django-jsonform.rtfd.io).
 
-## Features
-
- - [x] File uploads
- - [x] Many inputs and field types
- - [x] UI matches with Django admin's
- - [ ] Validation
- - [ ] Recursion (nesting with self references)
 
 ## License
 
