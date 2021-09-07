@@ -33,6 +33,7 @@ Keywords:
 - ``items`` (**required**) - Specifies the type of items allowed in the list.
 - ``minItems`` (alias ``min_items``) - Limit the minimum number of items in a list.
 - ``maxItems`` (alias ``max_items``) - Limit the maximum number of items in a list.
+- ``title`` - Specify a title for the list.
 
 This example shows a schema of a list containing string items:
 
@@ -64,6 +65,7 @@ Keywords:
   in a dict/object.
 - ``additionalProperties`` - Allow users to add extra keys not delclared in the
   schema.
+- ``title`` - Specify a title for the dict.
 
 This example shows a schema of a basic dict:
 
@@ -118,8 +120,8 @@ key:
 
     # Output data
     {
-        'name': 'John Doe',
-        'Gender': 'Male',
+        'name': 'John Doe', # declared in the schema
+        'gender': 'Male', # added by the user
     }
 
 The keys added by the user will only be of ``string`` type.

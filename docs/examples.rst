@@ -49,7 +49,7 @@ And here's the corresponding schema for obtaining the above data:
 Image slider
 ------------
 
-This example shows you how you can store an image slider in JSON:
+This example shows you how you can store an image slider in JSON.
 
 First, let's look at the expected data structure:
 
