@@ -30,6 +30,17 @@ The only difference is that it takes a ``schema`` argument.
 In Django < 3.1, for databases other than Postgres, it uses a ``TextField``
 underneath.
 
+.. attribute:: schema
+    :type: dict, callable
+
+    A ``dict`` or a callable object specifying the schema for the current field.
+
+    A callable is useful for :ref:`specifying dynamic choices <dynamic choices>`.
+
+    .. versionchanged:: 2.1
+
+        The ability to provide a callable was added.
+
 Usage:
 
 .. code-block:: python
@@ -92,8 +103,15 @@ The widget which renders the editor.
 It can be used in a form if you don't want to use the model field.
 
 .. attribute:: schema
+    :type: dict, callable
 
-    The schema for the JSON data.
+    A ``dict`` or a callable object specifying the schema for the current field.
+
+    A callable is useful for :ref:`specifying dynamic choices <dynamic choices>`.
+
+    .. versionchanged:: 2.1
+
+        The ability to provide a callable was added.
 
 .. attribute:: model_name
     :type: str

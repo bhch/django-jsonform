@@ -47,6 +47,27 @@ You can also use a ``radio`` input using the ``widget`` keyword:
     }
 
 
+Dynamic choices
+---------------
+
+In some cases, you might want to return choices dynamically, such by reading
+objects from the database.
+
+For that purpose, the ``schema`` can be a callable object:
+
+.. code-block:: python
+
+    def dynamic_schema():
+        # here, you can create a schema dynamically
+        # such as read data from database and populate choices
+        schema = {...}
+        return schema
+
+
+    class MyModel(models.Model):
+        items = JSONField(schema=dynamic_schema)
+
+
 Selecting multiple items
 ------------------------
 
@@ -54,4 +75,3 @@ Currently only one item can be selected. This is because the ``string`` type
 can't be an list.
 
 For multiple selections, you should use an ``array``.
-

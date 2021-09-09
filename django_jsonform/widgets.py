@@ -14,11 +14,16 @@ class JSONFormWidget(forms.Widget):
         self.model_name = model_name
 
     def render(self, name, value, attrs=None, renderer=None):
+        if callable(self.schema):
+            schema = self.schema()
+        else:
+            schema = self.schema
+
         context = {
             'name': name,
             'model_name': self.model_name,
             'data': value or json.dumps(''),
-            'schema': json.dumps(self.schema),
+            'schema': json.dumps(schema),
         }
         return mark_safe(render_to_string(self.template_name, context))
 
