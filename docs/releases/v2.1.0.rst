@@ -1,0 +1,24 @@
+django-jsonform 2.1.0 release notes
+===================================
+
+Sep 09, 2021
+------------
+
+This version is fully backwards compatible.
+
+What's new
+~~~~~~~~~~
+
+Callable ``schema``
+^^^^^^^^^^^^^^^^^^^
+
+``schema`` can now be a callable. This allows for :ref:`specifying choices dynamically <Dynamic choices>`, 
+among other things.
+
+Minor changes
+^^^^^^^^^^^^^
+
+Improvements to the widget's CSS:
+
+ - Fixed: the remove button overlapped the input field on mobile.
+ - Fixed: ``select`` input wasn't the same width as other inputs.
