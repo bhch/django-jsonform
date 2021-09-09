@@ -48,7 +48,8 @@
     padding: 5px;
 }
 
-.rjf-form-row input {
+.rjf-form-row input,
+.rjf-form-row select {
     width: 20em;
 }
 
@@ -91,7 +92,7 @@
 
 .rjf-remove-button {
     position: absolute;
-    top: 2px;
+    top: 5px;
     right: 5px;
     background: url(./img/icon-deletelink.svg) 0 1px no-repeat;
     width: 3px;
@@ -163,7 +164,8 @@
         max-width: 100%;
     }
 
-    .rjf-form-row input {
+    .rjf-form-row input,
+    .rjf-form-row select {
         width: 100%;
     }
 
@@ -171,9 +173,8 @@
         width: auto;
     }
 
-    .rjf-form-row > .rjf-remove-button {
-        top: 5px;
-        transform: none;
+    .rjf-remove-button + .rjf-form-row-inner {
+        padding-right: 32px;
     }
 
     .rjf-form-row label + div {
