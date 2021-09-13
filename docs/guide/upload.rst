@@ -5,7 +5,7 @@ There are two ways to keep files in a JSON data:
 
 1. Base64 string - the file will be encoded as Base64 string and all the data
    will be kept within the JSON object.
-2. File url - the file will uploaded on the server and only the URL of the file
+2. File url - the file will be uploaded on the server and only the URL of the file
    will be kept in the JSON object.
 
 
@@ -82,7 +82,7 @@ A sample handler function:
 
 .. attention::
 
-    It's is recommended your upload handler function should **return the path**
+    It is recommended your upload handler function should **return the path**
     of the uploaded file **without the media url prefix**.
 
     The rationale behind it is that file's url may change but file's name
@@ -131,7 +131,7 @@ file:
 
 Behind the scenes, django-jsonform will send an AJAX request to
 ``/django-jsonform/upload/`` url and your handler function will be called with the
-the request.
+request.
 
 
 You're all set now to upload files.

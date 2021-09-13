@@ -1,13 +1,15 @@
 Schema guide
 ============
 
-django-jsonform currently implements a custom JSON Schema spec.
+django-jsonform currently implements a custom JSON Schema spec written specifically
+for Django.
 
 You should also read the standard spec at
 `https://json-schema.org <https://json-schema.org/learn/getting-started-step-by-step>`_.
 
-At this moment, a lot of the features declared in the standard spec are not
-supported by django-jsonform.
+At present, certain features from the standard spec are not supported by
+django-jsonform. However, we've also implemented a few extra features which are
+not in the standard spec.
 
 For some complex schema examples, see :doc:`Examples page <examples>`.
 

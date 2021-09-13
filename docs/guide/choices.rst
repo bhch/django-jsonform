@@ -50,7 +50,7 @@ You can also use a ``radio`` input using the ``widget`` keyword:
 Dynamic choices
 ---------------
 
-In some cases, you might want to return choices dynamically, such by reading
+In some cases, you might want to return choices dynamically, such as by reading
 objects from the database.
 
 For that purpose, the ``schema`` can be a callable object:
@@ -72,6 +72,6 @@ Selecting multiple items
 ------------------------
 
 Currently only one item can be selected. This is because the ``string`` type
-can't be an list.
+can't be a list.
 
 For multiple selections, you should use an ``array``.

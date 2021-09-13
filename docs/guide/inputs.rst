@@ -1,7 +1,7 @@
 Input field types
 =================
 
-These four values for the ``type`` keyword which have an input field:
+There are four values for the ``type`` keyword which have an input field:
 
 1. ``string`` - For text, email, date, file, and other inputs.
 2. ``number`` - For number input (including floats).
@@ -61,7 +61,7 @@ Examples:
 File inputs
 ~~~~~~~~~~~
 
-There two ``format`` values for file uploads: 
+There are two ``format`` values for file uploads: 
 
 1. ``data-url`` - for embedding base64 encoded data in the JSON object.
 2. ``file-url`` - for keeping only the link to the file in JSON object.

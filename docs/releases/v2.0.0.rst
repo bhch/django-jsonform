@@ -13,18 +13,14 @@ Like the previous version, it also supports ``Django >= 2.0`` and ``Python >= 3.
 What's new
 ~~~~~~~~~~
 
-.. _release-notes-jsonfield:
-
-``JSONField``
-^^^^^^^^^^^^^
+:class:`~django_jsonform.models.fields.JSONField`
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 A model field called :class:`~django_jsonform.models.fields.JSONField` has been
 added which makes it more convenient to set up the editing form widget.
 
-.. _release-notes-arrayfield:
-
-``ArrayField``
-^^^^^^^^^^^^^^
+:class:`~django_jsonform.models.fields.ArrayField`
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 A model field called :class:`~django_jsonform.models.fields.ArrayField` has been
 added which provides a nice, dynamic form for editing the Postgres ``ArrayField``.

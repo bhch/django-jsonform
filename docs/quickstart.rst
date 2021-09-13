@@ -56,7 +56,7 @@ Register your model for the admin site:
     admin.site.register(ShoppingList)
 
 
-Now go the admin site and visit the *"Add new"* shopping list page. The form should
+Now go to the admin site and visit the *"Add new"* shopping list page. The form should
 look something like this:
 
 .. image:: _static/quickstart.gif
