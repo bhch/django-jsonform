@@ -1,0 +1,15 @@
+django-jsonform 2.2.0 release notes
+===================================
+
+Sep 14, 2021
+------------
+
+This version adds no new featurs and is fully backwards compatible.
+
+Fix bad package
+~~~~~~~~~~~~~~~
+
+Templates and static files weren't included in the previous builds. This version
+includes all the required files.
+
+Previous versions are not usable due to this embarrasing mistake.
