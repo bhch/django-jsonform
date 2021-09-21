@@ -2,12 +2,13 @@
 
 <textarea cols="40" id="id_{{ name }}" name="{{ name }}" rows="10" required="" style="display: none;">{{ data|safe }}</textarea>
 
+{% url 'django_jsonform:upload' as upload_endpoint %}
 <script>
 (function() {
     var config = {
         containerId: 'id_{{ name }}_jsonform',
         dataInputId: 'id_{{ name }}',
-        fileUploadEndpoint: '{% url "django_jsonform:upload" %}',
+        fileUploadEndpoint: '{{ upload_endpoint }}',
         fieldName: '{{ name }}',
         modelName: '{{ model_name }}',
         schema: JSON.parse('{{ schema|escapejs }}'),
