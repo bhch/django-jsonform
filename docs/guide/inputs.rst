@@ -16,7 +16,8 @@ We've excluded ``array`` and ``object`` types as they can't have input fields.
 Inputs for ``string`` type
 --------------------------
 
-The input fields for ``string`` values can be customized using the ``format`` keyword.
+The input fields for ``string`` values can be customized using the ``format``
+and ``widget`` keywords.
 
 Possible values for ``format`` keyword are:
 
@@ -32,6 +33,15 @@ Format       Description
 ``data-url`` A file input. See :ref:`File inputs` for details.
 ``file-url`` A file input. See :ref:`File inputs` for details.
 ============ ===========
+
+Possible values for ``widget`` keyword are:
+
+============ ===========
+Widget       Description
+============ ===========
+``textarea`` A textarea input
+============ ===========
+
 
 Examples:
 
@@ -54,6 +64,12 @@ Examples:
     {
         'type': 'string',
         'format': 'email'
+    }
+
+    # 4. Textarea input
+    {
+        'type': 'string',
+        'widget': 'textarea'
     }
 
     # ...

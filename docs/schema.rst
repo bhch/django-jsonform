@@ -144,8 +144,8 @@ Keywords:
   See the :doc:`document on Choices <guide/choices>` for details.
 - ``format`` - Use this to specify the input field type. See :ref:`inputs for string type`
   for more.
-- ``widget`` - Use this to specify the input field type. Only use this with ``choices``
-  keyword. For other cases, prefer the ``format`` keyword.
+- ``widget`` - Use this to specify the input field type, such as a textarea. For
+  most use cases, prefer the ``format`` keyword.
 
 
 ``number``

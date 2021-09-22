@@ -1,0 +1,46 @@
+django-jsonform 2.3.0 release notes
+===================================
+
+
+Sep 22, 2021
+------------
+
+This version is fully backwards compatible with the previous version (v2.2.x).
+
+Like the previous version, it also supports ``Django >= 2.0`` and ``Python >= 3.4``.
+
+
+What's new
+~~~~~~~~~~
+
+react-json-form (JavaScript)
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+`react-json-form <https://github.com/bhch/react-json-form>`_ has been updated
+to version 1.5.1. This version implements following new features and many
+bugfixes.
+
+Textarea input
+^^^^^^^^^^^^^^
+
+Now a ``textarea`` input can be specified for a string field using the ``widget``
+keyword.
+
+Movable array items
+^^^^^^^^^^^^^^^^^^^
+
+Array items can now be re-ordered using arrow buttons.
+
+Bugfixes
+^^^^^^^^
+
+ - Choices for boolean type will now return a boolean value.
+ - Integer field's value was set as string before. Now it will be set as a numebr.
+ - Initial blank data was not set for certain fields (booleans, integers).
+ - Checkbox couldn't be unchecked once checked.
+
+Minor changes
+^^^^^^^^^^^^^
+
+ - Small improvements to the widget's css
+ - Javascript performance improvements

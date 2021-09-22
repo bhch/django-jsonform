@@ -1,0 +1,12 @@
+django-jsonform 2.2.1 release notes
+===================================
+
+Sep 21, 2021
+------------
+
+This is a minor release and adds no new features.
+
+Bugfixes
+~~~~~~~~
+
+ - NoReverseMatch exception was raised if django_jsonform's urls weren't registered.
