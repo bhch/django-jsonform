@@ -50,7 +50,7 @@
 
 .rjf-form-row input,
 .rjf-form-row select {
-    width: 20em;
+    width: 18em;
 }
 
 .rjf-form-row label + div {
@@ -70,7 +70,7 @@
 
 .rjf-current-file-name {
     color: #666;
-    max-width: 20em;
+    max-width: 18em;
     margin-bottom: 0.5em;
     white-space: nowrap;
     overflow: hidden;
@@ -89,28 +89,77 @@
     display: inline-block;
     width: auto;
 }
-
-.rjf-remove-button {
+.rjf-form-row-controls {
     position: absolute;
-    top: 5px;
-    right: 5px;
-    background: url(./img/icon-deletelink.svg) 0 1px no-repeat;
-    width: 3px;
-    height: 16px;
-    border: 0px none;
-    cursor: pointer;
+    right: 0;
+    top: 0;
     z-index: 2;
 }
-.rjf-remove-button > span {
-    display: none;
-}
-.rjf-form-row > .rjf-remove-button {
+.rjf-form-row > .rjf-form-row-controls {
+    right: 0.3rem;
     top: 50%;
     transform: translateY(-50%);
+    border-radius: 10rem; /* same as child button */
 }
-.rjf-remove-button:hover + .rjf-form-row-inner,
-.rjf-remove-button:hover + .rjf-form-group > .rjf-form-group-inner {
-    background-color: #fff3f3;
+.rjf-form-row-controls:hover + .rjf-form-row-inner,
+.rjf-form-row-controls:hover + .rjf-form-group {
+    background-color: #fffedd;
+}
+.rjf-form-row-controls button {
+    position: relative;
+    width: 22px;
+    height: 22px;
+    margin-left: -1px;
+    border: 0px none;
+    cursor: pointer;
+    background-color: transparent;
+    background-repeat: no-repeat;
+    background-size: 14px;
+    border: 1px solid #ddd;
+}
+.rjf-form-group-wrapper > .rjf-form-row-controls button {
+    border-top: 0;
+}
+.rjf-form-row > .rjf-form-row-controls > button {
+    border-color: #ccc;
+    border-radius: 10rem;
+}
+.rjf-form-group-wrapper > .rjf-form-row-controls > button:first-child {
+    border-bottom-left-radius: 6px;
+}
+.rjf-form-row-controls > button:not(:last-child) {
+    border-top-right-radius: 0;
+    border-bottom-right-radius: 0;
+}
+.rjf-form-row-controls > button:not(:first-child) {
+    border-top-left-radius: 0;
+    border-bottom-left-radius: 0;
+}
+.rjf-form-row-controls button:hover {
+    background-color: #fff;
+    border-color: #666;
+    z-index: 1;
+}
+.rjf-form-row-controls button > span {
+    display: none;
+}
+.rjf-remove-button {
+    background-image: url(./img/icon-deletelink.svg);
+    background-position: center center;
+}
+.rjf-move-up-button {
+    background-image: url('./img/arrow-icons.svg');
+    background-position: center 4px;
+}
+.rjf-move-up-button:hover {
+    background-position: center -15px;
+}
+.rjf-move-down-button {
+    background-image: url('./img/arrow-icons.svg');
+    background-position: center -32px;
+}
+.rjf-move-down-button:hover {
+    background-position: center -50.5px;
 }
 
 .rjf-edit-button {
@@ -173,8 +222,12 @@
         width: auto;
     }
 
-    .rjf-remove-button + .rjf-form-row-inner {
-        padding-right: 32px;
+    .rjf-form-row > .rjf-form-row-controls {
+        right: -0.4rem;
+    }
+
+    .rjf-form-row-controls + .rjf-form-row-inner {
+        padding-right: 62px;
     }
 
     .rjf-form-row label + div {
