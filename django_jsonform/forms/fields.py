@@ -2,6 +2,7 @@ import json
 import django
 from django.db import models
 from django.conf import settings
+from django.core.exceptions import ImproperlyConfigured
 
 if django.VERSION[0] >= 3 and django.VERSION[1] >= 1:
     # Django >= 3.1
@@ -13,7 +14,12 @@ else:
     else:
         from django_jsonform.forms.compat import JSONFormField as DjangoJSONFormField
 
-from django.contrib.postgres.forms import SimpleArrayField
+try:
+    from django.contrib.postgres.forms import SimpleArrayField
+except ImportError:
+    class SimpleArrayField:
+        mock_field = True
+
 from django_jsonform.widgets import JSONFormWidget
 
 from django.forms.widgets import TextInput
@@ -31,6 +37,9 @@ class JSONFormField(DjangoJSONFormField):
 
 class ArrayFormField(SimpleArrayField):
     def __init__(self, base_field, **kwargs):
+        if hasattr(SimpleArrayField, 'mock_field'):
+            raise ImproperlyConfigured('ArrayField requires psycopg2 to be installed.')
+
         self.base_field = base_field
         self.max_items = kwargs.get('max_length', kwargs.get('size', None))
         self.min_items = kwargs.get('min_length')
