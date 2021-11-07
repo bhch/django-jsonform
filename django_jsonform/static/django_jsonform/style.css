@@ -92,7 +92,7 @@
 .rjf-form-row-controls {
     position: absolute;
     right: 0;
-    top: 0;
+    top: -2px;
     z-index: 2;
 }
 .rjf-form-row > .rjf-form-row-controls {
@@ -112,9 +112,10 @@
     margin-left: -1px;
     border: 0px none;
     cursor: pointer;
+    background-image: url(./img/control-icons.svg);
     background-color: transparent;
     background-repeat: no-repeat;
-    background-size: 14px;
+    background-size: 40px;
     border: 1px solid #ddd;
 }
 .rjf-form-group-wrapper > .rjf-form-row-controls button {
@@ -144,22 +145,22 @@
     display: none;
 }
 .rjf-remove-button {
-    background-image: url(./img/icon-deletelink.svg);
-    background-position: center center;
+    background-position: -20px 0px;
+}
+.rjf-remove-button:hover {
+    background-position: -20px -20px;
 }
 .rjf-move-up-button {
-    background-image: url('./img/arrow-icons.svg');
-    background-position: center 4px;
+    background-position: 0px 0px;
 }
 .rjf-move-up-button:hover {
-    background-position: center -15px;
+    background-position: 0px -20px;
 }
 .rjf-move-down-button {
-    background-image: url('./img/arrow-icons.svg');
-    background-position: center -32px;
+    background-position: 0px -40px;
 }
 .rjf-move-down-button:hover {
-    background-position: center -50.5px;
+    background-position: 0px -60px;
 }
 
 .rjf-edit-button {
