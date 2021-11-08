@@ -1,0 +1,32 @@
+django-jsonform 2.4.0 release notes
+===================================
+
+
+Nov 08, 2021
+------------
+
+This version is fully backwards compatible with the previous version (v2.3.x).
+
+Like the previous version, it also supports ``Django >= 2.0`` and ``Python >= 3.4``.
+
+What's new
+~~~~~~~~~~
+
+react-json-form (JavaScript)
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+`react-json-form <https://github.com/bhch/react-json-form>`_ has been updated
+to version 1.5.2. This version fixes the bug related to choice inputs.
+
+Bugfixes
+^^^^^^^^
+
+ - Earlier version required ``psycopg2`` to be installed because of ``ArrayField``.
+   Now, ``psycopg2`` isn't required unless ``ArrayField`` is used.
+ - Choices for the choice input field were not set from the data.
+
+
+Minor changes
+^^^^^^^^^^^^^
+
+ - Small improvements to the widget's css and icons
