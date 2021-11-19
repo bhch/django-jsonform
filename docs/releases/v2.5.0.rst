@@ -1,0 +1,38 @@
+django-jsonform 2.5.0 release notes
+===================================
+
+
+Nov 19, 2021
+------------
+
+This version introduces a minor breaking change from the previous releases (2.4.x).
+
+Like the previous version, it also supports ``Django >= 2.0`` and ``Python >= 3.4``.
+
+What's new
+~~~~~~~~~~
+
+react-json-form (JavaScript)
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+`react-json-form <https://github.com/bhch/react-json-form>`_ has been updated
+to version 1.6.0.
+
+Breaking Changes
+^^^^^^^^^^^^^^^^
+
+Earlier version used to set empty string (``''``) for blank number inputs. This
+version will use ``null`` instead.
+
+It will also change empty strings to ``null`` in the initial data as well.
+
+Bugfixes
+^^^^^^^^
+
+ - Use ``null`` instead of empty string for blank number inputs.
+
+Minor changes
+^^^^^^^^^^^^^
+
+ - Small improvements to the widget's css, such as the group panel's titles are
+   now bolder.
