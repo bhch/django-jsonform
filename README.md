@@ -1,5 +1,5 @@
 <p align="center">
-  <img src="docs/_static/logo.png" width="200" alt="django-jsonform icon">
+  <img src="https://raw.githubusercontent.com/bhch/django-jsonform/master/docs/_static/logo.png" width="200" alt="django-jsonform icon">
 </p>
 
 <p align="center">
