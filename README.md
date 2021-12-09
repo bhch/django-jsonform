@@ -24,7 +24,7 @@
 
 Here's a screenshot of items being added to a shopping list (JSON array) dynamically:
 
-![django-jsonform screenshot](docs/_static/quickstart.gif)
+![django-jsonform screenshot](https://raw.githubusercontent.com/bhch/django-jsonform/master/docs/_static/quickstart.gif)
 
 ## Install
 
