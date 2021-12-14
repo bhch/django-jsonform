@@ -29,4 +29,14 @@ Update your project's settings:
     ]
 
 
+.. admonition:: Upgrading notes
+    
+    When upgrading from an older version of this library, please ensure that your
+    browser is loading the latest static JavaScript files that come with this library:
+
+    - In the development environment, clear the browser cache.
+    - In the production environment, you must run the ``collectstatic`` command to update
+      the static files.
+
+
 Next, go to :doc:`quickstart` page for basic usage instructions.

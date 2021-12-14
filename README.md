@@ -45,6 +45,15 @@ INSTALLED_APPS = [
 ]
 ```
 
+## Upgrading notes
+
+When upgrading from an older version of this library, please ensure that your
+browser is loading the latest static JavaScript files that come with this library.
+
+ - In the development environment, clear the browser cache.
+ - In the production environment, you must run the `collectstatic` command to update
+ the static files.
+
 ## Documentation
 
 Quickstart and usage docs can be found at [http://django-jsonform.rtfd.io](http://django-jsonform.rtfd.io).
