@@ -193,6 +193,10 @@
     -webkit-animation: loaderRotate .4s infinite linear;
     animation: loaderRotate .4s infinite linear;
 }
+.rjf-form-group input[readonly] {
+    background-color: #eee;
+    outline: 0;
+}
 
 @-webkit-keyframes loaderRotate {
     from {
