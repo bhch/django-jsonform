@@ -58,6 +58,11 @@ browser is loading the latest static JavaScript files that come with this librar
 
 Quickstart and usage docs can be found at [http://django-jsonform.rtfd.io](http://django-jsonform.rtfd.io).
 
+## Contributing
+
+ - The JavaScript code is written in React and it lives in another repo: https://github.com/bhch/react-json-form.  
+   The JS code lacks proper documentation or comments, so before contributing, maybe open an issue and I can help you out.
+ - For everything else (related to Django or widget's css), contribute directly to this repo.
 
 ## License
 
