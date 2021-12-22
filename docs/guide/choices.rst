@@ -28,6 +28,7 @@ underlying value is different.
             {'label': 'New York', 'value': 'NY'},
             {'label': 'California', 'value': 'CA'},
             {'label': 'Texas', 'value': 'TX'},
+        ]
     }
 
 

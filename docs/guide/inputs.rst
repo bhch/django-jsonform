@@ -105,3 +105,66 @@ customized to another input type.
 
 However, you can use :doc:`choices <choices>` to display a ``radio`` or ``select``
 input with *Yes/No* options to choose from.
+
+
+Default values
+--------------
+
+.. versionadded:: 2.6.0
+
+You can specify default initial values for inputs using the ``default`` keyword:
+
+.. code-block:: python
+
+    # 1. String input
+    {
+        'type': 'string',
+        'default': 'Hello world'
+    }
+
+    # 2. Boolean
+    {
+        'type': 'boolean',
+        'default': True
+    }
+
+    # 3. Default choice
+    {
+        'type': 'string',
+        'choices': ['Eggs', 'Juice', 'Milk'],
+        'default': 'Milk'
+    }
+
+    # 4. Default array items
+    {
+        'type': 'array',
+        'items': {
+            'type': 'string',
+            'default': 'Hello world' # default value for every new array item
+        }
+    }
+
+
+Readonly inputs
+---------------
+
+.. versionadded:: 2.6.0
+
+You can make inputs uneditable using a ``readonly`` (alias ``readOnly``) keyword:
+
+.. code-block:: python
+
+    # 1. String inputs
+    {
+        'type': 'string',
+        'readonly': True
+    }
+
+    # 2. Array items
+    {
+        'type': 'array',
+        'items': {
+            'type': 'string',
+            'readonly': True # all items will be readonly
+        }
+    }

@@ -45,7 +45,9 @@ This example shows a schema of a list containing string items:
     {
         'type': 'list', # or 'array'
         'items': {
-            'type': 'string'
+            'type': 'string',
+            'default': 'Hello', # default value for new items
+            'readonly': True, # make all items readonly
         },
         'min_items': 1,
         'max_items': 5
@@ -85,7 +87,9 @@ This example shows a schema of a basic dict:
             },
             'age': {
                 'type': 'number',
-                'title': 'Age in years'
+                'title': 'Age in years',
+                'default': 50, # default value for age
+                'readonly': True, # make it readonly
             }
         }
     }
@@ -146,6 +150,8 @@ Keywords:
   for more.
 - ``widget`` - Use this to specify the input field type, such as a textarea. For
   most use cases, prefer the ``format`` keyword.
+- ``default`` - Specify a default value for this input field.
+- ``readonly`` (alias ``readOnly``) - Make this input field readonly
 
 
 ``number``
@@ -161,6 +167,8 @@ Keywords:
 - ``title`` - Specify the label for the input field.
 - ``choices`` - Specify choices for the field. A ``select`` input will be rendered.
   See the :doc:`document on Choices <guide/choices>` for details.
+- ``default`` - Specify a default value for this input field. The value must be of numerical type.
+- ``readonly`` (alias ``readOnly``) - Make this input field readonly
 
 It gets a ``number`` HTML input by default. It can't be overriden.
 
@@ -178,6 +186,8 @@ Keywords:
 - ``title`` - Specify the label for the input field.
 - ``choices`` - Specify choices for the field. A ``select`` input will be rendered.
   See the :doc:`document on Choices <guide/choices>` for details.
+- ``default`` - Specify a default value for this input field. The value must be an integer.
+- ``readonly`` (alias ``readOnly``) - Make this input field readonly
 
 It gets a ``number`` HTML input by default. It can't be overriden.
 
@@ -193,6 +203,8 @@ you should use Django's ``BooleanField``.
 Keywords:
 
 - ``title`` - Specify the label for the input field.
+- ``default`` - Specify a default value for this input field. Must be a boolean.
+- ``readonly`` (alias ``readOnly``) - Make this input field readonly
 
 It gets a ``checkbox`` HTML input by default. It can't be overriden.
 
