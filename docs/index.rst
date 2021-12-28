@@ -29,4 +29,5 @@ Table of contents
    schema
    fields-and-widgets
    examples
+   troubleshooting
    releases/index
