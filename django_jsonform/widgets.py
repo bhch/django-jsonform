@@ -2,6 +2,7 @@ import json
 from django import forms
 from django.template.loader import render_to_string
 from django.utils.safestring import mark_safe
+from django_jsonform.utils import normalize_schema
 
 
 class JSONFormWidget(forms.Widget):
@@ -18,6 +19,8 @@ class JSONFormWidget(forms.Widget):
             schema = self.schema()
         else:
             schema = self.schema
+
+        schema = normalize_schema(schema)
 
         context = {
             'name': name,
