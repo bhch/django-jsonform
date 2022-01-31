@@ -1,0 +1,24 @@
+django-jsonform 2.7.0 release notes
+===================================
+
+
+Jan 31, 2022
+------------
+
+This version introduces no breaking changes and is fully compatible with the
+previous releases (2.6.x).
+
+Like the previous version, it also supports ``Django >= 2.0`` and ``Python >= 3.4``.
+
+What's new
+~~~~~~~~~~
+
+New features
+^^^^^^^^^^^^
+
+- Support for lazy translations within the schema.
+
+Bugfixes
+^^^^^^^^
+
+- Package didn't work as intended in Django 4.0 due to bad version checking.
