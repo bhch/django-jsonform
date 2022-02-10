@@ -305,6 +305,17 @@ p.admonition-title {
     box-shadow: none;
 }
 
+.rst-content .toctree-wrapper ul li.toctree-l1 {
+    margin-bottom: 8px;
+}
+
+.rst-content .section ol li > ol,
+.rst-content .section ol li > ul,
+.rst-content .section ul li > ol,
+.rst-content .section ul li > ul {
+    margin-top: 0;
+}
+
 .rst-content .code-block-caption .headerlink::after, 
 .rst-content .toctree-wrapper > p.caption:hover .headerlink::after, 
 .rst-content dl dt .headerlink::after, 
