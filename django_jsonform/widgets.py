@@ -1,4 +1,5 @@
 import json
+from inspect import signature
 from django import forms
 from django.template.loader import render_to_string
 from django.utils.safestring import mark_safe
@@ -16,7 +17,10 @@ class JSONFormWidget(forms.Widget):
 
     def render(self, name, value, attrs=None, renderer=None):
         if callable(self.schema):
-            schema = self.schema()
+            if hasattr(self, 'instance') and len(signature(self.schema).parameters):
+                schema = self.schema(self.instance)
+            else:
+                schema = self.schema()
         else:
             schema = self.schema
 
