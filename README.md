@@ -7,8 +7,14 @@
 </p>
 
 <p align="center">
-    <a href="http://django-jsonform.rtfd.io">Documentation</a> &bull;
-    <code>Django &gt;= 2.0</code>
+  <img src="https://img.shields.io/badge/Python-%3E%3D%203.4-blue">
+  <img src="https://img.shields.io/badge/Django-%3E%3D%202.0-blue">
+  <img src="https://img.shields.io/pypi/dm/django-jsonform">
+</p>
+
+<p align="center">
+  <strong><a href="http://django-jsonform.rtfd.io">Documentation</a></strong> &bull;
+  <strong><a href="https://pypi.org/project/django-jsonform/">PyPI</a></strong>
 </p>
 
 ## Features
