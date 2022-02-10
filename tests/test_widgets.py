@@ -3,14 +3,6 @@ from unittest.mock import MagicMock
 from django_jsonform.widgets import JSONFormWidget
 
 
-def dynamic_schema_accepts_args(instance=None):
-    return {}
-
-
-def dynamic_schema_no_args():
-    return {}
-
-
 class JSONFormWidgetTests(TestCase):
     def test_passes_model_instance_to_schema_callable(self):
         """If an 'instance' attribute was set on the widget,
