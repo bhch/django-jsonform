@@ -340,6 +340,12 @@ Another solution is to user portals in React.
 .form-row {
     overflow: visible !important;
 }
+div.form-row::before,
+div.form-row::after {
+    content: " ";
+    display: table;
+    clear: both;
+}
 .rjf-multiselect-field-option.disabled {
     color: #999;
 }
