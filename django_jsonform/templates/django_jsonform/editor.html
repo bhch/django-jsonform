@@ -4,7 +4,7 @@
 
 {% url 'django_jsonform:upload' as upload_endpoint %}
 <script>
-(function() {
+function initJSONEditor(inlineIndex) {
     var config = {
         containerId: 'id_{{ name }}_jsonform',
         dataInputId: 'id_{{ name }}',
@@ -15,8 +15,28 @@
         data: JSON.parse('{{ data|escapejs }}'),
     };
 
-    var editor = new reactJsonForm.JSONForm(config);
-    editor.render();
+    if (config.containerId.indexOf('__prefix__') > -1) {
+        if (inlineIndex !== undefined && inlineIndex !== null) {
+            config.containerId = config.containerId.replace('__prefix__', inlineIndex);
+            config.dataInputId = config.dataInputId.replace('__prefix__', inlineIndex);
+        }
+    }
+
+    if (config.containerId.indexOf('__prefix__') === -1) {
+        var editor = new reactJsonForm.JSONForm(config);
+        editor.render();
+    }
+}
+
+function onFormsetAdd(e, row, options) {
+    // extract current inline's index and pass it to initJSONEditor
+    initJSONEditor(row[0].id.split('-').pop());
+}
+
+(function() {
+    if ('{{ name }}'.indexOf('__prefix__') > -1) // this is an unrendered inline formset
+        django.jQuery(document).on('formset:added', onFormsetAdd)
+    else
+        initJSONEditor();
 })();
 </script>
-
