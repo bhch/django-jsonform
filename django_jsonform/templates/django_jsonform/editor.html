@@ -28,7 +28,7 @@ function initJSONEditor(inlineIndex) {
     }
 }
 
-function onFormsetAdd(e, row, options) {
+function onFormsetAdd(e, row, id_prefix) {
     // extract current inline's index and pass it to initJSONEditor
     initJSONEditor(row[0].id.split('-').pop());
 }
