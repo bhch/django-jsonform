@@ -198,9 +198,12 @@ saving in the database.
 Also, the widget's time picker is in 12-hour format, but the final value will be
 converted to 24-hour format.
 
-Example: Suppose there's a user's whose timezone is +5:30 (Indian Standard Time). If that user inputs
+Example: Suppose there's a user whose timezone is +5:30 (Indian Standard Time). If that user inputs
 ``10:00:00 pm``, the widget will convert it to UTC time and 24-hour format.
 The final value you'll get is ``16:30:00``.
+
+This timezone conversion only happens on the ``datetime`` field. It doesn't affect ``date`` field 
+or ``time`` field.
 
 Formatting datetime
 ~~~~~~~~~~~~~~~~~~~
