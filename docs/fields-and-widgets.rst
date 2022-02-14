@@ -37,9 +37,14 @@ underneath.
 
     A callable is useful for :ref:`specifying dynamic choices <dynamic choices>`.
 
-    .. versionchanged:: 2.1
+    The callable function may optionally receive the current model instance. See:
+    :ref:`Accessing model instance in callable schema`.
 
+    .. versionchanged:: 2.1
         The ability to provide a callable was added.
+
+    .. versionchanged:: 2.8
+        Callable schema may receive an ``instance`` argument.
 
 Usage:
 
@@ -53,7 +58,7 @@ Usage:
 
         items = JSONField(schema=ITEMS_SCHEMA)
 
-For details about other parameters, options and attributes, see
+For details about other parameters, options and attributes of the ``JSONField``, see
 `Django's docs <https://docs.djangoproject.com/en/3.2/ref/models/fields/#django.db.models.JSONField>`__.
 
 
@@ -109,9 +114,14 @@ It can be used in a form if you don't want to use the model field.
 
     A callable is useful for :ref:`specifying dynamic choices <dynamic choices>`.
 
-    .. versionchanged:: 2.1
+    The callable function may optionally receive the current model instance. See:
+    :ref:`Accessing model instance in callable schema`.
 
+    .. versionchanged:: 2.1
         The ability to provide a callable was added.
+
+    .. versionchanged:: 2.8
+        Callable schema may receive an ``instance`` argument.
 
 .. attribute:: model_name
     :type: str
@@ -144,7 +154,41 @@ Usage:
     admin.site.register(ShoppingList, ShoppingListAdmin)
 
 
-
 This widget can not be used directly with Django's ``ArrayField`` because Django's
 ``ArrayField`` converts the value from array to a string before passing it to
 the widget whereas it expects a list or a dict.
+
+
+Accessing model instance in callable schema
+-------------------------------------------
+
+.. versionadded:: 2.8
+
+Automatically accessing model instance in a widget is not possible. This is due
+the way Django initialises the widgets and form fields.
+
+However, you can bypass this limitation by manually setting an ``instance`` attribute
+on the widget.
+
+.. code-block::
+
+    def callable_schema(instance):
+        # ... do something ...
+        pass
+
+    class MyModel(models.Model):
+        json_field = JSONField(schema=callable_schema)
+
+
+    # create a custom modelform
+    class MyModelForm(forms.ModelForm):
+        def __init__(self):
+            # manually set the current instance on the widget
+            self.fields['json_field'].widget.instance = self.instance
+
+
+    # set the form on the admin class
+    class MyAdmin(admin.ModelAdmin):
+        form = MyModelForm
+
+Now, the value of the instance will be passed to your callable schema function.

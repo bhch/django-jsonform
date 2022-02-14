@@ -36,6 +36,10 @@ Keywords:
 - ``minItems`` (alias ``min_items``) - Limit the minimum number of items in a list.
 - ``maxItems`` (alias ``max_items``) - Limit the maximum number of items in a list.
 - ``title`` - Specify a title for the list.
+- ``default`` - A list containing all the default initial values for the array.
+
+.. versionchanged:: 2.8
+    Support for setting initial array data using ``default`` keyword was added.
 
 This example shows a schema of a list containing string items:
 
@@ -50,7 +54,8 @@ This example shows a schema of a list containing string items:
             'readonly': True, # make all items readonly
         },
         'min_items': 1,
-        'max_items': 5
+        'max_items': 5,
+        'default': ['One', 'Two', 'Three'], # initial value for the whole list
     }
 
 
@@ -153,6 +158,9 @@ Keywords:
 - ``default`` - Specify a default value for this input field.
 - ``readonly`` (alias ``readOnly``) - Make this input field readonly
 
+.. versionchanged:: 2.6
+    Support for ``default`` and ``readonly`` keywords was added.
+
 
 ``number``
 ~~~~~~~~~~
@@ -171,6 +179,9 @@ Keywords:
 - ``readonly`` (alias ``readOnly``) - Make this input field readonly
 
 It gets a ``number`` HTML input by default. It can't be overriden.
+
+.. versionchanged:: 2.6
+    Support for ``default`` and ``readonly`` keywords was added.
 
 
 ``integer``
@@ -191,6 +202,9 @@ Keywords:
 
 It gets a ``number`` HTML input by default. It can't be overriden.
 
+.. versionchanged:: 2.6
+    Support for ``default`` and ``readonly`` keywords was added.
+
 
 ``boolean``
 ~~~~~~~~~~~
@@ -207,6 +221,9 @@ Keywords:
 - ``readonly`` (alias ``readOnly``) - Make this input field readonly
 
 It gets a ``checkbox`` HTML input by default. It can't be overriden.
+
+.. versionchanged:: 2.6
+    Support for ``default`` and ``readonly`` keywords was added.
 
 
 Unsupported features

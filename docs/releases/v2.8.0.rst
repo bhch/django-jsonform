@@ -1,0 +1,75 @@
+django-jsonform 2.8.0 release notes
+===================================
+
+
+Feb 14, 2022
+------------
+
+This version introduces no breaking changes and is fully compatible with the
+previous releases (2.7.x).
+
+Like the previous version, it also supports ``Django >= 2.0`` and ``Python >= 3.4``.
+
+
+What's new
+~~~~~~~~~~
+
+
+New features
+^^^^^^^^^^^^
+
+- **Datetime input**
+
+  Support for datetime input has been added for ``string`` type fields using
+  ``format: 'datetime'`` key.
+  Read about its usage here: :ref:`Datetime field`.
+
+- **Multiple choice selection**
+
+  Support for multiple choice selection. Learn more in usage docs: :ref:`Multiple selections`. 
+
+- **Default value for array**
+
+  Support for ``default`` initial value for an array. Earlier, only array items
+  could have a default value. The problem with that is when a new item was added,
+  the same default value was also added again.
+
+  With this feature, it is now possible to set multiple default values on an array.
+
+- **Clearable file inputs**
+
+  Now file upload inputs can be cleared, i.e. their value can be unset.
+  Earlier, it wasn't possible to empty a file input once a value was attached.
+
+- **Callable schema may receive the model instance**
+
+  Now the callable schema function may optionally receive the current model instance as an argument.
+
+
+Bug fixes
+^^^^^^^^^
+
+- :issue:`25`: Fixed a bug where editing a key in an extendable dict (object) made the key disappear.
+- :issue:`27`: Fixed a bug to make the editor work in admin inlines.
+
+
+Minor improvements
+^^^^^^^^^^^^^^^^^^
+
+- **Autogrowing textarea**
+
+  Textarea's height will now grow automatically as the user types in. This saves
+  the user from having to manually resize the textarea.
+
+- **Animated list items**
+
+  List items will have a nice animation when moved up/down or removed. This will
+  help provide some feedback to the user. Earlier it wasn't obvious when list items
+  were moved.
+
+
+react-json-form (JavaScript)
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+`react-json-form <https://github.com/bhch/react-json-form>`_ has been updated
+to version 1.9.0.

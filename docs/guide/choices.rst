@@ -48,6 +48,33 @@ You can also use a ``radio`` input using the ``widget`` keyword:
     }
 
 
+Multiple selections
+-------------------
+
+.. versionadded:: 2.8
+
+For multiple selections, you'll have to use an ``array`` type to hold the selected
+values.
+
+To disallow users from selecting the same value multiple times, you can use ``multiselect`` widget.
+
+.. code-block:: python
+
+    {
+        'type': 'array',
+        'items': {
+            'type': 'string',
+            'choices': ['Eggs', 'Milk', 'Juice'],
+            'widget': 'multiselect'
+        }
+    }
+
+The ``multiselect`` widget ensures that one value can only be selected once.
+
+Don't use ``multiselect`` widget if you want to let your users select the same value
+multiple times.
+
+
 Dynamic choices
 ---------------
 
@@ -67,12 +94,3 @@ For that purpose, the ``schema`` can be a callable object:
 
     class MyModel(models.Model):
         items = JSONField(schema=dynamic_schema)
-
-
-Selecting multiple items
-------------------------
-
-Currently only one item can be selected. This is because the ``string`` type
-can't be a list.
-
-For multiple selections, you should use an ``array``.

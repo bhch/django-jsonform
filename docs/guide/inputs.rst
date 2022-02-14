@@ -26,6 +26,7 @@ Format       Description
 ============ ===========
 ``color``    A colour input
 ``date``     A date input
+``datetime`` A datetime input. See :ref:`Datetime field` for details.
 ``email``    An email input
 ``password`` A password input
 ``range``    A range input
@@ -36,11 +37,13 @@ Format       Description
 
 Possible values for ``widget`` keyword are:
 
-============ ===========
-Widget       Description
-============ ===========
-``textarea`` A textarea input
-============ ===========
+=============== ===========
+Widget          Description
+=============== ===========
+``textarea``    A textarea input
+``radio``       A radio input (:doc:`useful for choices </guide/choices>`)
+``multiselect`` A multiselect drowpdown input (:doc:`useful for choices </guide/choices>`)
+=============== ===========
 
 
 Examples:
@@ -110,7 +113,7 @@ input with *Yes/No* options to choose from.
 Default values
 --------------
 
-.. versionadded:: 2.6.0
+.. versionadded:: 2.6
 
 You can specify default initial values for inputs using the ``default`` keyword:
 
@@ -148,7 +151,7 @@ You can specify default initial values for inputs using the ``default`` keyword:
 Readonly inputs
 ---------------
 
-.. versionadded:: 2.6.0
+.. versionadded:: 2.6
 
 You can make inputs uneditable using a ``readonly`` (alias ``readOnly``) keyword:
 
@@ -168,3 +171,49 @@ You can make inputs uneditable using a ``readonly`` (alias ``readOnly``) keyword
             'readonly': True # all items will be readonly
         }
     }
+
+Datetime field
+--------------
+
+.. versionadded:: 2.8
+
+Usage:
+
+.. code-block:: python
+
+    {
+        'type': 'string',
+        'format': 'datetime'
+    }
+
+The value will be saved as ISO formatted date, such as: ``2022-02-06T15:42:11.000+00:00``.
+
+Timezone conversion
+~~~~~~~~~~~~~~~~~~~
+
+When a user selects the time on their browser, it will be interpreted in their
+operating system's local timezone. Then, the widget will convert it to UTC for
+saving in the database.
+
+Also, the widget's time picker is in 12-hour format, but the final value will be
+converted to 24-hour format.
+
+Example: Suppose there's a user's whose timezone is +5:30 (Indian Standard Time). If that user inputs
+``10:00:00 pm``, the widget will convert it to UTC time and 24-hour format.
+The final value you'll get is ``16:30:00``.
+
+Formatting datetime
+~~~~~~~~~~~~~~~~~~~
+
+The widget keeps the datetime value as an ISO string for JSON compatibility.
+
+However, you may want to format a date value such as to display in the templates in
+a user-friendly format. For that purpose, you can manually create Python's ``datetime`` object from the string value:
+
+.. code-block:: python
+
+    from datetime import datetime
+
+    date = datetime.fromisoformat('2022-02-06T15:42:11.092+00:00')
+
+    # ... do something with the object ...

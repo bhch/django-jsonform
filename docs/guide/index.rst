@@ -8,3 +8,4 @@ User's guide
     choices
     upload
     arrayfield
+    translations
