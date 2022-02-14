@@ -27,6 +27,7 @@ version = __version__
 
 extensions = [
     'sphinx.ext.autosectionlabel',
+    'sphinx.ext.extlinks',
 ]
 
 add_module_names = False
@@ -49,3 +50,10 @@ html_css_files = [
     # "preconnect" and "crossorigin" attributes on the tags.
 ]
 html_show_sphinx = False
+
+extlinks = {
+    'issue': (
+        'https://github.com/bhch/django-jsonform/issues/%s',
+        '#' # verions 4+ also require '%s' in this value
+    )
+}
