@@ -93,21 +93,27 @@
     color: #666;
     max-width: 18em;
     margin-bottom: 0.5em;
-    white-space: nowrap;
-    overflow: hidden;
-    text-overflow: ellipsis;
 }
 .rjf-current-file-name > span {
     background-color: #eaf9ff;
     color: #071d1f;
     padding: 1px 4px;
     border-radius: 3px;
+    display: inline-block;
+    vertical-align: middle;
+    overflow: hidden;
+    white-space: nowrap;
+    max-width: 9em;
+    text-overflow: ellipsis;
 }
 .rjf-remove-file-button {
     color: #da1f1f;
     background: transparent;
+    display: inline-block;
+    vertical-align: middle;
     border: 0;
     cursor: pointer;
+    padding: 0 1px;
 }
 .rjf-remove-file-button:hover {
     background-color: #ffdbdb;
