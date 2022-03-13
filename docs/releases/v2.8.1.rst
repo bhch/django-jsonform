@@ -1,0 +1,31 @@
+django-jsonform 2.8.1 release notes
+===================================
+
+
+Mar 13, 2022
+------------
+
+This is a minor release and is fully backwards compatible.
+
+
+What's new
+~~~~~~~~~~
+
+
+New features
+^^^^^^^^^^^^
+
+- Ask for confirmation before clearing file input
+
+
+Bug fixes
+^^^^^^^^^
+
+- :issue:`28`: Fixed a bug to make the "Clear" file button visible when filename was too long.
+
+
+react-json-form (JavaScript)
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+`react-json-form <https://github.com/bhch/react-json-form>`_ has been updated
+to version 1.10.0.
