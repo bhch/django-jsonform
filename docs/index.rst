@@ -28,6 +28,7 @@ Table of contents
    guide/index
    schema
    fields-and-widgets
+   templatetags
    examples
    troubleshooting
    releases/index

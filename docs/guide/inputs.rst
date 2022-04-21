@@ -210,13 +210,44 @@ Formatting datetime
 
 The widget keeps the datetime value as an ISO string for JSON compatibility.
 
-However, you may want to format a date value such as to display in the templates in
-a user-friendly format. For that purpose, you can manually create Python's ``datetime`` object from the string value:
+However, you may want to format a date value such as to display in the templates
+in a user-friendly format.
+
+Formatting datetime in templates
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+django-jsonform provides a few template filters to convert the date string to a
+``datetime`` object so you can use it with Django's ``date`` filter.
+
+You can use the :ref:`parse_datetime <parse-datetime>` filter (*New in version 2.9*) for this:
+
+.. code-block:: html
+
+    <!-- template.html -->
+    {% load django_jsonform %}
+
+    {{ date_string | parse_datetime }}
+
+    <!-- you can also use it with the date filter -->
+    {{ date_string | parse_datetime | date:'d M, Y' }}
+
+
+
+Read the document on :doc:`Template tags and filters </templatetags>` for full list of
+available filters.
+
+Formatting datetime in Python code
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+To format datetime string in Python code, you'll have to first convert the string
+to Python's ``datetime`` object:
 
 .. code-block:: python
 
     from datetime import datetime
 
-    date = datetime.fromisoformat('2022-02-06T15:42:11.092+00:00')
+    date_string = '2022-02-06T15:42:11.092+00:00' # ISO string
+
+    date = datetime.fromisoformat(date_string)
 
     # ... do something with the object ...
