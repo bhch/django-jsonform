@@ -72,21 +72,35 @@
     outline: 0;
 }
 
-.rjf-form-row label + div {
-    margin-left: 170px;
+.rjf-input-group {
     display: table;
-    width: 19.4em;
+    width: 19.4em
+}
+
+.rjf-check-input > label {
+    display: table;
+    float: none;
+    width: auto;
+}
+
+.rjf-help-text {
+    font-size: 11px;
+    color: var(--body-quiet-color);
+    display: block;
+    margin-top: 4px;
+}
+
+.rjf-check-input > .rjf-help-text {
+    margin-top: 0;
 }
 
 .rjf-file-field {
     color: #666;
-}
-
-.rjf-file-field .rjf-file-field-input {
     display: inline-block;
 }
+
 .rjf-file-field .rjf-file-field-input input {
-    max-width: 18em;
+    width: 18em;
 }
 
 .rjf-current-file-name {
@@ -203,10 +217,14 @@
 .rjf-edit-button {
     text-indent: -9999px;
     background: url(./img/icon-changelink.svg) 0 1px no-repeat;
-    width: 3px;
+    width: 16px;
     height: 16px;
     border: 0px none;
     cursor: pointer;
+    margin-left: 2px;
+}
+.rjf-edit-button:hover {
+    border: 0;
 }
 
 .rjf-icon {
@@ -215,7 +233,10 @@
     display: inline-block;
 }
 
-.rjf-datetime-field-inner::after {
+.rjf-datetime-field-inner {
+    display: inline-block;
+}
+.rjf-datetime-field-inputs::after {
     display: table;
     content: " ";
     clear: both;
@@ -232,8 +253,12 @@
 .rjf-datetime-field-time > div > label {
     display: none;
 }
-.rjf-datetime-field-date > div > input,
-.rjf-datetime-field-time > div > input {
+.rjf-datetime-field-date .rjf-input-group,
+.rjf-datetime-field-time .rjf-input-group {
+    width: 100%;
+}
+.rjf-datetime-field-date .rjf-input-group > input,
+.rjf-datetime-field-time .rjf-input-group > input {
     width: 100%;
     margin-left: 0;
     box-sizing: border-box;
@@ -451,7 +476,7 @@ div.form-row::after {
         width: auto;
     }
 
-    .rjf-form-row label + div {
+    .rjf-input-group {
         width: 100%;
     }
 
@@ -491,7 +516,7 @@ div.form-row::after {
 }
 
 @media(max-width: 1024px) {
-    .rjf-form-row label + div {
+    .rjf-input-group {
         margin-left: 0;
     }
 
@@ -583,8 +608,16 @@ div.form-row::after {
 .grp-module .rjf-time-picker button {
     margin-left: 0;
 }
-.grp-module .rjf-form-row label + div {
-    margin-left: 140px;
-    display: table;
-    width: 19.4em;
+.grp-module .rjf-multiselect-field-input {
+    background-color: #fdfdfd !important;
+    cursor: pointer !important;
 }
+.grp-module .rjf-check-input > label {
+    display: table;
+    float: none;
+    width: auto;
+}
+.grp-module .rjf-help-text {
+    color: #888;
+}
+
