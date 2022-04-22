@@ -550,7 +550,6 @@ div.form-row::after {
     margin: 0 !important;
 }
 .grp-module input[readonly] {
-    background-color: #fdfdfd !important;
     border: 1px solid #ccc !important;
     box-shadow: inset 0 1px 3px 0 #eee !important;
     cursor: default;    
@@ -568,7 +567,7 @@ div.form-row::after {
     border: 1px solid #ccc !important;
     margin-top: 0;
     color: #333;
-    background-color: #fff;
+    background-color: #fdfdfd !important;
     box-shadow: inset 0 1px 3px 0 #eee !important;
     padding: 2px 6px;
     border-radius: 3px;
@@ -580,6 +579,9 @@ div.form-row::after {
 .grp-module .rjf-datetime-field-date > div > label,
 .grp-module .rjf-datetime-field-time > div > label {
     display: none;
+}
+.grp-module .rjf-time-picker button {
+    margin-left: 0;
 }
 .grp-module .rjf-form-row label + div {
     margin-left: 140px;
