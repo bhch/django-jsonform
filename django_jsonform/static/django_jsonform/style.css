@@ -509,3 +509,80 @@ div.form-row::after {
         background-position: right 8px center;
     }
 }
+
+
+/* Styles for Grappelli admin */
+
+.grp-module .rjf-add-button {
+    padding: 0 2px 0 16px;
+    margin-top: 8px;
+    margin-left: 0;
+    width: auto;
+    height: auto;
+    border: 0;
+    border-radius: 2px;
+}
+.grp-module .rjf-remove-file-button {
+    padding: 0 1px;
+    margin-left: 0;
+    width: auto;
+    height: auto;
+    display: inline-block;
+    vertical-align: middle;
+    border-radius: 2px;
+    border: 0;
+}
+.grp-module .rjf-add-button:hover,
+.grp-module .rjf-remove-file-button:hover {
+    border: 0;
+}
+.grp-module .rjf-form-row-inner label {
+    display: block;
+    padding: 4px 10px 0 0;
+    float: left;
+    width: 140px;
+    word-wrap: break-word;
+    line-height: 1;
+}
+.grp-module .rjf-multiselect-field-option label {
+    width: 100%;
+    float: none;
+    margin: 0 !important;
+}
+.grp-module input[readonly] {
+    background-color: #fdfdfd !important;
+    border: 1px solid #ccc !important;
+    box-shadow: inset 0 1px 3px 0 #eee !important;
+    cursor: default;    
+}
+.grp-module .rjf-multiselect-field-input {
+    cursor: pointer;
+    padding-right: 28px !important;
+    background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3e%3cpath fill='none' stroke='%23777777' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='M2 5l6 6 6-6'/%3e%3c/svg%3e") !important;
+    background-repeat: no-repeat !important;
+    background-position: right 6px center !important;
+    background-size: 16px 12px !important;
+}
+.grp-module .rjf-form-row input[type="date"],
+.grp-module .rjf-form-row input[type="time"] {
+    border: 1px solid #ccc !important;
+    margin-top: 0;
+    color: #333;
+    background-color: #fff;
+    box-shadow: inset 0 1px 3px 0 #eee !important;
+    padding: 2px 6px;
+    border-radius: 3px;
+}
+.grp-module .rjf-datetime-field-date,
+.grp-module .rjf-datetime-field-time {
+    width: 9.2em;
+}
+.grp-module .rjf-datetime-field-date > div > label,
+.grp-module .rjf-datetime-field-time > div > label {
+    display: none;
+}
+.grp-module .rjf-form-row label + div {
+    margin-left: 140px;
+    display: table;
+    width: 19.4em;
+}
