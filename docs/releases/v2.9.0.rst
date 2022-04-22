@@ -1,0 +1,48 @@
+django-jsonform 2.9.0 release notes
+===================================
+
+
+Apr 22, 2022
+------------
+
+This version introduces some :ref:`backwards-incompatible changes <breaking-changes-2-9-0>` with the previous versions
+related to CSS styling and internal HTML structure .
+
+Like the previous version, it also supports ``Django >= 2.0`` and ``Python >= 3.4``.
+
+What's new
+~~~~~~~~~~
+
+
+New features
+^^^^^^^^^^^^
+
+- Support for displaying help text under inputs (using the ``help_text`` or ``helpText`` keyword).
+- New :doc:`template filters </templatetags>` to help convert datetime strings into datetime objects in templates.
+- Improvements to CSS to ensure compatibility with the Django-Grappelli admin.
+
+
+Bug fixes
+^^^^^^^^^
+
+- :issue:`34`: Fixed a CSS stylings for Djang-Grappelli admin.
+- :issue:`35`: Fixed a bug to reset file input when the file is cleared.
+
+
+react-json-form (JavaScript)
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+`react-json-form <https://github.com/bhch/react-json-form>`_ has been updated
+to version 1.11.0.
+
+
+.. _breaking-changes-2-9-0:
+
+Breaking changes
+~~~~~~~~~~~~~~~~
+
+The internal HTML structure of the widget, i.e. how the the fields are rendered,
+has been changed. Due to this, some of the CSS code has also been changed.
+
+You don't need to worry about this unless you've written custom CSS styles for the
+widget. If so, this is something to beware for.
