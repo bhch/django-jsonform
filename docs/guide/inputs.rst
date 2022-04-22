@@ -233,8 +233,8 @@ You can use the :ref:`parse_datetime <parse-datetime>` filter (*New in version 2
 
 
 
-Read the document on :doc:`Template tags and filters </templatetags>` for full list of
-available filters.
+All the available tags and filters are listed in :doc:`Template tags and filters </templatetags>`
+document.
 
 Formatting datetime in Python code
 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^

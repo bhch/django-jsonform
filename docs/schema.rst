@@ -157,9 +157,13 @@ Keywords:
   most use cases, prefer the ``format`` keyword.
 - ``default`` - Specify a default value for this input field.
 - ``readonly`` (alias ``readOnly``) - Make this input field readonly
+- ``help_text`` (alias ``helpText``) - Display a help text under this input
 
 .. versionchanged:: 2.6
     Support for ``default`` and ``readonly`` keywords was added.
+
+.. versionchanged:: 2.9
+    Support for ``help_text`` (or ``helpText``) keywords was added.
 
 
 ``number``
@@ -177,11 +181,15 @@ Keywords:
   See the :doc:`document on Choices <guide/choices>` for details.
 - ``default`` - Specify a default value for this input field. The value must be of numerical type.
 - ``readonly`` (alias ``readOnly``) - Make this input field readonly
+- ``help_text`` (alias ``helpText``) - Display a help text under this input
 
-It gets a ``number`` HTML input by default. It can't be overriden.
+It gets a ``number`` HTML input by default. It can't be overridden.
 
 .. versionchanged:: 2.6
     Support for ``default`` and ``readonly`` keywords was added.
+
+.. versionchanged:: 2.9
+    Support for ``help_text`` (or ``helpText``) keywords was added.
 
 
 ``integer``
@@ -198,12 +206,16 @@ Keywords:
 - ``choices`` - Specify choices for the field. A ``select`` input will be rendered.
   See the :doc:`document on Choices <guide/choices>` for details.
 - ``default`` - Specify a default value for this input field. The value must be an integer.
+- ``help_text`` (alias ``helpText``) - Display a help text under this input
 - ``readonly`` (alias ``readOnly``) - Make this input field readonly
 
-It gets a ``number`` HTML input by default. It can't be overriden.
+It gets a ``number`` HTML input by default. It can't be overridden.
 
 .. versionchanged:: 2.6
     Support for ``default`` and ``readonly`` keywords was added.
+
+.. versionchanged:: 2.9
+    Support for ``help_text`` (or ``helpText``) keywords was added.
 
 
 ``boolean``
@@ -219,11 +231,15 @@ Keywords:
 - ``title`` - Specify the label for the input field.
 - ``default`` - Specify a default value for this input field. Must be a boolean.
 - ``readonly`` (alias ``readOnly``) - Make this input field readonly
+- ``help_text`` (alias ``helpText``) - Display a help text under this input
 
-It gets a ``checkbox`` HTML input by default. It can't be overriden.
+It gets a ``checkbox`` HTML input by default. It can't be overridden.
 
 .. versionchanged:: 2.6
     Support for ``default`` and ``readonly`` keywords was added.
+
+.. versionchanged:: 2.9
+    Support for ``help_text`` (or ``helpText``) keywords was added.
 
 
 Unsupported features
