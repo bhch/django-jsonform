@@ -26,6 +26,7 @@ from django_jsonform.forms.fields import ArrayFormField
 class JSONField(DjangoJSONField):
     def __init__(self, *args, **kwargs):
         self.schema = kwargs.pop('schema', {})
+        self.pre_save_hook = kwargs.pop('pre_save_hook', None)
         super().__init__(*args, **kwargs)
 
     def formfield(self, **kwargs):
@@ -35,6 +36,14 @@ class JSONField(DjangoJSONField):
             'model_name': self.model.__name__,
             **kwargs
         })
+
+    def pre_save(self, model_instance, add):
+        value = super().pre_save(model_instance, add)
+
+        if (self.pre_save_hook):
+            value = self.pre_save_hook(value)
+
+        return value
 
 
 class ArrayField(DjangoArrayField):
