@@ -23,8 +23,8 @@
  - [x] Postgres `ArrayField`
  - [x] Many inputs and field types
  - [x] UI matches with Django admin's
+ - [x] Recursion (nesting with self references)
  - [ ] Validation
- - [ ] Recursion (nesting with self references)
 
 ## Screenshots
 
