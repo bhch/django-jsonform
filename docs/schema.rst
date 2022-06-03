@@ -72,7 +72,7 @@ Keywords:
 
 - ``properties`` (alias ``keys``; **required**) - Specifies the keys (or fields)
   in a dict/object.
-- ``additionalProperties`` - Allow users to add extra keys not delclared in the
+- ``additionalProperties`` - Allow users to add extra keys not declared in the
   schema.
 - ``title`` - Specify a title for the dict.
 
@@ -113,29 +113,39 @@ Additional keys
 
 By default, an object's data can only contain keys declared in the schema.
 But you can allow users to add extra keys using the ``additionalProperties``
-key:
+keyword.
+
+The ``additionalProperties`` keyword can be:
+
+- **a schema**. You can provide a sub-schema for the new properties.
+- **a boolean**. As a shortcut for adding string keys only, you can set this to ``True``.
+- **a reference**. You can also use the ``$ref`` keyword to reference and reuse existing schema.
+  See :ref:`referencing schema` docs below to learn more.
+
+.. versionchanged:: 2.10 Support for sub-schema for new properties was added.
 
 .. code-block:: python
+    :emphasize-lines: 8, 10, 12
 
     # Schema
     {
         'type': 'dict': # or 'object'
         'keys': { # or 'properties'
-            'name': {
-                'type': 'string'
-            },
+            'name': { 'type': 'string' },
         },
-        'additionalProperties': True
-    }
+        
+        'addtionalProperties': True
 
+        # or
+        
+        'additionalProperties': { 'type': 'string' }
+    }
 
     # Output data
     {
         'name': 'John Doe', # declared in the schema
         'gender': 'Male', # added by the user
     }
-
-The keys added by the user will only be of ``string`` type.
 
 
 ``string``
@@ -242,8 +252,136 @@ It gets a ``checkbox`` HTML input by default. It can't be overridden.
     Support for ``help_text`` (or ``helpText``) keywords was added.
 
 
+Referencing schema
+------------------
+
+.. versionadded:: 2.10
+
+JSON schema specification allows you to reference parts of schema for reuse in
+multiple places. This feature also allows you to recursively nest an object
+within itself.
+
+
+``$ref`` keyword
+~~~~~~~~~~~~~~~~
+
+Use the ``$ref`` keyword to reference other parts of the schema.
+
+In the following example, ``shipping_address`` has same fields as
+``billing_address``. So, instead of defining the schema twice, you can reference the
+earlier defined schema.
+
+.. code-block:: python
+    :emphasize-lines: 12
+
+    {
+        'type': 'object',
+        'properties': {
+            'billing_address': {
+                'type': 'object',
+                'properties': {
+                    'street': { 'type': 'string' },
+                    'city': { 'type': 'string' },
+                    'state': { 'type': 'string' }
+                }
+            },
+            'shipping_address': { '$ref': '#/properties/billing_address' }
+        }
+    }
+
+
+``$defs`` keyword
+~~~~~~~~~~~~~~~~~
+
+You can define common schema and keep them in a single place under the ``$defs`` object:
+
+.. code-block:: python
+    :emphasize-lines: 5, 8, 12
+
+    {
+        'type': 'object',
+        'properties': {
+            'billing_address': {
+                '$ref': '#/$defs/address'
+            },
+            'shipping_address': {
+                '$ref': '#/$defs/address'
+            }
+        },
+
+        '$defs': {
+            'address': {
+                'type': 'object',
+                'properties': {
+                    'street': { 'type': 'string' },
+                    'city': { 'type': 'string' },
+                    'state': { 'type': 'string' }
+                }
+            }
+        }
+    }
+
+
+.. seealso::
+
+   `Structuring a complex schema <https://json-schema.org/understanding-json-schema/structuring.html>`__
+      Official documentation on referencing and nesting on JSON Schema's website
+
+
+Recursive nesting
+-----------------
+
+The ``$ref`` keyword also makes recursion possible. You can use it for recursively
+nesting an object within itself.
+
+For example, a Menu object can have link items and a sub-menu (dropdown menu) which
+contains more links and a sub-sub-menu and so on...
+
+.. code-block:: python
+    :emphasize-lines: 15
+
+    {
+        'type': 'array',
+        'title': 'Menu',
+        'items': {
+            'type': 'object',
+            'properties': {
+                'text': {
+                    'type': 'string',
+                    'title': 'Display text for the item'
+                },
+                'link': {
+                    'type': 'string',
+                    'title': 'URL of the item'
+                },
+                'children': { '$ref': '#' }
+            }
+        }        
+    }
+
+.. caution::
+
+    **Beware of the infinite loop** while referencing.
+
+    In certain cases, referencing (``$ref``) may cause an infinite loop. Currently,
+    that error is unhandled, and the widget will not be rendered at all if that happens.
+
+    One particular case is when two objects reference each other. For example, ``a`` is a reference to ``b``
+    and ``b`` is a reference to ``a``.
+
+    There might be other cases, too. If the widget doesn't render while you're using
+    ``$ref``, please open your browser's dev console to check the error message.
+
+    Also, `open an issue on Github <https://github.com/bhch/django-jsonform/issues>`__.
+
+    Infinite loop error handling will be improved in a future release.
+
+
 Unsupported features
 --------------------
 
-Recursion and validation are the two major features which are not supported at
-present.
+These features are not supported by django-jsonform yet. These are planned to be
+added in future but there's no definite ETA: 
+
+- Validation
+- ``anyOf`` / ``allOf`` / ``oneOf``

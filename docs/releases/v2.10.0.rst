@@ -1,0 +1,42 @@
+django-jsonform 2.10.0 release notes
+====================================
+
+
+Jun 03, 2022
+------------
+
+This version introduces no breaking changes and is fully backwards-compatible
+with the previous releases (2.9.x)
+
+Like the previous version, it also supports ``Django >= 2.0`` and ``Python >= 3.4``.
+
+
+What's new
+~~~~~~~~~~
+
+
+New features
+^^^^^^^^^^^^
+
+- ``additionalProperties`` can accept a schema now. Earlier, ``additionalProperties``
+  only accepted a boolean and the new properties (keys) could only be of string type.
+  Now you can provide a schema for new properties through this schema.
+- Support for :ref:`recursive nesting` objects and items.
+- Support for :ref:`referencing schema` (using the ``$ref`` keyword).
+- :class:`~django_jsonform.models.fields.JSONField` now accepts a new parameter called
+  ``pre_save_hook`` which can be used to process or transform the JSON data before saving.
+
+
+Bug fixes
+^^^^^^^^^
+
+- :issue:`38`: If an array has ``minItems`` set to 0 or undefined, it will be kept blank initially.
+  If it has a default value, it will use the default value instead of being blank.
+  Earlier, an empty item was automatically added to an array which could be undesirable in many cases.
+
+
+react-json-form (JavaScript)
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+`react-json-form <https://github.com/bhch/react-json-form>`_ has been updated
+to version 1.12.1.

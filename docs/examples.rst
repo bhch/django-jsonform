@@ -46,6 +46,41 @@ And here's the corresponding schema for obtaining the above data:
     }
 
 
+Menu with nested items
+----------------------
+
+A menu item can either be a link or a dropdown containing multiple links as its children.
+
+You can recursively nest an object within itself using the ``$ref`` keyword. See docs
+on :ref:`referencing schema` for details:
+
+.. code-block:: python
+    :emphasize-lines: 17, 18, 19
+
+    # Schema
+    {
+        'type': 'list',
+        'items': {
+            'type': 'dict',
+            'keys': {
+                'label': {
+                    'type': 'string'
+                },
+                'link': {
+                    'type': 'string'
+                },
+                'new_tab': {
+                    'type': 'boolean',
+                    'title': 'Open in new tab'
+                },
+                'children': {
+                    '$ref': '#'
+                }
+            }
+        }
+    }
+
+
 Image slider
 ------------
 

@@ -18,14 +18,13 @@ Model fields
 ``JSONField``
 ~~~~~~~~~~~~~
 
-.. class:: JSONField(schema, encoder=None, decoder=None, **options)
+.. class:: JSONField(schema=None, pre_save_hook=None, **options)
     
 .. versionadded:: 2.0
 
 It is basically a subclass of Django's ``JSONField``, but for convenience,
 it automatically sets up the JSON editor widget for you.
 
-The only difference is that it takes a ``schema`` argument.
 
 In Django < 3.1, for databases other than Postgres, it uses a ``TextField``
 underneath.
@@ -46,6 +45,37 @@ underneath.
     .. versionchanged:: 2.8
         Callable schema may receive an ``instance`` argument.
 
+.. attribute:: pre_save_hook
+    :type: callable
+
+    .. versionadded:: 2.10
+
+    (Optional) Sometimes you may wish to transform the JSON data before saving in the database.
+
+    For that purpose, you can provide a callable through this argument which will be 
+    called before saving the field's value in the database.
+
+    The ``pre_save_hook`` callable will receive the current value of the field as
+    the only argument. It must return the value which you intend to save in the database.
+
+    .. code-block::
+
+        def pre_save_hook(value):
+            # do something with the value ...
+            return value
+
+
+        class MyModel(...):
+            items = JSONField(schema=..., pre_save_hook=pre_save_hook)
+
+.. attribute:: **options
+
+    This ``JSONField`` accepts all the arguments accepted by Django's ``JSONField``, such as
+    a custom ``encoder`` or ``decoder``.
+
+    For details about other parameters, options and attributes of the ``JSONField``, see
+    `Django's docs <https://docs.djangoproject.com/en/stable/ref/models/fields/#django.db.models.JSONField>`__.
+
 Usage:
 
 .. code-block:: python
@@ -57,9 +87,6 @@ Usage:
         ITEMS_SCHEMA = {...}
 
         items = JSONField(schema=ITEMS_SCHEMA)
-
-For details about other parameters, options and attributes of the ``JSONField``, see
-`Django's docs <https://docs.djangoproject.com/en/3.2/ref/models/fields/#django.db.models.JSONField>`__.
 
 
 ``ArrayField``
