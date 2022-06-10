@@ -1,6 +1,6 @@
 <div id="id_{{ name }}_jsonform"></div>
 
-<textarea cols="40" id="id_{{ name }}" name="{{ name }}" rows="10" required="" style="display: none;">{{ data|safe }}</textarea>
+<textarea cols="40" id="id_{{ name }}" name="{{ name }}" rows="10" required="" style="display: none;">{{ data }}</textarea>
 
 {% url 'django_jsonform:upload' as upload_endpoint %}
 <script>
