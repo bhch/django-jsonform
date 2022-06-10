@@ -1,0 +1,21 @@
+django-jsonform 2.10.1 release notes
+====================================
+
+
+Jun 10, 2022
+------------
+
+django-jsonform v2.10.1 fixes a "high" severity security vulnerability which affects
+all previous versions.
+
+
+XSS (Cross Site Scripting) vulnerability in the admin form
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+django-jsonform stores the raw JSON data of the database field in a hidden
+``textarea`` on the admin page.
+
+However, that data was kept in the ``textarea`` after unescaping it using the
+``safe`` template filter. This opens up possibilities for XSS attacks.
+
+This only affects the admin pages where the django-jsonform is rendered.
