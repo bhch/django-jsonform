@@ -73,11 +73,3 @@ Quickstart and usage docs can be found at [http://django-jsonform.rtfd.io](http:
 ## License
 
 [BSD-3-Clause](LICENSE.txt)
-
----
-
-If you've found this library useful, and if you wish to support me you can:
-
-<a href="https://www.buymeacoffee.com/bhch">
-    <img src="https://www.buymeacoffee.com/assets/img/guidelines/download-assets-sm-2.svg" width="170">
-</a>
