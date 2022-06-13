@@ -11,7 +11,10 @@ def parse_datetime(value):
     """Converts ISO date string to a datetime object
     which can be used with the ``date`` filter.
     """
-    return timezone.datetime.fromisoformat(value)
+    try:
+        return timezone.datetime.fromisoformat(value)
+    except ValueError:
+        return value
 
 
 @register.filter
