@@ -308,6 +308,15 @@ p.admonition-title {
 .rst-content .toctree-wrapper ul li.toctree-l1 {
     margin-bottom: 8px;
 }
+.rst-content .toctree-wrapper ul li.toctree-l1 ul li a {
+    font-size: 0.9em;
+    color: #323130;
+    text-decoration: underline dotted;
+}
+.rst-content .toctree-wrapper ul li.toctree-l1 ul li a:hover {
+    color: #be1932;
+    text-decoration: underline solid;
+}
 
 .rst-content .section ol li > ol,
 .rst-content .section ol li > ul,
