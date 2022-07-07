@@ -24,7 +24,7 @@ To use the filters and tags, you'll have to first load them in a template:
 Available filters
 -----------------
 
-.. _parse-datetime:
+.. templatefilter:: parse_datetime
 
 ``parse_datetime``
 ~~~~~~~~~~~~~~~~~~
@@ -49,7 +49,7 @@ Usage:
     <!-- you can also use it with the date filter -->
     {{ date_string | parse_datetime | date:'d M, Y' }}
 
-.. _parse-time:
+.. templatefilter:: parse_time
 
 ``parse_time``
 ~~~~~~~~~~~~~~

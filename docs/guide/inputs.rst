@@ -219,7 +219,7 @@ Formatting datetime in templates
 django-jsonform provides a few template filters to convert the date string to a
 ``datetime`` object so you can use it with Django's ``date`` filter.
 
-You can use the :ref:`parse_datetime <parse-datetime>` filter (*New in version 2.9*) for this:
+You can use the :tfilter:`parse_datetime` filter (*New in version 2.9*) for this:
 
 .. code-block:: html
 
