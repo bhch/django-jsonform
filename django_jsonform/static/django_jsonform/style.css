@@ -231,6 +231,7 @@
     width: 1.2em;
     height: 1.2em;
     display: inline-block;
+    vertical-align: middle;
 }
 
 .rjf-datetime-field-inner {
@@ -424,6 +425,228 @@ div.form-row::after {
     transform: translateX(10px);
 }
 
+.rjf-modal__main-body--open {
+    overflow: hidden;
+}
+.rjf-modal__overlay {
+    height: 100%;
+    width: 100%;
+    position: fixed;
+    background-color: rgba(0,0,0,.25);
+    left: 0;
+    right: 0;
+    top: 0;
+    bottom: 0;
+    z-index: 2000;
+    overflow-x: hidden;
+    overflow-y: auto;
+    box-sizing: border-box;
+    opacity: 0;
+    transition: opacity 0.2s ease-in-out;
+}
+
+.rjf-modal__overlay.ReactModal__Overlay--after-open {
+    opacity: 1;
+}
+
+.rjf-modal__overlay.ReactModal__Overlay--before-close {
+    opacity: 0;
+    transition: opacity 0.1s ease-in-out;
+}
+.rjf-modal__dialog {
+    max-width: 700px;
+    top: 5%;
+    left: 0;
+    right: 0;
+    margin: auto;
+    margin-top: .5rem;
+    padding-left: 10px;
+    padding-right: 10px;
+    padding-bottom: 5rem;
+    position: relative;
+    width: auto;
+    pointer-events: none;
+    outline: none;
+    border: none;
+    box-sizing: border-box;
+    opacity: 0;
+    transform: scale(0.5);
+    transition: all 0.2s ease-in-out;
+}
+.rjf-modal__dialog.ReactModal__Content--after-open {
+    opacity: 1;
+    transform: scale(1);
+}
+.rjf-modal__dialog.ReactModal__Content--before-close {
+    opacity: 0;
+    transform: scale(0.8);
+    transition: all 0.1s ease-in-out;
+}
+.rjf-modal__content {
+    background-color: #fff;
+    overflow: auto;
+    border-radius: 4px;
+    width: 100%;
+    box-shadow: 0 0 16px rgba(0,0,0,.25);
+    pointer-events: auto;
+    box-sizing: border-box;
+}
+.rjf-modal__header {
+    padding: 15px;
+    font-size: 1.2rem;
+    font-weight: 700;
+    background-color: #f8f8f8;
+}
+.rjf-modal__close-button {
+    float: right;
+    position: relative;
+    font-weight: bold;
+    padding: 5px;
+    margin-top: -0.2em;
+    color: #ff4444;
+    background-color: #ffeeee;
+    border: 1px solid transparent;
+    border-radius: 100%;
+    cursor: pointer;
+    transition: background-color 0.12s ease-in-out, border-color 0.12s ease-in-out, color 0.12s ease-in-out;
+    line-height: 1;
+}
+.rjf-modal__close-button:hover {
+    color: #ff4444;
+    border-color: #ff4444;
+    background-color: #fff;
+}
+.rjf-modal__close-button > .rjf-icon {
+    width: 1.5em;
+    height: 1.5em;
+}
+.rjf-modal__close-button span {
+    pointer-events: none;
+}
+.rjf-upload-modal__open-button,
+.rjf-modal__footer-close-button {
+    background-color: #e8e8e8;
+    color: #000;
+    border: 1px solid #e8e8e8;
+    padding: 3px 8px;
+    border-radius: 3px;
+    cursor: pointer;
+}
+.rjf-upload-modal__open-button:hover,
+.rjf-modal__footer-close-button:hover {
+    background-color: #ddd;
+}
+.rjf-modal__body {
+    padding: 15px;
+    box-sizing: border-box;
+}
+.rjf-modal__footer {
+    padding: 15px;
+    display: table;
+    width: 100%;
+    text-align: right;
+    box-sizing: border-box;
+}
+.rjf-upload-modal__tab-button {
+    background-color: transparent;
+    color: #1f546d;
+    border: 1px solid #1f546d;
+    padding: 3px 6px;
+    border-radius: 3px;
+    cursor: pointer;
+}
+.rjf-upload-modal__tab-button:hover {
+    background-color: #dcecf4;
+}
+.rjf-upload-modal__tab-button--active {
+    background-color: #417690;
+    color: #fff;
+    border-color: #417690;
+}
+.rjf-upload-modal__tab-button--active:hover {
+    background-color: #205067;
+}
+.rjf-upload-modal__media-container {
+    box-sizing: border-box;
+    display: -ms-flexbox;
+    display: flex;
+    -ms-flex-wrap: wrap;
+    flex-wrap: wrap;
+    margin-left: -5px;
+    margin-right: -5px;
+}
+.rjf-upload-modal__media-tile {
+    width: 100%;
+    -ms-flex: 0 0 25%;
+    flex: 0 0 25%;
+    max-width: 25%;
+    float: left;
+    padding: 5px;
+    box-sizing: border-box;
+    position: relative;
+}
+.rjf-upload-modal__media-tile-inner {
+    width: 100%;
+    background-color: #fff;
+    box-sizing: border-box;
+    border: 1px solid #ddd;
+    border-radius: 3px;
+    padding: 5px;
+    cursor: pointer;
+}
+.rjf-upload-modal__media-tile-inner:hover {
+    background-color: #f8f8f8;
+    border-color: #777;
+}
+.rjf-upload-modal__media-tile-inner > img {
+    max-width: 100%;
+    max-height: 100px;
+    display: block;
+    margin: auto;
+    box-sizing: border-box;
+}
+.rjf-upload-modal__media-tile-metadata {
+    color: #777;
+    font-size: 0.9em;
+    padding-top: 15px;
+    word-break: break-word;
+    word-wrap: break-word;
+}
+.rjf-upload-modal__media-tile-metadata span {
+    display: block;
+    margin-bottom: 2px;
+}
+.rjf-upload-modal__media-load-button {
+    display: table;
+    margin: auto;
+    margin-top: 2em;
+    font-size: 1em;
+    padding: 4px 8px;
+    border: 1px solid;
+    border-radius: 3px;
+    background-color: transparent;
+    cursor: pointer;
+    color: #417690;
+}
+.rjf-upload-modal__media-load-button:hover {
+    background-color: #dcecf4;
+}
+.rjf-upload-modal__media-end-message {
+    font-size: 1.2em;
+    text-align: center;
+    margin-top: 2em;
+    color: #999;
+    font-weight: bold;
+}
+.rjf-loader.rjf-upload-modal__media-loader {
+    width: 2.2em;
+    height: 2.2em;
+    border-width: 5px;
+    display: block;
+    margin: auto;
+    margin-top: 2em;
+}
+
 .rjf-file-field-loading {
     margin-top: 0.6em;
     vertical-align: middle;
@@ -457,6 +680,26 @@ div.form-row::after {
     }
     to {
         transform: rotate(359deg);
+    }
+}
+
+@media(max-width: 1024px) {
+    .rjf-input-group {
+        margin-left: 0;
+    }
+
+    .form-row input[type="date"],
+    .form-row input[type="time"] {
+        box-sizing: border-box;
+        margin: 0;
+        padding: 6px 8px;
+        min-height: 36px;
+        font-size: 14px;
+    }
+
+    .rjf-multiselect-field-input {
+        padding-right: 32px !important;
+        background-position: right 8px center;
     }
 }
 
@@ -513,25 +756,19 @@ div.form-row::after {
     .rjf-multiselect-field-options-container {
         width: calc(100% + 60px);
     }
+
+    .rjf-upload-modal__media-tile {
+        -ms-flex: 0 0 33%;
+        flex: 0 0 33%;
+        max-width: 33%;
+    }
 }
 
-@media(max-width: 1024px) {
-    .rjf-input-group {
-        margin-left: 0;
-    }
-
-    .form-row input[type="date"],
-    .form-row input[type="time"] {
-        box-sizing: border-box;
-        margin: 0;
-        padding: 6px 8px;
-        min-height: 36px;
-        font-size: 14px;
-    }
-
-    .rjf-multiselect-field-input {
-        padding-right: 32px !important;
-        background-position: right 8px center;
+@media(max-width: 575px) {
+    .rjf-upload-modal__media-tile {
+        -ms-flex: 0 0 50%;
+        flex: 0 0 50%;
+        max-width: 50%;
     }
 }
 
