@@ -159,7 +159,7 @@ a string, you should use Django's ``CharField``.
 Keywords:
 
 - ``title`` - Specify the label for the input field.
-- ``choices`` - Specify choices for the field. A ``select`` input will be rendered.
+- ``choices`` (alias ``enum``) - Specify choices for the field. A ``select`` input will be rendered.
   See the :doc:`document on Choices <guide/choices>` for details.
 - ``format`` - Use this to specify the input field type. See :ref:`inputs for string type`
   for more.
@@ -168,6 +168,7 @@ Keywords:
 - ``default`` - Specify a default value for this input field.
 - ``readonly`` (alias ``readOnly``) - Make this input field readonly
 - ``help_text`` (alias ``helpText``) - Display a help text under this input
+- ``placeholder`` - Placeholder text for this input
 
 .. versionchanged:: 2.6
     Support for ``default`` and ``readonly`` keywords was added.
@@ -175,6 +176,8 @@ Keywords:
 .. versionchanged:: 2.9
     Support for ``help_text`` (or ``helpText``) keywords was added.
 
+.. versionchanged:: 2.11
+    Support for ``placeholder`` and ``enum`` keywords was added.
 
 ``number``
 ~~~~~~~~~~
@@ -187,11 +190,12 @@ you should use Django's ``FloatField``.
 Keywords:
 
 - ``title`` - Specify the label for the input field.
-- ``choices`` - Specify choices for the field. A ``select`` input will be rendered.
+- ``choices`` (alias ``enum``) - Specify choices for the field. A ``select`` input will be rendered.
   See the :doc:`document on Choices <guide/choices>` for details.
 - ``default`` - Specify a default value for this input field. The value must be of numerical type.
 - ``readonly`` (alias ``readOnly``) - Make this input field readonly
 - ``help_text`` (alias ``helpText``) - Display a help text under this input
+- ``placeholder`` - Placeholder text for this input
 
 It gets a ``number`` HTML input by default. It can't be overridden.
 
@@ -201,6 +205,8 @@ It gets a ``number`` HTML input by default. It can't be overridden.
 .. versionchanged:: 2.9
     Support for ``help_text`` (or ``helpText``) keywords was added.
 
+.. versionchanged:: 2.11
+    Support for ``placeholder`` and ``enum`` keywords was added.
 
 ``integer``
 ~~~~~~~~~~~
@@ -213,11 +219,12 @@ you should use Django's ``IntegerField``.
 Keywords:
 
 - ``title`` - Specify the label for the input field.
-- ``choices`` - Specify choices for the field. A ``select`` input will be rendered.
+- ``choices`` (alias ``enum``) - Specify choices for the field. A ``select`` input will be rendered.
   See the :doc:`document on Choices <guide/choices>` for details.
 - ``default`` - Specify a default value for this input field. The value must be an integer.
 - ``help_text`` (alias ``helpText``) - Display a help text under this input
 - ``readonly`` (alias ``readOnly``) - Make this input field readonly
+- ``placeholder`` - Placeholder text for this input
 
 It gets a ``number`` HTML input by default. It can't be overridden.
 
@@ -227,6 +234,8 @@ It gets a ``number`` HTML input by default. It can't be overridden.
 .. versionchanged:: 2.9
     Support for ``help_text`` (or ``helpText``) keywords was added.
 
+.. versionchanged:: 2.11
+    Support for ``placeholder`` and ``enum`` keywords was added.
 
 ``boolean``
 ~~~~~~~~~~~

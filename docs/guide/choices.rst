@@ -1,10 +1,12 @@
 Choices
 ======= 
 
-You can specify choices for an input field using the ``choices`` keyword.
+You can specify choices for an input field using the ``choices`` (or ``enum``) keyword.
 
 Choices can be specified for any type of input - ``string``, ``number``, ``boolean`` etc.
 
+.. versionchanged:: 2.11.0
+    Support for ``enum`` keyword was added.
 
 Specifying choices
 ------------------
@@ -13,7 +15,7 @@ Specifying choices
 
     {
         'type': 'string',
-        'choices': ['Eggs', 'Milk', 'Juice']
+        'choices': ['Eggs', 'Milk', 'Juice'] # you can also use 'enum' keyword
     }
 
 
