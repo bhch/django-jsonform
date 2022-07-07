@@ -13,6 +13,7 @@
 import os
 import sys
 sys.path.insert(0, os.path.abspath('..'))
+sys.path.append(os.path.abspath("./_ext"))
 
 from django_jsonform import __version__
 
@@ -28,6 +29,7 @@ version = __version__
 extensions = [
     'sphinx.ext.autosectionlabel',
     'sphinx.ext.extlinks',
+    'helpers',
 ]
 
 add_module_names = False
