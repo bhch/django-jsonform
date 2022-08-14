@@ -44,7 +44,8 @@ class JSONFormWidget(forms.Widget):
         js = [
             'django_jsonform/vendor/react.production.min.js',
             'django_jsonform/vendor/react-dom.production.min.js',
-            'django_jsonform/react-json-form.min.js',
+            'django_jsonform/vendor/react-modal.min.js',
+            'django_jsonform/react-json-form.js',
         ]
 
         return forms.Media(css=css, js=js)
