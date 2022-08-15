@@ -1,4 +1,5 @@
 from django.utils.functional import Promise
+from django.conf import settings
 
 
 def normalize_schema(schema):
@@ -31,3 +32,11 @@ def normalize_schema(schema):
         new_schema = {}
 
     return new_schema
+
+
+def get_setting(name, default=None):
+    """Returns settings nested inside DJANGO_JSONFORM main setting variable"""
+    if not hasattr(settings, 'DJANGO_JSONFORM'):
+        return default
+
+    return settings.DJANGO_JSONFORM.get(name, default)

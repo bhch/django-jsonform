@@ -4,6 +4,7 @@ from django import forms
 from django.template.loader import render_to_string
 from django.utils.safestring import mark_safe
 from django_jsonform.utils import normalize_schema, get_setting
+from django.urls import reverse, NoReverseMatch
 
 
 class JSONFormWidget(forms.Widget):
@@ -34,6 +35,14 @@ class JSONFormWidget(forms.Widget):
             'schema': json.dumps(schema),
             'file_handler': self.file_handler or get_setting('FILE_HANDLER', ''),
         }
+
+        # backwards compatibility for `JSONFORM_UPLOAD_HANDLER` setting
+        if not context['file_handler']:
+            try:
+                context['file_handler'] = reverse('django_jsonform:upload')
+            except NoReverseMatch:
+                pass
+
         return mark_safe(render_to_string(self.template_name, context))
 
     @property
