@@ -3,17 +3,18 @@ from inspect import signature
 from django import forms
 from django.template.loader import render_to_string
 from django.utils.safestring import mark_safe
-from django_jsonform.utils import normalize_schema
+from django_jsonform.utils import normalize_schema, get_setting
 
 
 class JSONFormWidget(forms.Widget):
     template_name = 'django_jsonform/editor.html'
 
-    def __init__(self, schema, model_name=''):
+    def __init__(self, schema, model_name='', file_handler=''):
         super().__init__()
 
         self.schema = schema
         self.model_name = model_name
+        self.file_handler = file_handler
 
     def render(self, name, value, attrs=None, renderer=None):
         if callable(self.schema):
@@ -31,6 +32,7 @@ class JSONFormWidget(forms.Widget):
             'model_name': self.model_name,
             'data': value or json.dumps(''),
             'schema': json.dumps(schema),
+            'file_handler': self.file_handler or get_setting('FILE_HANDLER', ''),
         }
         return mark_safe(render_to_string(self.template_name, context))
 

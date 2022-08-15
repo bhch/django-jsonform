@@ -27,6 +27,7 @@ class JSONField(DjangoJSONField):
     def __init__(self, *args, **kwargs):
         self.schema = kwargs.pop('schema', {})
         self.pre_save_hook = kwargs.pop('pre_save_hook', None)
+        self.file_handler = kwargs.pop('file_handler', '')
         super().__init__(*args, **kwargs)
 
     def formfield(self, **kwargs):
@@ -34,6 +35,7 @@ class JSONField(DjangoJSONField):
             'form_class': JSONFormField,
             'schema': self.schema,
             'model_name': self.model.__name__,
+            'file_handler': self.file_handler,
             **kwargs
         })
 

@@ -29,9 +29,11 @@ from django.forms.widgets import TextInput
 class JSONFormField(DjangoJSONFormField):
     def __init__(
         self, *, schema=None, encoder=None, decoder=None, model_name='',
+        file_handler='',
         **kwargs
     ):
-        self.widget = JSONFormWidget(schema=schema, model_name=model_name)
+        self.file_handler = file_handler
+        self.widget = JSONFormWidget(schema=schema, model_name=model_name, file_handler=file_handler)
         kwargs['widget'] = self.widget
         super().__init__(**kwargs)
 
