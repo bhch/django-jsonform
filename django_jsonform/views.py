@@ -1,6 +1,7 @@
 from importlib import import_module
 from django.http import JsonResponse, HttpResponseNotAllowed
 from django.conf import settings
+from django.contrib.auth.decorators import login_required
 
 
 if hasattr(settings, 'JSONFORM_UPLOAD_HANDLER'):
@@ -12,6 +13,7 @@ else:
     FILE_UPLOAD_HANDLER = None
 
 
+@login_required
 def upload_handler(request):
     if request.method == 'POST':
         if not FILE_UPLOAD_HANDLER:
