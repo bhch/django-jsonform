@@ -1,3 +1,23 @@
+.rjf-form-wrapper > .module.aligned {
+    min-width: 20rem;
+}
+.fieldBox .rjf-form-wrapper::before {
+    visibility: hidden;
+    display: block;
+    font-size: 0;
+    content: " ";
+    clear: both;
+    height: 0;
+}
+.fieldBox .rjf-form-wrapper {
+    min-width: 19rem;
+    width: 100%
+}
+
+.fieldBox .rjf-form-wrapper > .module.aligned {
+    min-width: 0;
+}
+
 .rjf-add-button {
     background: url(./img/icon-addlink.svg) 0 1px no-repeat;
     padding-left: 16px;
@@ -46,15 +66,22 @@
     width: 100%;
     position: relative;
 }
-.rjf-form-row-inner {
+.rjf-form-row-controls + .rjf-form-row-inner {
+    box-sizing: border-box;
     transition: background-color 0.12s ease-in-out;
     padding: 5px;
+    padding-right: 76px;
 }
 
 .rjf-form-row input,
 .rjf-form-row select,
 .rjf-form-row textarea {
-    width: 18em;
+    box-sizing: border-box;
+    width: 100%;
+}
+.rjf-form-row input,
+.rjf-form-row select {
+    max-width: 18rem;
 }
 
 .rjf-form-row input[type="date"],
@@ -71,10 +98,22 @@
     background-color: #eee;
     outline: 0;
 }
-
-.rjf-input-group {
+.rjf-form-row label {
+    box-sizing: border-box;
+    width: 33%;
+    min-width: 5em;
+}
+.rjf-form-row  label + .rjf-input-group {
+    box-sizing: border-box;
     display: table;
-    width: 19.4em
+    width: 66%;
+    min-width: 8em;
+}
+.fieldBox .rjf-form-row label {
+    min-width: 3em;
+}
+.fieldBox .rjf-form-row label + .rjf-input-group {
+    min-width: 4em;
 }
 
 .rjf-check-input > label {
@@ -95,17 +134,20 @@
 }
 
 .rjf-file-field {
+    box-sizing: border-box;
+    width: 66%;
     color: #666;
-    display: inline-block;
+    display: table;
 }
 
 .rjf-file-field .rjf-file-field-input input {
-    width: 18em;
+    width: 100%;
+    max-width: 18em;
 }
 
 .rjf-current-file-name {
     color: #666;
-    max-width: 18em;
+    width: 100%;
     margin-bottom: 0.5em;
 }
 .rjf-current-file-name > span {
@@ -254,15 +296,10 @@
 .rjf-datetime-field-time > div > label {
     display: none;
 }
-.rjf-datetime-field-date .rjf-input-group,
-.rjf-datetime-field-time .rjf-input-group {
+.rjf-datetime-field-date label + .rjf-input-group,
+.rjf-datetime-field-time label + .rjf-input-group {
     width: 100%;
-}
-.rjf-datetime-field-date .rjf-input-group > input,
-.rjf-datetime-field-time .rjf-input-group > input {
-    width: 100%;
-    margin-left: 0;
-    box-sizing: border-box;
+    min-width: 0;
 }
 .rjf-time-picker {
     width: 18em;
@@ -704,6 +741,13 @@ div.form-row::after {
 }
 
 @media(max-width: 767px) {
+    .rjf-form-wrapper > .module.aligned {
+        min-width: 0;
+    }
+    .fieldBox .rjf-form-wrapper {
+        min-width: 0;
+    }
+
     .rjf-form-group {
         width: calc(100vw - 30px);
         max-width: 100%;
@@ -719,8 +763,18 @@ div.form-row::after {
         width: auto;
     }
 
-    .rjf-input-group {
+    .rjf-input-group,
+    .rjf-form-row label + .rjf-input-group {
         width: 100%;
+    }
+
+    .rjf-file-field {
+        width: 100%;
+    }
+
+    .rjf-file-field .rjf-file-field-input input {
+        width: 100%;
+        max-width: 100%;
     }
 
     .rjf-form-row > .rjf-form-row-controls {
