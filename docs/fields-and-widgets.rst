@@ -18,7 +18,7 @@ Model fields
 ``JSONField``
 ~~~~~~~~~~~~~
 
-.. class:: JSONField(schema=None, pre_save_hook=None, **options)
+.. class:: JSONField(schema=None, pre_save_hook=None, file_handler=None, **options)
     
 .. versionadded:: 2.0
 
@@ -28,6 +28,8 @@ it automatically sets up the JSON editor widget for you.
 
 In Django < 3.1, for databases other than Postgres, it uses a ``TextField``
 underneath.
+
+**Parameters**:
 
 .. attribute:: schema
     :type: dict, callable
@@ -50,13 +52,15 @@ underneath.
 
     .. versionadded:: 2.10
 
-    (Optional) Sometimes you may wish to transform the JSON data before saving in the database.
+    (Optional) Sometimes you may wish to transform the JSON data before saving
+    in the database.
 
-    For that purpose, you can provide a callable through this argument which will be 
-    called before saving the field's value in the database.
+    For that purpose, you can provide a callable through this argument which
+    will be called before saving the field's value in the database.
 
-    The ``pre_save_hook`` callable will receive the current value of the field as
-    the only argument. It must return the value which you intend to save in the database.
+    The ``pre_save_hook`` callable will receive the current value of the field
+    as the only argument. It must return the value which you intend to save in
+    the database.
 
     .. code-block::
 
@@ -68,13 +72,22 @@ underneath.
         class MyModel(...):
             items = JSONField(schema=..., pre_save_hook=pre_save_hook)
 
+.. attribute:: file_handler
+    :type: callable
+
+    .. versionadded:: 2.11
+
+    (Optional) Provide a the url of the view for handling file uploads. See :ref:`document
+    on uploading files <file url>` for usage.
+
 .. attribute:: **options
 
-    This ``JSONField`` accepts all the arguments accepted by Django's ``JSONField``, such as
-    a custom ``encoder`` or ``decoder``.
+    This ``JSONField`` accepts all the arguments accepted by Django's
+    ``JSONField``, such as a custom ``encoder`` or ``decoder``.
 
-    For details about other parameters, options and attributes of the ``JSONField``, see
-    `Django's docs <https://docs.djangoproject.com/en/stable/ref/models/fields/#django.db.models.JSONField>`__.
+    For details about other parameters, options and attributes of the
+    ``JSONField``, see `Django's docs
+    <https://docs.djangoproject.com/en/stable/ref/models/fields/#django.db.models.JSONField>`__.
 
 Usage:
 
@@ -117,7 +130,6 @@ For more details, see
 `Django's docs <https://docs.djangoproject.com/en/stable/ref/contrib/postgres/fields/#arrayfield>`__.
 
 
-
 Widgets
 -------
 
@@ -134,6 +146,8 @@ The widget which renders the editor.
 
 It can be used in a form if you don't want to use the model field.
 
+**Parameters**:
+
 .. attribute:: schema
     :type: dict, callable
 
@@ -141,8 +155,8 @@ It can be used in a form if you don't want to use the model field.
 
     A callable is useful for :ref:`specifying dynamic choices <dynamic choices>`.
 
-    The callable function may optionally receive the current model instance. See:
-    :ref:`Accessing model instance in callable schema`.
+    The callable function may optionally receive the current model instance.
+    See: :ref:`Accessing model instance in callable schema`.
 
     .. versionchanged:: 2.1
         The ability to provide a callable was added.
@@ -153,10 +167,10 @@ It can be used in a form if you don't want to use the model field.
 .. attribute:: model_name
     :type: str
 
-    An optional string. The name of the model. It is passed to the file upload handler
+    (Optional). The name of the model. It is passed to the file upload handler
     so that you can identify which model is requesting the file upload.
 
-    See :ref:`file-upload-request-parameters` for more details.
+    See :ref:`Handling file uploads` for more details.
 
 Usage:
 
@@ -181,9 +195,9 @@ Usage:
     admin.site.register(ShoppingList, ShoppingListAdmin)
 
 
-This widget can not be used directly with Django's ``ArrayField`` because Django's
-``ArrayField`` converts the value from array to a string before passing it to
-the widget whereas it expects a list or a dict.
+This widget can not be used directly with Django's ``ArrayField`` because
+Django's ``ArrayField`` converts the value from array to a string before passing
+it to the widget whereas it expects a list or a dict.
 
 
 Accessing model instance in callable schema
@@ -194,8 +208,8 @@ Accessing model instance in callable schema
 Automatically accessing model instance in a widget is not possible. This is due
 the way Django initialises the widgets and form fields.
 
-However, you can bypass this limitation by manually setting an ``instance`` attribute
-on the widget.
+However, you can bypass this limitation by manually setting an ``instance``
+attribute on the widget.
 
 .. code-block::
 

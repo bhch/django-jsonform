@@ -14,7 +14,8 @@ Project links
 -------------
 
 - Current version: |version| (:doc:`Release notes <releases/index>`)
-- `Source code (Github) <https://github.com/bhch/django-jsonform>`_
+- `Source code (Github) <https://github.com/bhch/django-jsonform>`__
+- `Live Demos & Playground <https://bhch.github.io/react-json-form/>`__
 
 
 Table of contents
@@ -30,6 +31,7 @@ Table of contents
    schema
    fields-and-widgets
    templatetags
+   settings
    examples
    troubleshooting
    releases/index

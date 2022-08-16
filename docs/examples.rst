@@ -3,6 +3,9 @@ Examples
 
 Here are some schema examples to achieve fairly complex data structures.
 
+.. seealso::
+    `Live Demos & Playground <https://bhch.github.io/react-json-form/>`__
+
 Menu
 ----
 

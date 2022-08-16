@@ -21,19 +21,20 @@ and ``widget`` keywords.
 
 Possible values for ``format`` keyword are:
 
-============ ===========
-Format       Description
-============ ===========
-``color``    A colour input
-``date``     A date input
-``datetime`` A datetime input. See :ref:`Datetime field` for details.
-``email``    An email input
-``password`` A password input
-``range``    A range input
-``time``     A time input
-``data-url`` A file input. See :ref:`File inputs` for details.
-``file-url`` A file input. See :ref:`File inputs` for details.
-============ ===========
+============= ===========
+Format        Description
+============= ===========
+``color``     A colour input
+``date``      A date input
+``date-time`` A datetime input. See :ref:`Datetime field` for details.
+``datetime``  Alias for ``date-time``
+``email``     An email input
+``password``  A password input
+``range``     A range input
+``time``      A time input
+``data-url``  A file input. See :ref:`File inputs` for details.
+``file-url``  A file input. See :ref:`File inputs` for details.
+============= ===========
 
 Possible values for ``widget`` keyword are:
 
@@ -183,7 +184,7 @@ Usage:
 
     {
         'type': 'string',
-        'format': 'datetime'
+        'format': 'datetime' # or 'date-time'
     }
 
 The value will be saved as ISO formatted date, such as: ``2022-02-06T15:42:11.000+00:00``.

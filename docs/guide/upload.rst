@@ -5,8 +5,8 @@ There are two ways to keep files in a JSON data:
 
 1. Base64 string - the file will be encoded as Base64 string and all the data
    will be kept within the JSON object.
-2. File url - the file will be uploaded on the server and only the URL of the file
-   will be kept in the JSON object.
+2. File url - the file will be uploaded on the server and only the URL of the
+   file will be kept in the JSON object.
 
 
 Base64 string
@@ -15,24 +15,21 @@ Base64 string
 This option is ideal for keeping small file data within a JSON object.
 
 However, there are two drawbacks: Base64 encoded data will be 33% larger than
-the original file. Second, Base64 images and files won't be cached by the browsers
-unlike other images accessed via urls.
+the original file. Second, Base64 images and files won't be cached by the
+browsers unlike other images accessed via urls.
 
 The ``type`` should be ``string`` and ``format`` should be ``'data-url'``:
 
 .. code-block:: python
+    :emphasize-lines: 5
 
     # Schema
     {
         'type': 'object',
         'keys': {
-            'logo': {
-                'type': 'string',
-                'format': 'data-url'
-            }
+            'logo': {'type': 'string', 'format': 'data-url'}
         }
     }
-
 
     # Output data
     {
@@ -44,45 +41,243 @@ The ``type`` should be ``string`` and ``format`` should be ``'data-url'``:
 File url
 --------
 
-This option is ideal for keeping large files.
+This option is ideal for *"uploading"* large files in JSON data. However, it
+requires a little more work to set up.
 
-However, it requires a little more work to set up.
+The file will be saved on the server and only a reference (such as a path or a
+url) to the file is kept in the JSON data.
 
-Since the files will be sent to the server, you will have to create an
-upload handler function which will be responsible for saving the files and
-returning the file's url.
+Since version 2.11, django-jsonform also supports choosing existing files from the server.
 
-A handler function is similar to a view: it receives a ``request`` object as a
-parameter. **But** instead of returning an HTTP response, it returns the name
-of the newly created file.
 
-A sample handler function:
+**Here's an animated GIF of this feature:**
+
+.. image:: /_static/file-upload.gif
+    :alt: Animated screenshot of file upload
+
+----
+
+In the schema, the ``type`` should be ``string`` and ``format`` should be
+``'file-url'``:
 
 .. code-block:: python
+    :emphasize-lines: 5
+
+    # Schema
+    {
+        'type': 'object',
+        'keys': {
+            'logo': {'type': 'string', 'format': 'file-url'}
+        }
+    }
+
+    # Output data
+    {
+        'logo': 'path/to/logo.png'
+    }
+
+
+File handler view
+~~~~~~~~~~~~~~~~~
+
+Since uploading files or listing existing files requires interaction with the
+server, you are required to create a view for handling upload and list requests.
+
+This view will be responsible for these two things:
+
+1. If request method is ``POST``, save files on the server.
+2. If request method is ``GET``, return a list of available files for the user
+   to choose from.
+
+Before diving into details, let's look at the handler view at a basic level:
+
+Following is a basic outline of the handler view. For working code examples,
+see :ref:`Handling file uploads` section and :ref:`Returning a list of available
+files` section.
+
+.. code-block:: python 
+
+    # Basic file handler view
+
+    from django.contrib.auth.decorators import login_required
+
+    @login_required
+    def file_handler_view(request):
+        if request.method == 'POST':
+            # save uploaded file
+            ...
+        elif request.method == 'GET':
+            # return available files for choosing
+            ...
+
+
+Setting things up
+~~~~~~~~~~~~~~~~~
+
+First, create a URL for your view:
+
+.. code-block:: python
+    :emphasize-lines: 7
+
+    # myapp/urls.py
+
+    from django.urls import path
+
+    urlpatterns = [
+        # ...
+        path('json-file-handler/', myapp.views.file_handler_view),
+        # ...
+    ]
+
+
+You can create as many handler views as you like. For example, **one separate**
+view for each JSONfield, or **one common** view for all fields.
+
+Next, you have to tell django-jsonform which handler view to call. There are 
+three ways to do that:
+
+1. By passing the URL through :attr:`~django_jsonform.models.fields.file_handler`
+   argument to the ``JSONField``;
+2. Or by using the :setting:`FILE_HANDLER` setting to declare one common handler
+   for all JSONFields;
+3. Or by using the ``handler`` keyword in the schema to specify a separate view
+   for each file input.
+
+Example 1: Using the ``FILE_HANDLER`` setting
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+This option is great for declaring one common handler view for all ``JSONField``
+instances.
+
+.. code-block:: python
+    :emphasize-lines: 4
+
+    # settings.py
+
+    DJANGO_JSONFORM = {
+        'FILE_HANDLER': '/json-file-handler/'
+    }
+
+
+Example 2: Using the ``file_handler`` argument
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+This option is great for declaring a handler for a particular ``JSONfield``. This is
+especially useful if you're writing a reusable app.
+
+This argument will override the ``FILE_HANDLER`` setting.
+
+.. code-block:: python
+    :emphasize-lines: 9, 13
+
+    # models.py
+
+    from django.urls import reverse_lazy
+
+    class MyModel(...):
+        data = JSONField(
+            schema=...,
+
+            file_handler='/json-file-handler/' # hard-coded URL
+
+            # OR
+
+            file_handler=reverse_lazy('name-of-url') # reversed URL
+        )
+
+To reverse the URL, you will have to use ``reverse_lazy`` function instead of
+the regular ``reverse`` function because urls are loaded after models. Therefore,
+using ``reverse`` will lead to an error.
+
+
+Example 3: Using ``handler`` keyword in schema
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+This option is great for declaring separate handlers for separate fields within
+a schema.
+
+This keyword will override the previous two options mentioned above.
+
+.. code-block:: python
+    :emphasize-lines: 7, 11
+
+    # models.py
+
+    'image': {
+        'type': 'string',
+        'format': 'file-url',
+
+        'handler': '/json-file-handler/' # hard-coded URL
+
+        # OR
+
+        'handler': reverse_lazy('json-file-handler') # reversed URL
+    }
+
+
+
+Handling file uploads
+~~~~~~~~~~~~~~~~~~~~~
+
+Your file handler view will receive a ``POST`` request for uploading files.
+
+Code example
+^^^^^^^^^^^^
+
+In this example, we'll save the file in a dedicated model called ``MediaModel``,
+but you are free to save your files however you want such as directly to the
+filesystem, it's up to you.
+
+.. code-block:: python
+    :emphasize-lines: 8, 15
 
     # views.py
 
-    def upload_handler(request):
-        file = request.FILES[0]
+    from django.http import JsonResponse
+    from django.contrib.auth.decorators import login_required
 
-        # you can save the file however you want:
-        # (i) write it directly to the filesystem,
-        # (ii) or keep it in a separate model.
+    @login_required
+    def file_handler(request):
+        if request.method == 'POST':
+            file = request.FILES[0]
+            obj = MediaModel(file=file)
+            obj.save()
 
-        # In this example, we'll save it in a
-        # dedicated model for storing files
+            # return the path of the file
+            # this value will be kept in the JSON data
+            return JsonResponse({'value': obj.file.name})
 
-        obj = MediaModel(file=file)
-        obj.save()
+        elif request.method == 'GET':
+            # return available files for choosing
+            ...
 
-        # return the path of the file
-        # this value will be kept in the JSON data
-        return obj.file.name
+Request arguments
+^^^^^^^^^^^^^^^^^
+
+Each ``POST`` request will also contain these additional arguments:
+
+- ``model_name``: Name of the model.
+- ``field_name``: Name of the field.
+
+These arguments are useful for identifying the model and the field when you have
+one common handler for multiple JSON fields.
+
+Response format
+^^^^^^^^^^^^^^^
+
+Your view must return a ``JsonResponse`` in this format:
+
+.. code-block:: python
+
+    JsonResponse({'value': 'path/to/uploaded-file.jpg'})
+
+
+The value of the ``value`` variable will be saved in the JSON data.
 
 
 .. attention::
 
-    It is recommended your upload handler function should **return the path**
+    It is recommended your file handler view should **return the path**
     of the uploaded file **without the media url prefix**.
 
     The rationale behind it is that file's url may change but file's name
@@ -104,92 +299,137 @@ A sample handler function:
     See :ref:`Accessing files in templates` section below for more.
 
 
-Now, you need to declare this upload handler function in the settings file:
+Returning a list of available files
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+Your file handler view will receive a ``GET`` request for fetching the list of
+available files.
+
+Code Example
+^^^^^^^^^^^^
+
+In the following code example we are sending files from the ``MediaModel`` we
+used in the previous example:
+
+.. code-block:: python
+    :emphasize-lines: 12, 36
+
+    # views.py
+
+    from django.http import JsonResponse
+    from django.contrib.auth.decorators import login_required
+
+    @login_required
+    def file_handler(request):
+        if request.method == 'POST':
+            # save uploaded file
+            ...
+
+        elif request.method == 'GET':
+            page = int(request.GET.get('page', 1))
+
+            files_per_page = 10
+
+            start = (page - 1) * files_per_page
+            end = start + files_per_page
+
+            results = []
+
+            for obj in MediaModel.objects.all()[start:end]:
+                results.append({
+                    'value': obj.file.name,
+
+                    # optional data
+                    # 
+                    # 'thumbnail': obj.file.url,
+                    # 'metadata': {
+                    #     'name': obj.file.name.split('/')[-1],
+                    #     'date_created': obj.created_on.strftime('%d %b, %Y'),
+                    #     'size': '%s KB' % (obj.file.size / 1000),
+                    # }
+                })
+
+            return JsonResponse({'results': results})
+
+
+Request arguments
+^^^^^^^^^^^^^^^^^
+
+Each ``GET`` request will also contain these additional arguments:
+
+- ``page``: Page number. It's up to you how many items you want to show per page.
+- ``model_name``: Name of the model.
+- ``field_name``: Name of the field.
+
+Response format
+^^^^^^^^^^^^^^^
+
+The view must return a ``JsonResponse`` in this format:
 
 .. code-block:: python
 
-    # settings.py
+    JsonResponse({
+        'results': [
+            {'value': 'path/to/file-1.jpg'}, # file 1
+            {'value': 'path/to/file-2.jpg'}, # file 2
+            ...
+        ]
+    })
 
-    JSONFORM_UPLOAD_HANDLER = 'myapp.views.upload_handler'
 
+Each item in the ``results`` list must be a dict containing these keys:
 
-Finally, you also need to include ``django-jsonform``'s urls in your main urls.py
-file:
+- ``value`` (string; **required**): The path of the file which will be saved in
+  the JSON data.
+- ``thumbnail`` (string; *optional*): Preview thumbnail of the file. If you don't
+  provide it,
+  a file icon will be displayed to the user.
+- ``metadata`` (dict; *optional*): This is a dict which can contain any keys
+  about the file info, such as name, size, date, etc. The ``metadata`` dict can
+  contain any data you wish. All of that data will be displayed to the user under
+  the file's thumbnail.
+
+Here are some examples of the ``results`` list:
 
 .. code-block:: python
 
-    # project's main urls.py
+    # 1. Items with only file names
 
-    from django.urls import path, include
-
-    urlpatterns = [
-        # ...
-        path('django-jsonform/', include('django_jsonform.urls')),
-        # ...
+    [
+        {'value': 'path/to/file.jpg'}, # file 1
+        {'value': 'path/to/file.jpg'}, # file 2
+        ...
     ]
 
+    # 2. Items with thumbnails
 
-Behind the scenes, django-jsonform will send an AJAX request to
-``/django-jsonform/upload/`` url and your handler function will be called with the
-request.
+    [
+        {'value': 'path/to/file.jpg', 'thumbnail': 'path/to/thumb.jpg',},
+        ...
+    ]
 
+    # 3. Items with metadata and file info
 
-You're all set now to upload files.
-
-In the schema, the ``type`` should be ``string`` and ``format`` should be ``'file-url'``:
-
-.. code-block:: python
-
-    # Schema
-    {
-        'type': 'object',
-        'keys': {
-            'logo': {
-                'type': 'string',
-                'format': 'file-url'
+    [
+        {
+            'value': 'path/to/file.jpg',
+            'thumbnail': 'path/to/thubnail.jpg',
+            'metadata': {
+                'name': 'Name of image',
+                'date': '01 Jan, 2022',
+                'size': '100 KB',
             }
-        }
-    }
 
+        },
+        ...
+    ]
 
-    # Output data
-    {
-        'logo': 'path/to/logo.png'
-    }
-
-
-.. _file-upload-request-parameters:
-
-Additional request parameters
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-
-In some cases, you may want to know the name of the model or name of the field
-while saving the file.
-
-The ``request.POST`` will have keys named ``model_name`` and ``field_name`` present.
-
-However, the widget has no way of knowing the name of the model, so you'll have
-to pass it to the widget while initializing:
-
-.. code-block:: python
-
-    JSONFormWidget(schema=schema, model_name='MyModel')
-
-In your upload handler, you can access the additional parameters like this:
-
-.. code-block:: python
-
-    def upload_handler(request):
-        file = request.FILES[0]
-
-        model_name = request.POST['model_name']
-        field_name = request.POST['field_name']
-    
 
 Accessing files in templates
 ----------------------------
 
-For ``data-url``, you can just use the value as it is.
+For ``data-url``, you can just use the value as it is because all the file data
+is saved in JSON as a Base64 encoded string.
 
 For ``file url``, you may want to prepend a media url prefix using Django's
 ``{% get_media_prefix %}`` tag (`see Django docs <https://docs.djangoproject.com/en/3.2/ref/templates/builtins/#get-media-prefix>`_).

@@ -1,0 +1,76 @@
+django-jsonform 2.11.0 release notes
+====================================
+
+
+Aug 16, 2022
+------------
+
+This release brings plenty of bugfixes, some exciting new features and some
+deprecations.
+
+Like the previous version, it also supports ``Django >= 2.0`` and ``Python >= 3.4``.
+
+
+What's new
+~~~~~~~~~~
+
+
+Deprecation notice
+^^^^^^^^^^^^^^^^^^
+
+- ``JSONFORM_UPLOAD_HANDLER``
+
+    The ``JSONFORM_UPLOAD_HANDLER`` setting has been deprecated and will be removed
+    in future.
+    Please read about the new way to upload files in the :ref:`Uploading files <File url>`
+    document.
+
+
+New features
+^^^^^^^^^^^^
+
+- Brand new :doc:`JavaScript API </guide/javascript>` for controlling the
+  widget in the browser.
+- New :ref:`file upload modal dialog <File url>` which provides the ability
+  to browse files form the server while uploading.
+- Support for ``enum`` keyword (alias for ``choices``).
+- Support for ``placeholder`` keyword.
+- Support for ``date-time`` keyword (alias for ``datetime``).
+- Support for ``handler`` keyword for string input. This can be used for
+  specifying the url for the file upload handler on a per input field basis.
+- :class:`~django_jsonform.models.fields.JSONField` now accepts a new parameter
+  called ``file_handler`` which can be used for specifying the url of the file
+  handler on a per widget basis.
+- Now django-jsonform settings will be namespaced under :setting:`DJANGO_JSONFORM`
+  setting.
+
+
+Bug fixes
+^^^^^^^^^
+
+- :issue:`45`: Default value for number and boolean types was ignored if the
+  default value was 0 or False.
+- :issue:`46`: Fixed a bug due to which the multiselect widget didn't work on
+  top-level arrays.
+- :issue:`47`: Fixed a bug in CSS when two widget fields were displayed in a
+  single fieldset row.
+- :issue:`48`: Array's ``minItems`` keyword was ignored if default value for
+  array was provided or if the form field had initial data.
+- Fixed a bug to make select input respect falsy options. Earlier, the select input
+  would not update the selected value if a falsy option was selected.
+- Minor improvements and fixes in widget's CSS.
+
+
+react-json-form (JavaScript)
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+`react-json-form <https://github.com/bhch/react-json-form>`_ has been updated
+to version 2.0.0.
+
+----
+
+Finally, huge thanks to...
+~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+- All my sponsors for their support. I really appreciate it.
+- All the people for contributing bug reports and improvement suggestions.

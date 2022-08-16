@@ -7,5 +7,6 @@ User's guide
     inputs
     choices
     upload
+    javascript
     arrayfield
     translations

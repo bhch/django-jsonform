@@ -1,8 +1,8 @@
 Schema guide
 ============
 
-django-jsonform currently implements a custom JSON Schema spec written specifically
-for Django.
+django-jsonform currently implements a custom JSON Schema spec written
+specifically for Django.
 
 You should also read the standard spec at
 `https://json-schema.org <https://json-schema.org/learn/getting-started-step-by-step>`_.
@@ -118,9 +118,10 @@ keyword.
 The ``additionalProperties`` keyword can be:
 
 - **a schema**. You can provide a sub-schema for the new properties.
-- **a boolean**. As a shortcut for adding string keys only, you can set this to ``True``.
-- **a reference**. You can also use the ``$ref`` keyword to reference and reuse existing schema.
-  See :ref:`referencing schema` docs below to learn more.
+- **a boolean**. As a shortcut for adding string keys only, you can set this to
+  ``True``.
+- **a reference**. You can also use the ``$ref`` keyword to reference and reuse
+  existing schema. See :ref:`referencing schema` docs below to learn more.
 
 .. versionchanged:: 2.10 Support for sub-schema for new properties was added.
 
@@ -159,16 +160,18 @@ a string, you should use Django's ``CharField``.
 Keywords:
 
 - ``title`` - Specify the label for the input field.
-- ``choices`` (alias ``enum``) - Specify choices for the field. A ``select`` input will be rendered.
-  See the :doc:`document on Choices <guide/choices>` for details.
-- ``format`` - Use this to specify the input field type. See :ref:`inputs for string type`
-  for more.
+- ``choices`` (alias ``enum``) - Specify choices for the field. A ``select``
+  input will be rendered. See the :doc:`document on Choices <guide/choices>` for
+  details.
+- ``format`` - Use this to specify the input field type. See :ref:`inputs for
+  string type` for more.
 - ``widget`` - Use this to specify the input field type, such as a textarea. For
   most use cases, prefer the ``format`` keyword.
 - ``default`` - Specify a default value for this input field.
 - ``readonly`` (alias ``readOnly``) - Make this input field readonly
 - ``help_text`` (alias ``helpText``) - Display a help text under this input
 - ``placeholder`` - Placeholder text for this input
+- ``handler`` - URL of file upload view. See :ref:`Uploading files` for usage.
 
 .. versionchanged:: 2.6
     Support for ``default`` and ``readonly`` keywords was added.
@@ -177,7 +180,7 @@ Keywords:
     Support for ``help_text`` (or ``helpText``) keywords was added.
 
 .. versionchanged:: 2.11
-    Support for ``placeholder`` and ``enum`` keywords was added.
+    Support for ``placeholder``, ``enum`` and ``handler`` keywords was added.
 
 ``number``
 ~~~~~~~~~~
@@ -190,9 +193,11 @@ you should use Django's ``FloatField``.
 Keywords:
 
 - ``title`` - Specify the label for the input field.
-- ``choices`` (alias ``enum``) - Specify choices for the field. A ``select`` input will be rendered.
-  See the :doc:`document on Choices <guide/choices>` for details.
-- ``default`` - Specify a default value for this input field. The value must be of numerical type.
+- ``choices`` (alias ``enum``) - Specify choices for the field. A ``select``
+  input will be rendered. See the :doc:`document on Choices <guide/choices>` for
+  details.
+- ``default`` - Specify a default value for this input field. The value must be
+  of numerical type.
 - ``readonly`` (alias ``readOnly``) - Make this input field readonly
 - ``help_text`` (alias ``helpText``) - Display a help text under this input
 - ``placeholder`` - Placeholder text for this input
@@ -213,15 +218,17 @@ It gets a ``number`` HTML input by default. It can't be overridden.
 
 An integer.
 
-This can't be at the top level of the schema. If you only want to save an integer,
-you should use Django's ``IntegerField``.
+This can't be at the top level of the schema. If you only want to save an
+integer, you should use Django's ``IntegerField``.
 
 Keywords:
 
 - ``title`` - Specify the label for the input field.
-- ``choices`` (alias ``enum``) - Specify choices for the field. A ``select`` input will be rendered.
-  See the :doc:`document on Choices <guide/choices>` for details.
-- ``default`` - Specify a default value for this input field. The value must be an integer.
+- ``choices`` (alias ``enum``) - Specify choices for the field. A ``select``
+  input will be rendered. See the :doc:`document on Choices <guide/choices>` for
+  details.
+- ``default`` - Specify a default value for this input field. The value must be
+  an integer.
 - ``help_text`` (alias ``helpText``) - Display a help text under this input
 - ``readonly`` (alias ``readOnly``) - Make this input field readonly
 - ``placeholder`` - Placeholder text for this input
@@ -277,8 +284,8 @@ within itself.
 Use the ``$ref`` keyword to reference other parts of the schema.
 
 In the following example, ``shipping_address`` has same fields as
-``billing_address``. So, instead of defining the schema twice, you can reference the
-earlier defined schema.
+``billing_address``. So, instead of defining the schema twice, you can reference
+the earlier defined schema.
 
 .. code-block:: python
     :emphasize-lines: 12
@@ -302,7 +309,8 @@ earlier defined schema.
 ``$defs`` keyword
 ~~~~~~~~~~~~~~~~~
 
-You can define common schema and keep them in a single place under the ``$defs`` object:
+You can define common schema and keep them in a single place under the ``$defs``
+object:
 
 .. code-block:: python
     :emphasize-lines: 5, 8, 12
@@ -340,11 +348,11 @@ You can define common schema and keep them in a single place under the ``$defs``
 Recursive nesting
 -----------------
 
-The ``$ref`` keyword also makes recursion possible. You can use it for recursively
-nesting an object within itself.
+The ``$ref`` keyword also makes recursion possible. You can use it for
+recursively nesting an object within itself.
 
-For example, a Menu object can have link items and a sub-menu (dropdown menu) which
-contains more links and a sub-sub-menu and so on...
+For example, a Menu object can have link items and a sub-menu (dropdown menu)
+which contains more links and a sub-sub-menu and so on...
 
 .. code-block:: python
     :emphasize-lines: 15
@@ -372,14 +380,16 @@ contains more links and a sub-sub-menu and so on...
 
     **Beware of the infinite loop** while referencing.
 
-    In certain cases, referencing (``$ref``) may cause an infinite loop. Currently,
-    that error is unhandled, and the widget will not be rendered at all if that happens.
+    In certain cases, referencing (``$ref``) may cause an infinite loop.
+    Currently, that error is unhandled, and the widget will not be rendered at
+    all if that happens.
 
-    One particular case is when two objects reference each other. For example, ``a`` is a reference to ``b``
-    and ``b`` is a reference to ``a``.
+    One particular case is when two objects reference each other. For example,
+    ``a`` is a reference to ``b`` and ``b`` is a reference to ``a``.
 
-    There might be other cases, too. If the widget doesn't render while you're using
-    ``$ref``, please open your browser's dev console to check the error message.
+    There might be other cases, too. If the widget doesn't render while you're
+    using ``$ref``, please open your browser's dev console to check the error
+    message.
 
     Also, `open an issue on Github <https://github.com/bhch/django-jsonform/issues>`__.
 

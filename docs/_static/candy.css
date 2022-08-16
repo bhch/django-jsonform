@@ -248,8 +248,12 @@ span.toctree-expand {
 
 div.deprecated {
     background: #ffdec6;
-    padding: 10px 10px 2px;
+    padding: 10px;
+    margin-bottom: 24px;
     border-radius: 2px;
+}
+div.deprecated p:last-child {
+    margin-bottom: 0;
 }
 div.admonition {
     margin-left: -50px;
