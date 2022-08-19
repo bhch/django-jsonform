@@ -22,15 +22,15 @@ API
     under the hood.
 
     So, this is a shortened documentation of the actual API. We'll only look at
-    the functions which only concern the Django side of things.
+    the functions which concern the widget.
 
 
 ``reactJsonForm.getFormInstance(id)``
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 Use this function to get an instance of the form widget.
 
-The ``id`` is the ID of the widget container which is this format: ``id_<field-name>_jsonform``.
+The ``id`` is the ID of the widget container which looks like this: ``id_<field-name>_jsonform``.
 
 E.g., if your model's JSONField is called "my_field", then the container id will be
 ``id_my_field_jsonform``.
@@ -169,25 +169,27 @@ Following is the code which is used in the demo above:
     };
 
 
-    function onJsonformChange(e) {
+    function onJsonFormChange(e) {
         var data = e.data; // current data after
         var prevData = e.prevData; // previous data (before this event)
 
         var schema = e.schema; // current schema
         var prevSchema = e.prevSchema; // previous schema (before this event)
 
-        if (!data.category) {
+        var selectedCategory = data.category;
+
+        if (!selectedCategory) {
             /* no category selected yet, exit the function */
             return;
         }
 
-        if (data.category === prevData.category) {
+        if (selectedCategory === prevData.category) {
             /* category hasn't changed, no need to update choices */
             return;
         }
 
-        schema.keys.vehicle.choices = vehicleChoiceMap[data.category];
-        schema.keys.vehicle.helpText = "Select " + data.category + " vehicle";
+        schema.keys.vehicle.choices = vehicleChoiceMap[selectedCategory];
+        schema.keys.vehicle.helpText = "Select " + selectedCategory + " vehicle";
         data.vehicle = ''; // reset previously selected vehicle
 
         form.update({
@@ -198,7 +200,7 @@ Following is the code which is used in the demo above:
 
 
 Loading your custom JS file on the admin page
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+---------------------------------------------
 
 You can use the ``Media`` class to load your custom JS files in the admin page.
 

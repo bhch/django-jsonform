@@ -73,7 +73,7 @@ underneath.
             items = JSONField(schema=..., pre_save_hook=pre_save_hook)
 
 .. attribute:: file_handler
-    :type: callable
+    :type: str
 
     .. versionadded:: 2.11
 
@@ -140,7 +140,7 @@ Widgets
 ``JSONFormWidget``
 ~~~~~~~~~~~~~~~~~~
 
-.. class:: JSONFormWidget(schema, model_name='')
+.. class:: JSONFormWidget(schema, model_name='', file_handler='')
     
 The widget which renders the editor.
 
@@ -171,6 +171,14 @@ It can be used in a form if you don't want to use the model field.
     so that you can identify which model is requesting the file upload.
 
     See :ref:`Handling file uploads` for more details.
+
+.. attribute:: file_handler
+    :type: str
+
+    .. versionadded:: 2.11
+
+    (Optional) Provide a the url of the view for handling file uploads. See :ref:`document
+    on uploading files <file url>` for usage.
 
 Usage:
 
