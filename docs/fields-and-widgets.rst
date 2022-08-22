@@ -219,25 +219,45 @@ the way Django initialises the widgets and form fields.
 However, you can bypass this limitation by manually setting an ``instance``
 attribute on the widget.
 
+To do this, you are required to create a custom form class for your model:
+
 .. code-block::
 
-    def callable_schema(instance):
-        # ... do something ...
-        pass
+    # models.py
+
+    def callable_schema(instance=None):
+        # instance will be None while creating new object
+        
+        if instance:
+            # ... do something with the instance ...
+        else:
+            # ... do something else ...        
+        return schema
+
 
     class MyModel(models.Model):
-        json_field = JSONField(schema=callable_schema)
+        my_field = JSONField(schema=callable_schema)
 
+
+    ...
+
+    # admin.py
 
     # create a custom modelform
     class MyModelForm(forms.ModelForm):
-        def __init__(self):
+        def __init__(self, *args, **kwargs):
+            super().__init__(*args, **kwargs)
             # manually set the current instance on the widget
-            self.fields['json_field'].widget.instance = self.instance
+            self.fields['my_field'].widget.instance = self.instance
 
 
     # set the form on the admin class
     class MyAdmin(admin.ModelAdmin):
         form = MyModelForm
 
-Now, the value of the instance will be passed to your callable schema function.
+
+    admin.site.register(MyModel, MyAdmin)
+
+
+Your callable schema function will get the current model ``instance`` on *Edit/Change*
+admin page. It will be ``None`` on the *Add new* page (*i.e.* while creating new objects).

@@ -170,7 +170,7 @@ Following is the code which is used in the demo above:
 
 
     function onJsonFormChange(e) {
-        var data = e.data; // current data after
+        var data = e.data; // current data
         var prevData = e.prevData; // previous data (before this event)
 
         var schema = e.schema; // current schema
