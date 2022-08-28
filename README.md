@@ -14,7 +14,7 @@
 
 <p align="center">
   <strong><a href="https://django-jsonform.rtfd.io">Documentation</a></strong> &bull;
-  <strong><a href="https://bhch.github.io/react-json-form/">Playground</a></strong> &bull;
+  <strong><a href="https://bhch.github.io/react-json-form/playground/">Playground</a></strong> &bull;
   <strong><a href="https://pypi.org/project/django-jsonform/">PyPI</a></strong>
 </p>
 
