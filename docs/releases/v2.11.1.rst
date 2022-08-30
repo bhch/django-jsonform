@@ -1,0 +1,25 @@
+django-jsonform 2.11.1 release notes
+====================================
+
+
+Aug 30, 2022
+------------
+
+This is a minor release.
+
+
+What's new
+~~~~~~~~~~
+
+
+Bugfixes
+^^^^^^^^
+
+- :issue:`54`: Multiselect widget didn't work with integer types.
+
+
+react-json-form (JavaScript)
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+`react-json-form <https://github.com/bhch/react-json-form>`_ has been updated
+to version 2.0.2.
