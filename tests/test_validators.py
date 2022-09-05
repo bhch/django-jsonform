@@ -92,6 +92,18 @@ class TestJSONSchemaValidator(TestCase):
         self.assertRaises(JSONSchemaValidationError, validator, wrong_data)
         validator(data) # must pass
 
+    def test_validate_array_uniqueItems(self):
+        schema = {
+            'type': 'array',
+            'items': {'type': 'string'},
+            'uniqueItems': True
+        }
+        wrong_data = ['a', 'b', 'a']
+        data = ['a', 'b', 'c']
+        validator = JSONSchemaValidator(schema)
+        self.assertRaises(JSONSchemaValidationError, validator, wrong_data)
+        validator(data) # must pass
+
     def test_validate_array_choices(self):
         schema = {
             'type': 'array',
