@@ -13,6 +13,7 @@
             modelName: '{{ model_name }}',
             schema: JSON.parse('{{ schema|escapejs }}'),
             data: JSON.parse('{{ data|escapejs }}'),
+            errorMap: JSON.parse('{{ error_map|escapejs }}'),
         };
 
         if (config.containerId.indexOf('__prefix__') > -1) {

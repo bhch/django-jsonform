@@ -34,6 +34,19 @@ def normalize_schema(schema):
     return new_schema
 
 
+def normalize_keyword(kw):
+    """Converts custom keywords to standard JSON schema keywords"""
+    return normalize_keyword.kw_map.get(kw, kw)
+
+normalize_keyword.kw_map = {
+    'list': 'array',
+    'dict': 'object',
+    'keys': 'properties',
+    'choices': 'enum',
+    'datetime': 'date-time'
+}
+
+
 def get_setting(name, default=None):
     """Returns settings nested inside DJANGO_JSONFORM main setting variable"""
     if not hasattr(settings, 'DJANGO_JSONFORM'):

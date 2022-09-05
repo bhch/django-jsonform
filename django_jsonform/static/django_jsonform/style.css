@@ -122,14 +122,23 @@
     width: auto;
 }
 
-.rjf-help-text {
-    font-size: 11px;
+.rjf-help-text, .rjf-error-text {
     color: var(--body-quiet-color);
     display: block;
     margin-top: 4px;
 }
 
-.rjf-check-input > .rjf-help-text {
+.rjf-help-text {
+    font-size: 11px;
+    color: var(--body-quiet-color);
+}
+
+.rjf-error-text {
+    color: var(--error-fg);
+}
+
+.rjf-check-input > label + .rjf-help-text,
+.rjf-check-input > .rjf-error-text {
     margin-top: 0;
 }
 
@@ -452,6 +461,17 @@ div.form-row::after {
 .rjf-multiselect-field-option label > input[type="checkbox"] {
     vertical-align: middle;
     margin-right: 3px;
+}
+
+.errors .rjf-form-wrapper input,
+.errors .rjf-form-wrapper select,
+.errors .rjf-form-wrapper textarea {
+    border-color: var(--border-color);
+}
+.rjf-input-group.has-error input,
+.rjf-input-group.has-error select,
+.rjf-input-group.has-error textarea {
+    border-color: var(--error-fg);
 }
 
 .rjf-animate {

@@ -24,6 +24,8 @@ except ImportError:
 from django_jsonform.widgets import JSONFormWidget
 
 from django.forms.widgets import TextInput
+from django_jsonform.validators import JSONSchemaValidator
+from django_jsonform.exceptions import JSONSchemaValidationError
 
 
 class JSONFormField(DjangoJSONFormField):
@@ -36,6 +38,18 @@ class JSONFormField(DjangoJSONFormField):
         self.widget = JSONFormWidget(schema=schema, model_name=model_name, file_handler=file_handler)
         kwargs['widget'] = self.widget
         super().__init__(**kwargs)
+
+    def validate(self, value):
+        super().validate(value)
+        validator = JSONSchemaValidator(schema=self.widget.schema)
+        try:
+            validator(value)
+        except JSONSchemaValidationError as e:
+            self.add_error(e.error_map)
+            raise
+
+    def add_error(self, error_map):
+        self.widget.add_error(error_map)
 
 
 class ArrayFormField(SimpleArrayField):

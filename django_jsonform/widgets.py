@@ -34,6 +34,7 @@ class JSONFormWidget(forms.Widget):
             'data': value or json.dumps(''),
             'schema': json.dumps(schema),
             'file_handler': self.file_handler or get_setting('FILE_HANDLER', ''),
+            'error_map': getattr(self, 'error_map', {})
         }
 
         # backwards compatibility for `JSONFORM_UPLOAD_HANDLER` setting
@@ -44,6 +45,9 @@ class JSONFormWidget(forms.Widget):
                 pass
 
         return mark_safe(render_to_string(self.template_name, context))
+
+    def add_error(self, error_map):
+        setattr(self, 'error_map', json.dumps(error_map))
 
     @property
     def media(self):
