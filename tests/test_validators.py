@@ -93,6 +93,7 @@ class TestJSONSchemaValidator(TestCase):
         validator(data) # must pass
 
     def test_validate_array_uniqueItems(self):
+        # 1. string items
         schema = {
             'type': 'array',
             'items': {'type': 'string'},
@@ -103,6 +104,40 @@ class TestJSONSchemaValidator(TestCase):
         validator = JSONSchemaValidator(schema)
         self.assertRaises(JSONSchemaValidationError, validator, wrong_data)
         validator(data) # must pass
+
+        # 2. dict items
+        schema = {
+            'type': 'array',
+            'items': {
+                'type': 'object',
+                'properties': {
+                    'a': {'type': 'string'}
+                }
+            },
+            'uniqueItems': True
+        }
+        wrong_data = [{'a': '1'}, {'a': '1'}]
+        data = [{'a': '1'}, {'a': '2'}]
+        validator = JSONSchemaValidator(schema)
+        self.assertRaises(JSONSchemaValidationError, validator, wrong_data)
+        validator(data) # must pass
+
+        # 3. list items
+        schema = {
+            'type': 'array',
+            'items': {
+                'type': 'array',
+                'items': {'type': 'string'}
+            },
+            'uniqueItems': True
+        }
+        wrong_data = [['a', 'b'], ['a', 'b']]
+        data_1 = [['a', 'b'], ['a', 'c']]
+        data_2 = [['a', 'b'], ['b', 'a']]
+        validator = JSONSchemaValidator(schema)
+        self.assertRaises(JSONSchemaValidationError, validator, wrong_data)
+        validator(data_1) # must pass
+        validator(data_2) # must pass
 
     def test_validate_array_choices(self):
         schema = {

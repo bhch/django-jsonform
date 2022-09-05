@@ -122,8 +122,15 @@ class JSONSchemaValidator:
             self.add_error(coords, 'Maximum %s items allowed.' % (maxItems))
 
         if schema.get('uniqueItems'):
-            if len(data) != len(set(data)):
-                self.add_error(coords, 'All items in this list must be unique.')
+            try:
+                if len(data) != len(set(data)):
+                    self.add_error(coords, 'All items in this list must be unique.')
+            except TypeError:
+                # TypeError is raised when trying to make a set from unashable types
+                # i.e. lists and dicts
+                # so we JSON-ify each item to make it a string
+                if len(data) != len(set([json.dumps(item) for item in data])): 
+                    self.add_error(coords, 'All items in this list must be unique.')
 
         if choices:
             for item in data:
