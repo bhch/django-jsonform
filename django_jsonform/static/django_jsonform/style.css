@@ -720,6 +720,86 @@ div.form-row::after {
     cursor: pointer;
 }
 
+.rjf-autocomplete-field {
+    position: relative;
+}
+.rjf-autocomplete-field-input {
+    cursor: pointer;
+    padding-right: 40px !important;
+    background-color: #fff !important;
+}
+.rjf-autocomplete-field-clear-button {
+    position: absolute;
+    right: 6px;
+    top: 5px;
+    line-height: 1;
+    padding: 1px 2px;
+    background: transparent;
+    color: var(--error-fg);
+    border: 0;
+    z-index: 10;
+    cursor: pointer;
+}
+.rjf-autocomplete-field-clear-button:hover {
+    background-color: #ffdbdb;;
+}
+.rjf-autocomplete-field-clear-button > .rjf-icon {
+    display: none;
+}
+.rjf-autocomplete-field-clear-button > span {
+    vertical-align: middle;
+}
+.rjf-autocomplete-field-popup {
+    position: absolute;
+    left: 33%;
+    background-color: #fff;
+    border: 1px solid #ccc;
+    width: 66%;
+    margin-bottom: 15px;
+    border-radius: 4px;
+    box-shadow: 0 3px 15px rgba(0,0,0,0.12);
+    max-height: 200px;
+    overflow: auto;
+    z-index: 100;
+}
+.rjf-autocomplete-field-search {
+    padding: 8px 10px;
+    position: relative;
+}
+.rjf-autocomplete-field-search input {
+    width: 100%;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='1em' height='1em' fill='%23444444' viewBox='0 0 16 16'%3E%3Cpath d='M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001c.03.04.062.078.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1.007 1.007 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0z'/%3E%3C/svg%3E");
+    background-repeat: no-repeat;
+    background-position: 6px center;
+    padding-left: 30px;
+    padding-right: 30px;
+}
+.rjf-autocomplete-field-search .rjf-loader {
+    position: absolute;
+    right: 14px;
+    top: 14px;
+}
+.rjf-autocomplete-field-options {
+    padding: 8px 0;
+    border-top: 1px solid #ccc;
+}
+.rjf-autocomplete-field-option {
+    padding: 6px 12px;
+    cursor: pointer;
+}
+.rjf-autocomplete-field-option:hover,
+.rjf-autocomplete-field-option:focus {
+    background-color: #eee;
+}
+.rjf-autocomplete-field-option.disabled {
+    color: #999;
+    cursor: default;
+}
+.rjf-autocomplete-field-option.disabled:hover,
+.rjf-autocomplete-field-option.disabled:focus {
+    background-color: transparent;
+}
+
 .rjf-upload-modal__media-load-button {
     display: table;
     margin: auto;
@@ -805,6 +885,15 @@ div.form-row::after {
         padding-right: 32px !important;
         background-position: right 8px center;
     }
+
+    .rjf-autocomplete-field-search input {
+        padding-left: 30px !important;
+        padding-right: 30px !important;
+        background-position: 6px center;
+    }
+    .rjf-autocomplete-field-search .rjf-loader {
+        top: 18px;
+    }
 }
 
 @media(max-width: 767px) {
@@ -876,6 +965,11 @@ div.form-row::after {
 
     .rjf-multiselect-field-options-container {
         width: calc(100% + 60px);
+    }
+
+    .rjf-autocomplete-field-popup {
+        left: 0;
+        width: 100%;
     }
 
     .rjf-upload-modal__media-tile {
