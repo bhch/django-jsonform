@@ -122,6 +122,10 @@
     width: auto;
 }
 
+.rjf-text-danger {
+    color: var(--error-fg);
+}
+
 .rjf-help-text, .rjf-error-text {
     color: var(--body-quiet-color);
     display: block;
@@ -172,7 +176,7 @@
     text-overflow: ellipsis;
 }
 .rjf-remove-file-button {
-    color: #da1f1f;
+    color: var(--error-fg);
     background: transparent;
     display: inline-block;
     vertical-align: middle;
@@ -182,7 +186,7 @@
 }
 .rjf-remove-file-button:hover {
     background-color: #ffdbdb;
-    color: #b01212;
+    color: var(--error-fg);
 }
 
 .rjf-form-row label input[type="checkbox"] {
@@ -673,6 +677,49 @@ div.form-row::after {
     display: block;
     margin-bottom: 2px;
 }
+.rjf-upload-modal__media-tile .rjf-dropdown {
+    position: absolute;
+    right: 6px;
+    top: 6px;
+}
+.rjf-upload-modal__media-tile .rjf-dropdown.open {
+    background: #fff;
+    width: 120px;
+    box-shadow: -2px 4px 10px rgba(0,0,0,0.3);
+    border-radius: 3px;
+    overflow: hidden;
+    border: 1px solid #ddd;
+}
+.rjf-upload-modal__media-tile .rjf-dropdown-toggler {
+    padding: 3px;
+    border: 0;
+    background-color: transparent;
+    float: right;
+}
+.rjf-upload-modal__media-tile .rjf-dropdown-toggler:hover {
+    background-color: #eee;
+    color: #000;
+    cursor: pointer;
+}
+.rjf-dropdown-items {
+    display: table;
+    width: 100%;
+    padding-top: 4px;
+}
+.rjf-dropdown-item {
+    background-color: #fff;
+    border: 0;
+    border-top: 1px solid #ccc;
+    width: 100%;
+    display: block;
+    padding: 5px 2px;
+    font-size: 1em;
+}
+.rjf-dropdown-item:hover {
+    background-color: #eee;
+    cursor: pointer;
+}
+
 .rjf-upload-modal__media-load-button {
     display: table;
     margin: auto;
@@ -931,4 +978,3 @@ div.form-row::after {
 .grp-module .rjf-help-text {
     color: #888;
 }
-
