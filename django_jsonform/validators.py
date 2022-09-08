@@ -111,9 +111,9 @@ class JSONSchemaValidator:
                 params={'schema_type': '%s (%s)' % (data_type_norm, data_type) if data_type_norm else data_type}
             )
 
-        minItems = schema.get('minItems', schema.get('min_items')) or None
-        maxItems = schema.get('maxItems', schema.get('max_items')) or None
-        choices = schema['items'].get('choices', schema['items'].get('enum')) or None
+        minItems = schema.get('minItems', schema.get('min_items', None))
+        maxItems = schema.get('maxItems', schema.get('max_items', None))
+        choices = schema['items'].get('choices', schema['items'].get('enum', None))
 
         if minItems and len(data) < int(minItems):
             self.add_error(coords, 'Minimum %s items required.' % (minItems))
