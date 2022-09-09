@@ -219,10 +219,10 @@ class JSONSchemaValidator:
             self.add_error(coords, 'This value is invalid. Must be a valid string.')
             return
 
-        if schema.get('minLength') and len(data) < int(schema['minLength']):
+        if isinstance(schema.get('minLength'), int) and len(data) < int(schema['minLength']):
             self.add_error(coords, 'Minumum length must be %s' % schema['minLength'])
 
-        if schema.get('maxLength') and len(data) > int(schema['maxLength']):
+        if isinstance(schema.get('maxLength'), int) and len(data) > int(schema['maxLength']):
             self.add_error(coords, 'Maximum length must be %s' % schema['maxLength'])
 
         format_ = normalize_keyword(schema.get('format'))
@@ -282,16 +282,16 @@ class JSONSchemaValidator:
 
         data = float(data)
 
-        if  schema.get('minimum') and data < float(schema['minimum']):
+        if  isinstance(schema.get('minimum'), (int, float))  and data < float(schema['minimum']):
             self.add_error(coords, 'This value must not be less than %s' % (schema['minimum']))
 
-        if  schema.get('maximum') and data > float(schema['maximum']):
+        if  isinstance(schema.get('maximum'), (int, float)) and data > float(schema['maximum']):
             self.add_error(coords, 'This value must not be greater than %s' % (schema['maximum']))
 
-        if  schema.get('exclusiveMinimum') and data <= float(schema['exclusiveMinimum']):
+        if  isinstance(schema.get('exclusiveMinimum'), (int, float)) and data <= float(schema['exclusiveMinimum']):
             self.add_error(coords, 'This value must be greater than %s' % (schema['exclusiveMinimum']))
 
-        if  schema.get('exclusiveMaximum') and data >= float(schema['exclusiveMaximum']):
+        if  isinstance(schema.get('exclusiveMaximum'), (int, float)) and data >= float(schema['exclusiveMaximum']):
             self.add_error(coords, 'This value must be less than %s' % (schema['exclusiveMaximum']))
 
     def __eq__(self, other):

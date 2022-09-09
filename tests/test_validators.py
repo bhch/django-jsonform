@@ -287,8 +287,8 @@ class TestJSONSchemaValidator(TestCase):
                 'a': {
                     'type': 'string',
                     'required': True,
-                    'minLength': '3',
-                    'maxLength': '5'
+                    'minLength': 3,
+                    'maxLength': 5
                 }
             }
         }
@@ -314,6 +314,11 @@ class TestJSONSchemaValidator(TestCase):
         # correct data
         data = {'a': '123'}
         validator(data)
+
+        # 5. test maxLength when zero
+        schema['properties']['a']['maxLength'] = 0
+        wrong_data = {'a': '123456'}
+        self.assertRaises(JSONSchemaValidationError, validator, wrong_data)
 
     def test_validate_string_formats(self):
         # 1. email
@@ -435,8 +440,29 @@ class TestJSONSchemaValidator(TestCase):
         validator(data_2)
         validator(data_3)
 
-        # 5. exclusiveMinimum & exclusiveMaximum
+        # 5. minimum when zero
+        del schema['properties']['a']['maximum'];
+        schema['properties']['a']['minimum'] = 0
+        wrong_data = {'a': -1}
+        data_1 = {'a': 0}
+        data_2 = {'a': 1}
+        validator = JSONSchemaValidator(schema)
+        self.assertRaises(JSONSchemaValidationError, validator, wrong_data)
+        validator(data_1)
+        validator(data_2)
+
+        # 6. maximum when zero
+        schema['properties']['a']['maximum'] = 0
         del schema['properties']['a']['minimum']
+        wrong_data = {'a': 1}
+        data_1 = {'a': 0}
+        data_2 = {'a': -1}
+        validator = JSONSchemaValidator(schema)
+        self.assertRaises(JSONSchemaValidationError, validator, wrong_data)
+        validator(data_1)
+        validator(data_2)
+
+        # 7. exclusiveMinimum & exclusiveMaximum
         del schema['properties']['a']['maximum']
         schema['properties']['a']['exclusiveMinimum'] = 2
         schema['properties']['a']['exclusiveMaximum'] = 5
@@ -453,6 +479,29 @@ class TestJSONSchemaValidator(TestCase):
         self.assertRaises(JSONSchemaValidationError, validator, wrong_data_4)
         validator(data_1)
         validator(data_2)
+
+        # 8. exclusiveMinimum when zero
+        schema['properties']['a']['exclusiveMinimum'] = 0
+        del schema['properties']['a']['exclusiveMaximum']
+        wrong_data_1 = {'a': -1}
+        wrong_data_2 = {'a': 0}
+        data = {'a': 1}
+        validator = JSONSchemaValidator(schema)
+        self.assertRaises(JSONSchemaValidationError, validator, wrong_data_1)
+        self.assertRaises(JSONSchemaValidationError, validator, wrong_data_2)
+        validator(data)
+
+        # 9. exclusiveMaximum when zero
+        del schema['properties']['a']['exclusiveMinimum']
+        schema['properties']['a']['exclusiveMaximum'] = 0
+        wrong_data_1 = {'a': 1}
+        wrong_data_2 = {'a': 0}
+        data = {'a': -1}
+        validator = JSONSchemaValidator(schema)
+        self.assertRaises(JSONSchemaValidationError, validator, wrong_data_1)
+        self.assertRaises(JSONSchemaValidationError, validator, wrong_data_2)
+        validator(data)
+
 
     def test_validate_number_method(self):
         # 1. type (either float or None)
@@ -495,8 +544,29 @@ class TestJSONSchemaValidator(TestCase):
         validator(data_2)
         validator(data_3)
 
-        # 4. exclusiveMinimum & exclusiveMaximum
+        # 4. minimum when zero
+        del schema['properties']['a']['maximum'];
+        schema['properties']['a']['minimum'] = 0.0
+        wrong_data = {'a': -0.1}
+        data_1 = {'a': 0.0}
+        data_2 = {'a': 0.1}
+        validator = JSONSchemaValidator(schema)
+        self.assertRaises(JSONSchemaValidationError, validator, wrong_data)
+        validator(data_1)
+        validator(data_2)
+
+        # 5. maximum when zero
+        schema['properties']['a']['maximum'] = 0.0
         del schema['properties']['a']['minimum']
+        wrong_data = {'a': 0.1}
+        data_1 = {'a': 0.0}
+        data_2 = {'a': -0.1}
+        validator = JSONSchemaValidator(schema)
+        self.assertRaises(JSONSchemaValidationError, validator, wrong_data)
+        validator(data_1)
+        validator(data_2)
+
+        # 6. exclusiveMinimum & exclusiveMaximum
         del schema['properties']['a']['maximum']
         schema['properties']['a']['exclusiveMinimum'] = 2.5
         schema['properties']['a']['exclusiveMaximum'] = 5.2
@@ -513,3 +583,25 @@ class TestJSONSchemaValidator(TestCase):
         self.assertRaises(JSONSchemaValidationError, validator, wrong_data_4)
         validator(data_1)
         validator(data_2)
+
+        # 7. exclusiveMinimum when zero
+        schema['properties']['a']['exclusiveMinimum'] = 0.0
+        del schema['properties']['a']['exclusiveMaximum']
+        wrong_data_1 = {'a': -0.1}
+        wrong_data_2 = {'a': 0.0}
+        data = {'a': 0.1}
+        validator = JSONSchemaValidator(schema)
+        self.assertRaises(JSONSchemaValidationError, validator, wrong_data_1)
+        self.assertRaises(JSONSchemaValidationError, validator, wrong_data_2)
+        validator(data)
+
+        # 8. exclusiveMaximum when zero
+        del schema['properties']['a']['exclusiveMinimum']
+        schema['properties']['a']['exclusiveMaximum'] = 0.0
+        wrong_data_1 = {'a': 0.1}
+        wrong_data_2 = {'a': 0.0}
+        data = {'a': -0.1}
+        validator = JSONSchemaValidator(schema)
+        self.assertRaises(JSONSchemaValidationError, validator, wrong_data_1)
+        self.assertRaises(JSONSchemaValidationError, validator, wrong_data_2)
+        validator(data)
