@@ -504,7 +504,7 @@ class TestJSONSchemaValidator(TestCase):
 
 
     def test_validate_number_method(self):
-        # 1. type (either float or None)
+        # 1. type (either float or int or None)
         schema = {
             'type': 'object',
             'properties': {'a': {'type': 'number'}}
@@ -521,13 +521,15 @@ class TestJSONSchemaValidator(TestCase):
         validator(data_3)
         validator(data_4)
 
-        # 2. required (only float)
+        # 2. required (float or int)
         schema['properties']['a']['required'] = True
         wrong_data = {'a': None}
-        data = {'a': 1.5}
+        data_1 = {'a': 1.5}
+        data_2 = {'a': 1}
         validator = JSONSchemaValidator(schema)
         self.assertRaises(JSONSchemaValidationError, validator, wrong_data)
-        validator(data)
+        validator(data_1)
+        validator(data_2)
 
         # 3. minimum & maximum
         schema['properties']['a']['minimum'] = 2.5
