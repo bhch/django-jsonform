@@ -294,5 +294,8 @@ class JSONSchemaValidator:
         if  isinstance(schema.get('exclusiveMaximum'), (int, float)) and data >= float(schema['exclusiveMaximum']):
             self.add_error(coords, 'This value must be less than %s' % (schema['exclusiveMaximum']))
 
+        if isinstance(schema.get('multipleOf'), (int, float)) and ((data * 100) % (schema['multipleOf'] * 100)) / 100:
+            self.add_error(coords, 'This value must be a multiple of %s' % (schema['multipleOf']))
+
     def __eq__(self, other):
         return self.schema == other.schema

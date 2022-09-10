@@ -502,6 +502,15 @@ class TestJSONSchemaValidator(TestCase):
         self.assertRaises(JSONSchemaValidationError, validator, wrong_data_2)
         validator(data)
 
+        # 10. multipleOf
+        del schema['properties']['a']['exclusiveMaximum']
+        schema['properties']['a']['multipleOf'] = 2
+        wrong_data = {'a': 1}
+        data = {'a': 4}
+        validator = JSONSchemaValidator(schema)
+        self.assertRaises(JSONSchemaValidationError, validator, wrong_data)
+        validator(data)
+
 
     def test_validate_number_method(self):
         # 1. type (either float or int or None)
@@ -606,4 +615,13 @@ class TestJSONSchemaValidator(TestCase):
         validator = JSONSchemaValidator(schema)
         self.assertRaises(JSONSchemaValidationError, validator, wrong_data_1)
         self.assertRaises(JSONSchemaValidationError, validator, wrong_data_2)
+        validator(data)
+
+        # 9. multipleOf
+        del schema['properties']['a']['exclusiveMaximum']
+        schema['properties']['a']['multipleOf'] = 0.2
+        wrong_data = {'a': 4.15}
+        data = {'a': 4.0}
+        validator = JSONSchemaValidator(schema)
+        self.assertRaises(JSONSchemaValidationError, validator, wrong_data)
         validator(data)
