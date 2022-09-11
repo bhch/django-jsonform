@@ -191,11 +191,12 @@ Usage:
 
 
     class ShoppingListForm(forms.ModelForm):
-        model = ShoppingList
-        fields = '__all__'
-        widgets = {
-            'items': JSONFormWidget(schema=ShoppingList.ITEMS_SCHEMA)
-        }
+        class Meta:
+            model = ShoppingList
+            fields = '__all__'
+            widgets = {
+                'items': JSONFormWidget(schema=ShoppingList.ITEMS_SCHEMA)
+            }
 
     class ShoppingListAdmin(admin.ModelAdmin):
         form = ShoppingListForm
