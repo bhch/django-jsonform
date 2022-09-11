@@ -1,5 +1,6 @@
 .rjf-form-wrapper > .module.aligned {
     min-width: 20rem;
+    margin-bottom: 0;
 }
 .fieldBox .rjf-form-wrapper::before {
     visibility: hidden;
@@ -164,7 +165,7 @@
     margin-bottom: 0.5em;
 }
 .rjf-current-file-name > span {
-    background-color: #eaf9ff;
+    background-color: #fbfbde;
     color: #071d1f;
     padding: 1px 4px;
     border-radius: 3px;
@@ -176,7 +177,7 @@
     text-overflow: ellipsis;
 }
 .rjf-remove-file-button {
-    color: var(--error-fg);
+    color: var(--link-fg);
     background: transparent;
     display: inline-block;
     vertical-align: middle;
@@ -185,8 +186,8 @@
     padding: 0 1px;
 }
 .rjf-remove-file-button:hover {
-    background-color: #ffdbdb;
-    color: var(--error-fg);
+    background-color: #eee;
+    color: var(--link-hover-color);
 }
 
 .rjf-form-row label input[type="checkbox"] {
@@ -735,13 +736,17 @@ div.form-row::after {
     line-height: 1;
     padding: 1px 2px;
     background: transparent;
-    color: var(--error-fg);
+    color: var(--link-fg);
     border: 0;
     z-index: 10;
     cursor: pointer;
 }
+.rjf-autocomplete-field.has-label .rjf-autocomplete-field-clear-button {
+    top: 5px;
+}
 .rjf-autocomplete-field-clear-button:hover {
-    background-color: #ffdbdb;;
+    background-color: #eee;
+    color: var(--link-hover-color);
 }
 .rjf-autocomplete-field-clear-button > .rjf-icon {
     display: none;
@@ -751,16 +756,19 @@ div.form-row::after {
 }
 .rjf-autocomplete-field-popup {
     position: absolute;
-    left: 33%;
+    left: 0;
     background-color: #fff;
     border: 1px solid #ccc;
-    width: 66%;
+    width: 100%;
+    max-width: 18rem;
     margin-bottom: 15px;
     border-radius: 4px;
     box-shadow: 0 3px 15px rgba(0,0,0,0.12);
-    max-height: 200px;
-    overflow: auto;
     z-index: 100;
+}
+.rjf-autocomplete-field.has-label .rjf-autocomplete-field-popup {
+    left: 33%;
+    width: 66%;
 }
 .rjf-autocomplete-field-search {
     padding: 8px 10px;
@@ -782,6 +790,8 @@ div.form-row::after {
 .rjf-autocomplete-field-options {
     padding: 8px 0;
     border-top: 1px solid #ccc;
+    max-height: 156px;
+    overflow: auto;
 }
 .rjf-autocomplete-field-option {
     padding: 6px 12px;
@@ -886,6 +896,10 @@ div.form-row::after {
         background-position: right 8px center;
     }
 
+    .rjf-autocomplete-field.has-label .rjf-autocomplete-field-clear-button,
+    .rjf-autocomplete-field-clear-button {
+        top: 8px;
+    }
     .rjf-autocomplete-field-search input {
         padding-left: 30px !important;
         padding-right: 30px !important;
@@ -967,9 +981,15 @@ div.form-row::after {
         width: calc(100% + 60px);
     }
 
+    .rjf-autocomplete-field.has-label .rjf-autocomplete-field-clear-button {
+        top: 32px;
+    }
+
+    .rjf-autocomplete-field.has-label .rjf-autocomplete-field-popup,
     .rjf-autocomplete-field-popup {
         left: 0;
         width: 100%;
+        max-width: 100%;
     }
 
     .rjf-upload-modal__media-tile {
