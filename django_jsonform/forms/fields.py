@@ -3,7 +3,7 @@ import pkg_resources
 import django
 from django.db import models
 from django.conf import settings
-from django.core.exceptions import ImproperlyConfigured
+from django.core.exceptions import ImproperlyConfigured, ValidationError
 
 if pkg_resources.parse_version(django.get_version()) >= pkg_resources.parse_version("3.1"):
     # Django >= 3.1
@@ -47,6 +47,23 @@ class JSONFormField(DjangoJSONFormField):
         except JSONSchemaValidationError as e:
             self.add_error(e.error_map)
             raise
+
+    def run_validators(self, value):
+        if value in self.empty_values:
+            return
+        errors = []
+        for v in self.validators:
+            try:
+                v(value)
+            except (JSONSchemaValidationError, ValidationError) as e:
+                if hasattr(e, 'error_map'):
+                    self.add_error(e.error_map)
+
+                if hasattr(e, 'code') and e.code in self.error_messages:
+                    e.message = self.error_messages[e.code]
+                errors.extend(e.error_list)
+        if errors:
+            raise ValidationError(errors)
 
     def add_error(self, error_map):
         self.widget.add_error(error_map)
