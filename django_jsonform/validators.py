@@ -219,6 +219,10 @@ class JSONSchemaValidator:
             self.add_error(coords, 'This value is invalid. Must be a valid string.')
             return
 
+        if not data:
+            # data not required and is empty
+            return
+
         if isinstance(schema.get('minLength'), int) and len(data) < int(schema['minLength']):
             self.add_error(coords, 'Minumum length must be %s' % schema['minLength'])
 

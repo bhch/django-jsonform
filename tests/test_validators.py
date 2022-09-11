@@ -320,6 +320,13 @@ class TestJSONSchemaValidator(TestCase):
         wrong_data = {'a': '123456'}
         self.assertRaises(JSONSchemaValidationError, validator, wrong_data)
 
+        # 6. minLength should be ignore if field is not required and is empty
+        del schema['properties']['a']['maxLength']
+        schema['properties']['a']['minLength'] = 3
+        schema['properties']['a']['required'] = False
+        data = {'a': ''}
+        validator(data)
+
     def test_validate_string_formats(self):
         # 1. email
         schema = {
@@ -333,9 +340,11 @@ class TestJSONSchemaValidator(TestCase):
         }
         wrong_data = {'a': '1'}
         data = {'a': 'test@example.com'}
+        data_2 = {'a': ''} # not required, empty must pass
         validator = JSONSchemaValidator(schema)
         self.assertRaises(JSONSchemaValidationError, validator, wrong_data)
         validator(data)
+        validator(data_2)
 
         # 2. date
         schema['properties']['a']['format'] = 'date'
