@@ -35,8 +35,11 @@ class JSONFormField(DjangoJSONFormField):
         **kwargs
     ):
         self.file_handler = file_handler
-        self.widget = JSONFormWidget(schema=schema, model_name=model_name, file_handler=file_handler)
-        kwargs['widget'] = self.widget
+        if not kwargs.get('widget'):
+            kwargs['widget'] = JSONFormWidget(schema=schema, model_name=model_name, file_handler=file_handler)
+
+        self.widget = kwargs['widget']
+
         super().__init__(**kwargs)
 
     def validate(self, value):
