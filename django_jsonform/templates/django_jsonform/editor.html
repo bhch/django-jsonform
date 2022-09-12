@@ -1,19 +1,20 @@
-<div id="id_{{ name }}_jsonform"></div>
+<div id="{{ widget.attrs.id }}_jsonform"></div>
 
-<textarea cols="40" id="id_{{ name }}" name="{{ name }}" rows="10" required="" style="display: none;">{{ data }}</textarea>
+<textarea cols="40" id="{{ widget.attrs.id }}" name="{{ widget.name }}" rows="10" style="display: none;">{{ widget.data }}</textarea>
 
 <script>
 (function() {
     function initJSONForm(inlineIndex) {
         var config = {
-            containerId: 'id_{{ name }}_jsonform',
-            dataInputId: 'id_{{ name }}',
-            fileHandler: '{{ file_handler }}',
-            fieldName: '{{ name }}',
-            modelName: '{{ model_name }}',
-            schema: JSON.parse('{{ schema|escapejs }}'),
-            data: JSON.parse('{{ data|escapejs }}'),
-            errorMap: JSON.parse('{{ error_map|escapejs }}'),
+            containerId: '{{ widget.attrs.id }}_jsonform',
+            dataInputId: '{{ widget.attrs.id }}',
+            fileHandler: '{{ widget.file_handler }}',
+            fieldName: '{{ widget.name }}',
+            modelName: '{{ widget.model_name }}',
+            schema: JSON.parse('{{ widget.schema|escapejs }}'),
+            data: JSON.parse('{{ widget.data|escapejs }}'),
+            errorMap: JSON.parse('{{ widget.error_map|escapejs }}'),
+            validateOnSubmit: {% if widget.validate_on_submit %}true{% else %}false{% endif %},
         };
 
         if (config.containerId.indexOf('__prefix__') > -1) {
@@ -25,11 +26,23 @@
 
         if (config.containerId.indexOf('__prefix__') === -1) {
             var jsonForm = reactJsonForm.createForm(config);
+            {% if widget.validate_on_submit %}
+            jsonForm.addEventListener('invalid', function(e) {
+                e.submitEvent.preventDefault();
+
+                var jsonFormDiv = django.jQuery('#' + jsonForm.containerId);
+
+                if (!jsonFormDiv.parent().prev().hasClass('errorlist'))
+                    jsonFormDiv.parent().before('<ul class="errorlist"><li>Please correct the errors below.</li></ul>');
+
+                jsonFormDiv.parent().prev()[0].scrollIntoView();
+            });
+            {% endif %}
             jsonForm.render();
         }
     }
 
-    if ('{{ name }}'.indexOf('__prefix__') > -1) {
+    if ('{{ widget.name }}'.indexOf('__prefix__') > -1) {
         // this is an unrendered inline formset
         django.jQuery(document).on('formset:added', function(e, row, id_prefix) {
             // extract current inline's index and pass it to initJSONForm
