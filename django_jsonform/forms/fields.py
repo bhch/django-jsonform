@@ -44,7 +44,7 @@ class JSONFormField(DjangoJSONFormField):
 
     def validate(self, value):
         super().validate(value)
-        validator = JSONSchemaValidator(schema=self.widget.schema)
+        validator = JSONSchemaValidator(schema=self.widget.get_schema())
         try:
             validator(value)
         except JSONSchemaValidationError as e:

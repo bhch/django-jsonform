@@ -25,8 +25,11 @@ class JSONFormWidget(forms.Widget):
         self.file_handler = file_handler
         self.validate_on_submit = validate_on_submit
 
+    def get_schema(self):
+        """Returns the schema attached to this widget.
 
-    def render(self, name, value, attrs=None, renderer=None):
+        If the schema is a callable, it will return the result of the callable.
+        """
         if callable(self.schema):
             if hasattr(self, 'instance') and len(signature(self.schema).parameters):
                 schema = self.schema(self.instance)
@@ -35,7 +38,10 @@ class JSONFormWidget(forms.Widget):
         else:
             schema = self.schema
 
-        schema = normalize_schema(schema)
+        return schema
+
+    def render(self, name, value, attrs=None, renderer=None):
+        schema = normalize_schema(self.get_schema())
 
         context = self.get_context(name, value, attrs)
 
