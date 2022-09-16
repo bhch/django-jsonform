@@ -86,11 +86,22 @@ The ``config`` is a JavaScript object (dict) which looks like this:
 
 
 .. important::
-    If you call the ``update`` function inside an event handler callback, it is important
+    If you call the ``update`` function from a ``change`` event listener, it is important
     that you call it conditionally. Otherwise, it might lead to an infinite loop.
 
     For example, call this function if the current data (``data``) and the previous data
     (``prevData``) are not the same. This way you can avoid the infinite loop.
+
+
+``formInstance.getData()``      
+~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+Returns the current data of the form instance.
+
+``formInstance.getSchema()``      
+~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+Returns the current schema of the form instance.
 
 
 Practical example
@@ -139,8 +150,8 @@ The schema for this demo:
     }
 
 
-Relevant JavaScript code
-~~~~~~~~~~~~~~~~~~~~~~~~
+JavaScript code
+~~~~~~~~~~~~~~~
 
 Following is the code which is used in the demo above:
 

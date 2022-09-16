@@ -8,6 +8,9 @@ Choices can be specified for any type of input - ``string``, ``number``, ``boole
 .. versionchanged:: 2.11.0
     Support for ``enum`` keyword was added.
 
+.. versionchanged:: 2.12.0
+    ``title`` keyword was added as an alias for the ``label`` keyword.
+
 Specifying choices
 ------------------
 
@@ -19,7 +22,7 @@ Specifying choices
     }
 
 
-You can also specify a different label for displaying to the user while the
+You can also specify a different title for displaying to the user while the
 underlying value is different.
 
 .. code-block:: python
@@ -27,9 +30,9 @@ underlying value is different.
     {
         'type': 'string',
         'choices': [
-            {'label': 'New York', 'value': 'NY'},
-            {'label': 'California', 'value': 'CA'},
-            {'label': 'Texas', 'value': 'TX'},
+            {'title': 'New York', 'value': 'NY'},
+            {'title': 'California', 'value': 'CA'},
+            {'title': 'Texas', 'value': 'TX'},
         ]
     }
 
@@ -96,3 +99,10 @@ For that purpose, the ``schema`` can be a callable object:
 
     class MyModel(models.Model):
         items = JSONField(schema=dynamic_schema)
+
+
+AJAX choices
+------------
+
+See :doc:`Autocomplete widget </guide/autocomplete>` for loading choices via AJAX
+requests.

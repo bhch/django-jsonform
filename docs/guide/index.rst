@@ -7,6 +7,9 @@ User's guide
     inputs
     choices
     upload
+    autocomplete
     javascript
     arrayfield
     translations
+    validation
+    coordinates

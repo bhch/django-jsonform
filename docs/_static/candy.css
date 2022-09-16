@@ -314,7 +314,7 @@ p.admonition-title {
 }
 .rst-content .toctree-wrapper ul li.toctree-l1 ul li a {
     font-size: 0.9em;
-    color: #323130;
+    color: #605e5c;
     text-decoration: underline dotted;
 }
 .rst-content .toctree-wrapper ul li.toctree-l1 ul li a:hover {
@@ -412,6 +412,10 @@ html.writer-html5 .rst-content table.docutils th {
 .wy-table-odd td, 
 .wy-table-striped tr:nth-child(2n-1) td {
     background-color: #faf9f8;
+}
+
+td > .line-block:last-child {
+    margin-bottom: 0;
 }
 
 dl {

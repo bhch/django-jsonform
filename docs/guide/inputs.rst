@@ -19,7 +19,7 @@ Inputs for ``string`` type
 The input fields for ``string`` values can be customized using the ``format``
 and ``widget`` keywords.
 
-Possible values for ``format`` keyword are:
+Available ``format`` values for ``string`` type:
 
 ============= ===========
 Format        Description
@@ -30,21 +30,21 @@ Format        Description
 ``datetime``  Alias for ``date-time``
 ``email``     An email input
 ``password``  A password input
-``range``     A range input
 ``time``      A time input
 ``data-url``  A file input. See :ref:`File inputs` for details.
 ``file-url``  A file input. See :ref:`File inputs` for details.
 ============= ===========
 
-Possible values for ``widget`` keyword are:
+Available ``widget`` values for ``string`` type:
 
-=============== ===========
-Widget          Description
-=============== ===========
-``textarea``    A textarea input
-``radio``       A radio input (:doc:`useful for choices </guide/choices>`)
-``multiselect`` A multiselect drowpdown input (:doc:`useful for choices </guide/choices>`)
-=============== ===========
+================ ===========
+Widget           Description
+================ ===========
+``textarea``     A textarea input
+``radio``        A radio input (:doc:`useful for choices </guide/choices>`)
+``multiselect``  A multiselect drowpdown input (:doc:`useful for choices </guide/choices>`)
+``autocomplete`` Useful for fetching options via AJAX requests (:doc:`See usage </guide/autocomplete>`)
+================ ===========
 
 
 Examples:
@@ -88,17 +88,20 @@ There are two ``format`` values for file uploads:
 
 Read :doc:`Uploading files <upload>` document for a full guide on uploading files.
 
-.. note::
-    
-    Do not use ``file`` format for file inputs. This won't work as you may expect.
-
 
 Inputs for ``number`` and ``integer`` types
 -------------------------------------------
 
-The ``number`` and ``integer`` types get an HTML ``number`` input field.
+The ``number`` and ``integer`` types get an HTML ``number`` input field by default.
+These can be customized using the ``widget`` keyword.
 
-They are not customizable.
+Available ``widget`` values for ``number`` & ``integer`` type:
+
+================ ===========
+Widget           Description
+================ ===========
+``range``        A range HTML input.
+================ ===========
 
 
 Inputs for ``boolean`` type

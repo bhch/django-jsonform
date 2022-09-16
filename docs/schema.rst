@@ -13,6 +13,8 @@ not in the standard spec.
 
 For some complex schema examples, see :doc:`Examples page <examples>`.
 
+For data validation, see :doc:`Validation page </guide/validation>`.
+
 
 Types
 -----
@@ -32,14 +34,29 @@ A JSON array (similar to Python list).
 
 Keywords:
 
-- ``items`` (**required**) - Specifies the type of items allowed in the list.
-- ``minItems`` (alias ``min_items``) - Limit the minimum number of items in a list.
-- ``maxItems`` (alias ``max_items``) - Limit the maximum number of items in a list.
-- ``title`` - Specify a title for the list.
-- ``default`` - A list containing all the default initial values for the array.
+================================== ===========
+Keyword                            Description
+================================== ===========
+``items`` (**required**)           Specifies the scheme for the items allowed in the list.
+``title``                          Specify a title for the list.
+``default``                        A list containing all the default initial values for the array.
+================================== ===========
+
+:doc:`Validation </guide/validation>` keywords:
+
+================================== ===========
+Keyword                            Description
+================================== ===========
+``minItems`` (alias ``min_items``) Limit the minimum number of items in a list.
+``maxItems`` (alias ``max_items``) Limit the maximum number of items in a list.
+``uniqueItems``                    Whether all items in the list must be unique or not.
+================================== ===========
 
 .. versionchanged:: 2.8
     Support for setting initial array data using ``default`` keyword was added.
+
+.. versionchanged:: 2.12
+    Support for ``uniqueItems`` keyword was added.
 
 This example shows a schema of a list containing string items:
 
@@ -53,8 +70,8 @@ This example shows a schema of a list containing string items:
             'default': 'Hello', # default value for new items
             'readonly': True, # make all items readonly
         },
-        'min_items': 1,
-        'max_items': 5,
+        'minItems': 1,
+        'maxItems': 5,
         'default': ['One', 'Two', 'Three'], # initial value for the whole list
     }
 
@@ -70,11 +87,13 @@ A JSON object (similar to Python dict).
 
 Keywords:
 
-- ``properties`` (alias ``keys``; **required**) - Specifies the keys (or fields)
-  in a dict/object.
-- ``additionalProperties`` - Allow users to add extra keys not declared in the
-  schema.
-- ``title`` - Specify a title for the dict.
+================================== ===========
+Keyword                            Description
+================================== ===========
+``properties`` (alias ``keys``)    Specifies the keys (or fields) in a dict/object.
+``additionalProperties``           Allow users to add extra keys not declared in the schema.
+``title``                          Specify a title for the dict.
+================================== ===========
 
 This example shows a schema of a basic dict:
 
@@ -159,28 +178,43 @@ a string, you should use Django's ``CharField``.
 
 Keywords:
 
-- ``title`` - Specify the label for the input field.
-- ``choices`` (alias ``enum``) - Specify choices for the field. A ``select``
-  input will be rendered. See the :doc:`document on Choices <guide/choices>` for
-  details.
-- ``format`` - Use this to specify the input field type. See :ref:`inputs for
-  string type` for more.
-- ``widget`` - Use this to specify the input field type, such as a textarea. For
-  most use cases, prefer the ``format`` keyword.
-- ``default`` - Specify a default value for this input field.
-- ``readonly`` (alias ``readOnly``) - Make this input field readonly
-- ``help_text`` (alias ``helpText``) - Display a help text under this input
-- ``placeholder`` - Placeholder text for this input
-- ``handler`` - URL of file upload view. See :ref:`Uploading files` for usage.
+================================== ===========
+Keyword                            Description
+================================== ===========
+``title``                          Specify the label for the input field.
+``choices`` (alias ``enum``)       | Specify choices for the field.
+                                   | See the :doc:`document on Choices <guide/choices>` for more.
+``format``                         | Use this to specify the input field type.
+                                   | See :ref:`inputs for string type` for more.
+``widget``                         | Use this to specify the input field type, such as a textarea.
+                                   | For most use cases, prefer the ``format`` keyword.
+``default``                        Specify a default value for this input field.
+``readonly`` (alias ``readOnly``)  Make this input field readonly.
+``helpText`` (alias ``help_text``) Display a help text under this input.
+``placeholder``                    Placeholder text for this input.
+================================== ===========
+
+:doc:`Validation </guide/validation>` keywords:
+
+==================== ===========
+Keyword              Description
+==================== ===========
+``required``         Whether this field is required or not.
+``minLength``        Minimum required length.
+``maxLength``        Maximum allowed length.
+==================== ===========
 
 .. versionchanged:: 2.6
     Support for ``default`` and ``readonly`` keywords was added.
 
 .. versionchanged:: 2.9
-    Support for ``help_text`` (or ``helpText``) keywords was added.
+    Support for ``helpText`` (or ``help_text``) keywords was added.
 
 .. versionchanged:: 2.11
     Support for ``placeholder``, ``enum`` and ``handler`` keywords was added.
+
+.. versionchanged:: 2.12
+    Support for ``required``, ``minLength`` and ``maxLength`` keywords was added.
 
 ``number``
 ~~~~~~~~~~
@@ -190,28 +224,48 @@ A number (including floats).
 This can't be at the top level of the schema. If you only want to save a number,
 you should use Django's ``FloatField``.
 
+It gets a ``number`` HTML input by default. It can be overridden using the ``range``
+widget.
+
 Keywords:
 
-- ``title`` - Specify the label for the input field.
-- ``choices`` (alias ``enum``) - Specify choices for the field. A ``select``
-  input will be rendered. See the :doc:`document on Choices <guide/choices>` for
-  details.
-- ``default`` - Specify a default value for this input field. The value must be
-  of numerical type.
-- ``readonly`` (alias ``readOnly``) - Make this input field readonly
-- ``help_text`` (alias ``helpText``) - Display a help text under this input
-- ``placeholder`` - Placeholder text for this input
+================================== ===========
+Keyword                            Description
+================================== ===========
+``title``                          Specify the label for the input field.
+``choices`` (alias ``enum``)       | Specify choices for the field.
+                                   | See the :doc:`document on Choices <guide/choices>` for more.
+``widget``                         Use this to specify the input field type, such as a range input.
+``default``                        Specify a default numerical value for this input field.
+``readonly`` (alias ``readOnly``)  Make this input field readonly.
+``helpText`` (alias ``help_text``) Display a help text under this input.
+``placeholder``                    Placeholder text for this input.
+================================== ===========
 
-It gets a ``number`` HTML input by default. It can't be overridden.
+:doc:`Validation </guide/validation>` keywords:
+
+==================== ===========
+Keyword              Description
+==================== ===========
+``required``         Whether this field is required or not.
+``minimum``          Minimum allowed value including this limit.
+``maximum``          Maximum allowed value including this limit.
+``exclusiveMinimum`` Minimum allowed value excluding this limit.
+``exclusiveMaximum`` Maximum allowed value excluding this limit.
+==================== ===========
 
 .. versionchanged:: 2.6
     Support for ``default`` and ``readonly`` keywords was added.
 
 .. versionchanged:: 2.9
-    Support for ``help_text`` (or ``helpText``) keywords was added.
+    Support for ``helpText`` (or ``help_text``) keywords was added.
 
 .. versionchanged:: 2.11
     Support for ``placeholder`` and ``enum`` keywords was added.
+
+.. versionchanged:: 2.12
+    Support for ``required``, ``minimum`` and ``maximum``, ``exclusiveMinimum``
+    and ``exclusiveMaximum`` keywords was added.
 
 ``integer``
 ~~~~~~~~~~~
@@ -221,28 +275,48 @@ An integer.
 This can't be at the top level of the schema. If you only want to save an
 integer, you should use Django's ``IntegerField``.
 
+It gets a ``number`` HTML input by default. It can be overridden using the ``range``
+widget.
+
 Keywords:
 
-- ``title`` - Specify the label for the input field.
-- ``choices`` (alias ``enum``) - Specify choices for the field. A ``select``
-  input will be rendered. See the :doc:`document on Choices <guide/choices>` for
-  details.
-- ``default`` - Specify a default value for this input field. The value must be
-  an integer.
-- ``help_text`` (alias ``helpText``) - Display a help text under this input
-- ``readonly`` (alias ``readOnly``) - Make this input field readonly
-- ``placeholder`` - Placeholder text for this input
+================================== ===========
+Keyword                            Description
+================================== ===========
+``title``                          Specify the label for the input field.
+``choices`` (alias ``enum``)       | Specify choices for the field.
+                                   | See the :doc:`document on Choices <guide/choices>` for more.
+``widget``                         Use this to specify the input field type, such as a range input.
+``default``                        Specify a default numerical value for this input field.
+``readonly`` (alias ``readOnly``)  Make this input field readonly.
+``helpText`` (alias ``help_text``) Display a help text under this input.
+``placeholder``                    Placeholder text for this input
+================================== ===========
 
-It gets a ``number`` HTML input by default. It can't be overridden.
+:doc:`Validation </guide/validation>` keywords:
+
+==================== ===========
+Keyword              Description
+==================== ===========
+``required``         Whether this field is required or not.
+``minimum``          Minimum allowed value including this limit.
+``maximum``          Maximum allowed value including this limit.
+``exclusiveMinimum`` Minimum allowed value excluding this limit.
+``exclusiveMaximum`` Maximum allowed value excluding this limit.
+==================== ===========
 
 .. versionchanged:: 2.6
     Support for ``default`` and ``readonly`` keywords was added.
 
 .. versionchanged:: 2.9
-    Support for ``help_text`` (or ``helpText``) keywords was added.
+    Support for ``helpText`` (or ``help_text``) keywords was added.
 
 .. versionchanged:: 2.11
     Support for ``placeholder`` and ``enum`` keywords was added.
+
+.. versionchanged:: 2.12
+    Support for ``required``, ``minimum`` and ``maximum``, ``exclusiveMinimum``
+    and ``exclusiveMaximum`` keywords was added.
 
 ``boolean``
 ~~~~~~~~~~~
@@ -252,20 +326,38 @@ A boolean.
 This can't be at the top level of the schema. If you only want to save an boolean,
 you should use Django's ``BooleanField``.
 
+It gets a ``checkbox`` HTML input by default. It can't be overridden.
+
 Keywords:
 
-- ``title`` - Specify the label for the input field.
-- ``default`` - Specify a default value for this input field. Must be a boolean.
-- ``readonly`` (alias ``readOnly``) - Make this input field readonly
-- ``help_text`` (alias ``helpText``) - Display a help text under this input
+================================== ===========
+Keyword                            Description
+================================== ===========
+``title``                          Specify the label for the input field.
+``choices`` (alias ``enum``)       | Specify choices for the field.
+                                   | See the :doc:`document on Choices <guide/choices>` for more.
+``widget``                         Use this to specify the input field type, such as a radio input.
+``default``                        Specify a default boolean value for this input field.
+``readonly`` (alias ``readOnly``)  Make this input field readonly.
+``helpText`` (alias ``help_text``) Display a help text under this input.
+================================== ===========
 
-It gets a ``checkbox`` HTML input by default. It can't be overridden.
+:doc:`Validation </guide/validation>` keywords:
+
+==================== ===========
+Keyword              Description
+==================== ===========
+``required``         Whether this field is required or not.
+==================== ===========
 
 .. versionchanged:: 2.6
     Support for ``default`` and ``readonly`` keywords was added.
 
 .. versionchanged:: 2.9
-    Support for ``help_text`` (or ``helpText``) keywords was added.
+    Support for ``helpText`` (or ``help_text``) keywords was added.
+
+.. versionchanged:: 2.12
+    Support for ``required`` keyword was added.
 
 
 Referencing schema

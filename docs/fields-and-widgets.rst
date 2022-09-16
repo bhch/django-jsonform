@@ -130,6 +130,57 @@ For more details, see
 `Django's docs <https://docs.djangoproject.com/en/stable/ref/contrib/postgres/fields/#arrayfield>`__.
 
 
+Form fields
+-----------
+
+.. module:: django_jsonform.forms.fields
+    :synopsis: Form fields
+
+.. _form-jsonfield:
+
+``JSONField``
+~~~~~~~~~~~~~
+
+.. class:: JSONField(schema=None, model_name='', field_name='', **options)
+    
+.. versionadded:: 2.0
+
+It is a subclass of Django's ``forms.JSONField``.
+
+**Parameters**:
+
+.. attribute:: schema
+    :type: dict, callable
+
+    A ``dict`` or a callable object.
+
+.. attribute:: model_name
+    :type: string
+
+    (Optional) Name of the model. It is sent along with the AJAX requests to your file handler
+    view.
+
+.. attribute:: file_handler
+    :type: string
+
+    (Optional) Provide a the url of the view for handling file uploads.
+
+.. attribute:: **options
+
+    It also accepts other options which are accepted by Django's ``forms.JSONField``.
+
+    For details about other parameters, options and attributes, see `Django's docs
+    <https://docs.djangoproject.com/en/4.1/ref/forms/fields/#jsonfield>`__.
+
+Usage:
+
+.. code-block:: python
+
+    from django_jsonform.forms.fields import JSONField
+
+    class MyForm(forms.Form):
+        my_field = JSONField(schema=schema)
+
 Widgets
 -------
 
@@ -140,7 +191,7 @@ Widgets
 ``JSONFormWidget``
 ~~~~~~~~~~~~~~~~~~
 
-.. class:: JSONFormWidget(schema, model_name='', file_handler='')
+.. class:: JSONFormWidget(schema, model_name='', file_handler='', validate_on_submit=False, attrs=None)
     
 The widget which renders the editor.
 
@@ -179,6 +230,25 @@ It can be used in a form if you don't want to use the model field.
 
     (Optional) Provide a the url of the view for handling file uploads. See :ref:`document
     on uploading files <file url>` for usage.
+
+.. attribute:: validate_on_submit
+    :type: bool
+
+    .. versionadded:: 2.12
+
+    (Optional) Whether to validate the data on the browser when form is submitted.
+
+    Default ``False``.
+    
+    See :ref:`Validating data in browser <validate-on-submit>` for more.
+
+.. attribute:: attrs
+    :type: dict
+
+    .. versionadded:: 2.12
+
+    (Optional) A dictionary mapping of HTML attributes and values for the widget
+    container element.
 
 Usage:
 

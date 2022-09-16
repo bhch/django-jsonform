@@ -47,15 +47,11 @@ requires a little more work to set up.
 The file will be saved on the server and only a reference (such as a path or a
 url) to the file is kept in the JSON data.
 
-Since version 2.11, django-jsonform also supports choosing existing files from the server.
+Features:
 
-
-**Here's an animated GIF of this feature:**
-
-.. image:: /_static/file-upload.gif
-    :alt: Animated screenshot of file upload
-
-----
+- :ref:`Uploading files to the server <Handling file uploads>`.
+- :ref:`Listing existing files from the server <Returning a list of available files>` (Since version 2.11).
+- :ref:`Deleting files <Deleting files>` (Since version 2.12).
 
 In the schema, the ``type`` should be ``string`` and ``format`` should be
 ``'file-url'``:
@@ -83,11 +79,12 @@ File handler view
 Since uploading files or listing existing files requires interaction with the
 server, you are required to create a view for handling upload and list requests.
 
-This view will be responsible for these two things:
+This view will be responsible for these three things:
 
 1. If request method is ``POST``, save files on the server.
 2. If request method is ``GET``, return a list of available files for the user
    to choose from.
+3. If request method is ``DELETE``, delete the file.
 
 Before diving into details, let's look at the handler view at a basic level:
 
@@ -108,6 +105,9 @@ files` section.
             ...
         elif request.method == 'GET':
             # return available files for choosing
+            ...
+        elif request.method == 'DELETE':
+            # delete files
             ...
 
 
@@ -250,6 +250,9 @@ filesystem, it's up to you.
         elif request.method == 'GET':
             # return available files for choosing
             ...
+        elif request.method == 'DELETE':
+            # delete files
+            ...
 
 Request arguments
 ^^^^^^^^^^^^^^^^^
@@ -258,6 +261,7 @@ Each ``POST`` request will also contain these additional arguments:
 
 - ``model_name``: Name of the model.
 - ``field_name``: Name of the field.
+- ``coords``: :doc:`Coordinates </guide/coordinates>` of the data input field.
 
 These arguments are useful for identifying the model and the field when you have
 one common handler for multiple JSON fields.
@@ -305,6 +309,13 @@ Returning a list of available files
 Your file handler view will receive a ``GET`` request for fetching the list of
 available files.
 
+**Here's an animated GIF of this feature:**
+
+.. image:: /_static/file-upload.gif
+    :alt: Animated screenshot of file upload
+
+----
+
 Code Example
 ^^^^^^^^^^^^
 
@@ -351,15 +362,21 @@ used in the previous example:
 
             return JsonResponse({'results': results})
 
+        elif request.method == 'DELETE':
+            # delete files
+            ...
+
+
 
 Request arguments
 ^^^^^^^^^^^^^^^^^
 
-Each ``GET`` request will also contain these additional arguments:
+Each ``GET`` request will also contain these arguments:
 
 - ``page``: Page number. It's up to you how many items you want to show per page.
 - ``model_name``: Name of the model.
 - ``field_name``: Name of the field.
+- ``coords``: :doc:`Coordinates </guide/coordinates>` of the data input field.
 
 Response format
 ^^^^^^^^^^^^^^^
@@ -423,6 +440,97 @@ Here are some examples of the ``results`` list:
         },
         ...
     ]
+
+
+Deleting files
+~~~~~~~~~~~~~~
+
+.. versionadded:: 2.12
+
+
+The file handler will receive ``DELETE`` requests for deleting files. It is left
+up to you to delete the files. If you don't want to delete any file, you can 
+just ignore all the ``DELETE`` requests.
+
+The ``DELETE`` request are sent for the following events:
+
+- A user clicks the *"Delete"* button on an image thumbnail.
+- A user clicks the *"Clear"* button on the file input.
+- A user exits the page without saving the form.
+
+Request arguments
+^^^^^^^^^^^^^^^^^
+
+Each ``DELETE`` request will contain these query parameters:
+
+- ``trigger``: The event that triggered the file deletion.
+- ``value``: Name of the file to be deleted. This parameter can be present more
+  than once if multiple files are to be deleted. Hence, treat it like a list.
+- ``model_name``: Name of the model.
+- ``field_name``: Name of the field.
+- ``coords``: :doc:`Coordinates </guide/coordinates>` of the data input field.
+
+
+**Available** ``trigger`` **values**:
+
+========================== ===========
+Trigger                    Description
+========================== ===========
+``delete_button``          When "Delete" button is clicked.
+``clear_button``           When file input is cleared using the "Clear" button.
+``unsaved_form_page_exit`` When user exits the page without saving the form.
+========================== ===========
+
+The ``trigger`` parameter helps you decide for which events you want to delete
+the files and which events you want to ignore.
+
+Response format
+^^^^^^^^^^^^^^^
+
+Return an empty response with appropriate status code:
+
+- ``200``, ``202``, ``204`` status codes for success.
+- ``4xx`` status codes for error.
+
+Code example
+^^^^^^^^^^^^
+
+.. code-block:: python
+    :emphasize-lines: 16
+
+    # views.py
+
+    from django.http import HttpResponse
+    from django.contrib.auth.decorators import login_required
+
+    @login_required
+    def file_handler(request):
+        if request.method == 'POST':
+            # save uploaded file
+            ...
+
+        elif request.method == 'GET':
+            # return list of existing files
+            ...
+
+        elif request.method == 'DELETE':
+            trigger = request.GET.get('trigger')
+            file_names = request.GET.getlist('value')
+
+            if trigger != 'delete_button':
+                # if deletion is not triggered by Delete button,
+                # exit the view
+                return HttpResponse(status=200)
+
+            for name in file_names:
+                # ... delete files ...
+                ...
+
+            return HttpResponse(status=200) # success
+
+            # OR
+
+            return HttpResponse(status=403) # permission denied
 
 
 Accessing files in templates
