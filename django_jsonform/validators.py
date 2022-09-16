@@ -211,6 +211,9 @@ class JSONSchemaValidator:
                 )
 
     def validate_string(self, schema, data, coords):
+        if isinstance(data, str):
+            data = data.strip()
+
         if schema.get('required') and not data:
             self.add_error(coords, 'This field is required.')
             return

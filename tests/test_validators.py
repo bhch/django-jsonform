@@ -297,7 +297,9 @@ class TestJSONSchemaValidator(TestCase):
 
         # 1. test required
         wrong_data = {'a': ''}
+        wrong_data_2 = {'a': '   '} # white space
         self.assertRaises(JSONSchemaValidationError, validator, wrong_data)
+        self.assertRaises(JSONSchemaValidationError, validator, wrong_data_2)
 
         # 2. test type
         wrong_data = {'a': 123}
