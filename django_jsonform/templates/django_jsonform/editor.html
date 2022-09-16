@@ -14,7 +14,6 @@
             schema: JSON.parse('{{ widget.schema|escapejs }}'),
             data: JSON.parse('{{ widget.data|escapejs }}'),
             errorMap: JSON.parse('{{ widget.error_map|escapejs }}'),
-            validateOnSubmit: {% if widget.validate_on_submit %}true{% else %}false{% endif %},
         };
 
         if (config.containerId.indexOf('__prefix__') > -1) {
@@ -27,15 +26,40 @@
         if (config.containerId.indexOf('__prefix__') === -1) {
             var jsonForm = reactJsonForm.createForm(config);
             {% if widget.validate_on_submit %}
-            jsonForm.addEventListener('invalid', function(e) {
-                e.submitEvent.preventDefault();
+            var form = document.getElementById(jsonForm.dataInputId).form;
+            form.addEventListener('submit', function(e) {
+                var jsonFormDiv = document.getElementById(jsonForm.containerId);
+                var errorlist = jsonFormDiv.parentElement.previousElementSibling;
+                var hasError;
 
-                var jsonFormDiv = django.jQuery('#' + jsonForm.containerId);
+                if (errorlist && errorlist.classList.contains('errorlist'))
+                    hasError = true;
+                else
+                    hasError = false;
 
-                if (!jsonFormDiv.parent().prev().hasClass('errorlist'))
-                    jsonFormDiv.parent().before('<ul class="errorlist"><li>Please correct the errors below.</li></ul>');
+                var validation = jsonForm.validate();
 
-                jsonFormDiv.parent().prev()[0].scrollIntoView();
+                if (!validation.isValid) {
+                    e.preventDefault();
+
+                    if (!hasError) {
+                        errorlist = document.createElement('ul');
+                        errorlist.setAttribute('class', 'errorlist');
+                        var errorli = document.createElement('li');
+                        errorli.textContent = 'Please correct the errors below.';
+                        errorlist.appendChild(errorli);
+
+                        jsonFormDiv.parentElement.parentElement.insertBefore(
+                            errorlist, jsonFormDiv.parentElement
+                        );
+                    }
+
+                    errorlist.scrollIntoView();
+                } else {
+                    if (hasError)
+                        errorlist.remove();
+                }
+                jsonForm.update({errorMap: validation.errorMap});
             });
             {% endif %}
             jsonForm.render();
