@@ -1,4 +1,4 @@
-<div id="{{ widget.attrs.id }}_jsonform"></div>
+<div id="{{ widget.attrs.id }}_jsonform"{% include 'django_jsonform/attrs.html' %}></div>
 
 <textarea cols="40" id="{{ widget.attrs.id }}" name="{{ widget.name }}" rows="10" style="display: none;">{{ widget.data }}</textarea>
 
