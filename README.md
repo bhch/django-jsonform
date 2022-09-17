@@ -25,7 +25,7 @@
  - [x] Many inputs and field types
  - [x] UI matches with Django admin's
  - [x] Recursion (nesting with self references)
- - [ ] Validation
+ - [x] Validation
 
 ## Screenshots
 
