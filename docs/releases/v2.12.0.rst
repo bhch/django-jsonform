@@ -1,0 +1,77 @@
+django-jsonform 2.12.0 release notes
+====================================
+
+
+Sep 17, 2022
+------------
+
+This release brings some exciting new features and a few bugfixes.
+
+Like the previous version, it also supports ``Django >= 2.0`` and ``Python >= 3.4``.
+
+
+New features
+~~~~~~~~~~~~
+
+- **Data validation**
+
+  Support for :doc:`data validation </guide/validation>`.
+
+- **Validation keywords**
+
+  Support for validation keywords — ``required``, ``minLength``, ``maxLength``,
+  ``minimum``, ``maximum``, ``exclusiveMinimum``, ``exclusiveMaximum``,
+  ``uniqueItems``.
+
+- **Autocomplete widget**
+
+  New :doc:`autocomplete widget </guide/autocomplete>` which can load choices via
+  AJAX requests.
+
+- **File deletion**
+
+  A delete button has been added in Media Library thumbnails which will send a
+  ``DELETE`` request to file handler endpoint. In addition to that, ``DELETE``
+  requests will automatically be sent to the server when *Clear* button is clicked
+  or when exiting page without form submission.
+
+- **Rename choices label keyword to title**
+
+  For consistency with JSON schema, choice ``label`` keyword has been renamed to
+  ``title``. However, the ``label`` keyword will still continue to work.
+
+- **Range input**
+
+  Support for range input widget. Earlier range input was added using the ``format``
+  keyword, but as a range input also returns a number value (no need for a specialised format).
+  Hence, it didn't make sense to use range as a format. So, now range inputs can
+  be created using the ``widget`` keyword.
+
+- **Time widget improvements**
+
+  Time widget's input spinner is now circular i.e. after reaching maximum or minimum
+  value, it will start over (e.g. after 12 for hours, it will go to 0 if the hour is
+  incremented and will go from 0 to 12 if decremented).
+
+
+Bug fixes
+~~~~~~~~~
+
+- :issue:`58`: Overriding the widget in custom form's ``Meta`` class was not
+  respected.
+- :issue:`61`: Widget didn't accept ``attrs`` argument.
+- Minor improvements and fixes in widget's CSS.
+
+
+react-json-form (JavaScript)
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+`react-json-form <https://github.com/bhch/react-json-form>`_ has been updated
+to version 2.1.0.
+
+
+Thank you
+~~~~~~~~~
+
+I want to thank all the people who contributed bug reports, feature requests
+and improvement suggestions.
