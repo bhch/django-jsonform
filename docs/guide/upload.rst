@@ -239,7 +239,7 @@ filesystem, it's up to you.
     @login_required
     def file_handler(request):
         if request.method == 'POST':
-            file = request.FILES[0]
+            file = request.FILES['file']
             obj = MediaModel(file=file)
             obj.save()
 
