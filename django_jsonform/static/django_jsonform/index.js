@@ -1,5 +1,5 @@
 (function() {
-  window.addEventListener("load", function() {
+  window.addEventListener("DOMContentLoaded", function() {
     var $ = django.jQuery;
 
     var _initializedCache = [];
@@ -14,8 +14,7 @@
       var dataInputId = element.id;
 
       var config = JSON.parse(element.dataset.djangoJsonform);
-      config.dataInputId =
-        config.data = JSON.parse(config.data);
+      config.data = JSON.parse(config.data);
 
       var containerId = element.id + '_jsonform';
 

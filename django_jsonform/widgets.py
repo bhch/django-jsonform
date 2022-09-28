@@ -49,7 +49,7 @@ class JSONFormWidget(forms.Widget):
             'config': {
                 'fieldName': context['widget']['name'],
                 'modelName': self.model_name,
-                'data': value or '',
+                'data': value or json.dumps(''),
                 'schema': schema,
                 'fileHandler': self.file_handler or get_setting('FILE_HANDLER', ''),
                 'errorMap': getattr(self, 'error_map', {}),
@@ -84,7 +84,7 @@ class JSONFormWidget(forms.Widget):
             'django_jsonform/vendor/react-dom.production.min.js',
             'django_jsonform/vendor/react-modal.min.js',
             'django_jsonform/react-json-form.js',
-            "django_jsonform/index.js",
+            'django_jsonform/index.js',
         ]
 
         return forms.Media(css=css, js=js)
