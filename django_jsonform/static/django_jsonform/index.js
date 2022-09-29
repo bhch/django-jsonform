@@ -1,10 +1,8 @@
 (function() {
-  window.addEventListener("DOMContentLoaded", function() {
-    var $ = django.jQuery;
-
+  window.addEventListener('DOMContentLoaded', function() {
     var _initializedCache = [];
 
-    function initJSONForm(index, element) {
+    function initJSONForm(element) {
       // Check if element has already been initialized
       if (_initializedCache.indexOf(element) !== -1) {
         return;
@@ -18,20 +16,21 @@
 
       var containerId = element.id + '_jsonform';
 
-      var container = $(element).prev("[data-django-jsonform-container]");
-      container.attr('id', element.id + '_jsonform');
+      var container = element.previousElementSibling;
+      container.setAttribute('id', element.id + '_jsonform');
 
       config.containerId = containerId;
       config.dataInputId = dataInputId;
 
       var jsonForm = reactJsonForm.createForm(config);
+
       if (config.validateOnSubmit) {
         var form = dataInput.form;
-        form.addEventListener("submit", function(e) {
+        form.addEventListener('submit', function(e) {
           var errorlist = container.parentElement.previousElementSibling;
           var hasError;
 
-          if (errorlist && errorlist.classList.contains("errorlist"))
+          if (errorlist && errorlist.classList.contains('errorlist'))
             hasError = true;
           else
             hasError = false;
@@ -42,10 +41,10 @@
             e.preventDefault();
 
             if (!hasError) {
-              errorlist = document.createElement("ul");
-              errorlist.setAttribute("class", "errorlist");
-              var errorli = document.createElement("li");
-              errorli.textContent = "Please correct the errors below.";
+              errorlist = document.createElement('ul');
+              errorlist.setAttribute('class', 'errorlist');
+              var errorli = document.createElement('li');
+              errorli.textContent = 'Please correct the errors below.';
               errorlist.appendChild(errorli);
 
               container.parentElement.parentElement.insertBefore(
@@ -65,20 +64,6 @@
       _initializedCache.push(element);
     }
 
-    // This logic taken from django-autocomplete-light:
-    // https://github.com/yourlabs/django-autocomplete-light/blob/master/src/dal/static/autocomplete_light/autocomplete_light.js#L120
-    $.fn.excludeTemplateForms = function() {
-      // exclude elements that contain '__prefix__' in their id
-      // these are used by django formsets for template forms
-      return this.not("[id*=__prefix__]").filter(function() {
-        // exclude elements that contain '-empty-' in their ids
-        // these are used by django-nested-admin for nested template formsets
-        // note that the filter also ensures that 'empty' is not actually the related_name for some relation
-        // by ensuring that it is not surrounded by numbers on both sides
-        return !this.id.match(/-empty-/) || this.id.match(/-\d+-empty-\d+-/);
-      });
-    };
-
     /**
      * Helper function to determine if the element is being dragged, so that we
      * don't initialize the json form fields. They will get initialized when the dragging stops.
@@ -87,18 +72,35 @@
      * @returns {boolean}
      */
     function isDraggingElement(element) {
-      return "classList" in element && element.classList.contains("ui-sortable-helper");
+      return 'classList' in element && element.classList.contains('ui-sortable-helper');
     }
 
     function initializeAllForNode(parentElement) {
-      $(parentElement).find("[data-django-jsonform]").excludeTemplateForms().each(initJSONForm)
+      parentElement.querySelectorAll('[data-django-jsonform]')
+      .forEach(function(element) {
+
+        // disregard elements that contain '__prefix__' in their id
+        // these are used by django formsets for template forms
+        if (element.id.indexOf('__prefix__') > -1)
+          return;
+
+        // disregard elements that contain '-empty-' in their ids
+        // these are used by django-nested-admin for nested template formsets
+        // also ensure that 'empty' is not actually the related_name for some relation
+        // by checking that it is not surrounded by numbers on both sides
+        if (element.id.match(/-empty-/) && !element.id.match(/-\d+-empty-\d+-/))
+          return;
+
+        // else initialize jsonform
+        initJSONForm(element);
+      });
     }
 
     // Initialize all json form fields already on the page.
     initializeAllForNode(document);
 
     // Setup listeners to initialize all json form fields as they get added to the page.
-    if ("MutationObserver" in window) {
+    if ('MutationObserver' in window) {
       new MutationObserver(function(mutations) {
         var mutationRecord;
         var addedNode;
@@ -108,16 +110,22 @@
 
           if (mutationRecord.addedNodes.length > 0) {
             for (var j = 0; j < mutationRecord.addedNodes.length; j++) {
+
               addedNode = mutationRecord.addedNodes[j];
-              if (isDraggingElement(addedNode)) return;
+
+              if (isDraggingElement(addedNode))
+                return;
+
               initializeAllForNode(addedNode);
             }
           }
         }
       }).observe(document.documentElement, { childList: true, subtree: true });
     } else {
-      $(document).on("DOMNodeInserted", function(e) {
-        if (isDraggingElement(e.target)) return;
+      document.addEventListener('DOMNodeInserted', function(e) {
+        if (isDraggingElement(e.target))
+          return;
+
         initializeAllForNode(e.target);
       });
     }
