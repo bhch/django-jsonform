@@ -46,20 +46,26 @@ class JSONFormWidget(forms.Widget):
         context = self.get_context(name, value, attrs)
 
         context['widget'].update({
-            'model_name': self.model_name,
-            'data': value or json.dumps(''),
-            'schema': json.dumps(schema),
-            'file_handler': self.file_handler or get_setting('FILE_HANDLER', ''),
-            'error_map': getattr(self, 'error_map', {}),
-            'validate_on_submit': self.validate_on_submit
+            'config': {
+                'fieldName': context['widget']['name'],
+                'modelName': self.model_name,
+                'data': value or json.dumps(''),
+                'schema': schema,
+                'fileHandler': self.file_handler or get_setting('FILE_HANDLER', ''),
+                'errorMap': getattr(self, 'error_map', {}),
+                'validateOnSubmit': self.validate_on_submit,
+            },
         })
 
         # backwards compatibility for `JSONFORM_UPLOAD_HANDLER` setting
-        if not context['widget']['file_handler']:
+        if not context['widget']['config']['fileHandler']:
             try:
-                context['widget']['file_handler'] = reverse('django_jsonform:upload')
+                context['widget']['config']['fileHandler'] = reverse('django_jsonform:upload')
             except NoReverseMatch:
                 pass
+
+        # Turn widget config into json string
+        context['widget']['config'] = json.dumps(context['widget']['config'])
 
         return mark_safe(render_to_string(self.template_name, context))
 
@@ -78,6 +84,7 @@ class JSONFormWidget(forms.Widget):
             'django_jsonform/vendor/react-dom.production.min.js',
             'django_jsonform/vendor/react-modal.min.js',
             'django_jsonform/react-json-form.js',
+            'django_jsonform/index.js',
         ]
 
         return forms.Media(css=css, js=js)
