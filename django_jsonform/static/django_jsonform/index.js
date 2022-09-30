@@ -76,24 +76,26 @@
     }
 
     function initializeAllForNode(parentElement) {
-      parentElement.querySelectorAll('[data-django-jsonform]')
-      .forEach(function(element) {
+      var containers = parentElement.querySelectorAll('[data-django-jsonform]');
 
-        // disregard elements that contain '__prefix__' in their id
+      // hacky way to filter NodeList using Array.filter
+      [].filter.call(containers, function(container) {
+
+        // filter out elements that contain '__prefix__' in their id
         // these are used by django formsets for template forms
-        if (element.id.indexOf('__prefix__') > -1)
-          return;
+        if (container.id.indexOf('__prefix__') > -1)
+          return false;
 
-        // disregard elements that contain '-empty-' in their ids
+        // filter out elements that contain '-empty-' in their ids
         // these are used by django-nested-admin for nested template formsets
         // also ensure that 'empty' is not actually the related_name for some relation
         // by checking that it is not surrounded by numbers on both sides
-        if (element.id.match(/-empty-/) && !element.id.match(/-\d+-empty-\d+-/))
-          return;
+        if (container.id.match(/-empty-/) && !container.id.match(/-\d+-empty-\d+-/))
+          return false;
 
-        // else initialize jsonform
-        initJSONForm(element);
-      });
+        return true;
+      })
+      .forEach(initJSONForm);
     }
 
     // Initialize all json form fields already on the page.
