@@ -15,8 +15,8 @@ language. For those cases, the schema also supports lazy translations:
         'type': 'string',
         'title': _('Occupation'),
         'choices': [
-            {'value': 'teacher', 'label': _('Teacher')},
-            {'value': 'doctor', 'label': _('Doctor')},
-            {'value': 'engineer', 'label': _('Engineer')},
+            {'value': 'teacher', 'title': _('Teacher')},
+            {'value': 'doctor', 'title': _('Doctor')},
+            {'value': 'engineer', 'title': _('Engineer')},
         'default': 'teacher'
     }
