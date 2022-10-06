@@ -47,11 +47,13 @@ class JSONFormWidget(forms.Widget):
 
         context['widget'].update({
             'config': {
-                'fieldName': context['widget']['name'],
-                'modelName': self.model_name,
                 'data': value or json.dumps(''),
                 'schema': schema,
                 'fileHandler': self.file_handler or get_setting('FILE_HANDLER', ''),
+                'fileHandlerArgs': {
+                    'field_name': context['widget']['name'],
+                    'model_name': self.model_name,
+                },
                 'errorMap': getattr(self, 'error_map', {}),
                 'validateOnSubmit': self.validate_on_submit,
             },
