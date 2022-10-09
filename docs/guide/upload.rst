@@ -455,7 +455,6 @@ just ignore all the ``DELETE`` requests.
 The ``DELETE`` request are sent for the following events:
 
 - A user clicks the *"Delete"* button on an image thumbnail.
-- A user clicks the *"Clear"* button on the file input.
 - A user exits the page without saving the form.
 
 Request arguments
@@ -477,7 +476,6 @@ Each ``DELETE`` request will contain these query parameters:
 Trigger                    Description
 ========================== ===========
 ``delete_button``          When "Delete" button is clicked.
-``clear_button``           When file input is cleared using the "Clear" button.
 ``unsaved_form_page_exit`` When user exits the page without saving the form.
 ========================== ===========
 

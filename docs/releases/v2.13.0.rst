@@ -1,0 +1,74 @@
+django-jsonform 2.13.0 release notes
+====================================
+
+
+Oct 09, 2022
+------------
+
+This release brings some minor but important changes.
+
+Like the previous version, it also supports ``Django >= 2.0`` and ``Python >= 3.4``.
+
+
+Breaking changes
+~~~~~~~~~~~~~~~~
+
+- **Widget template**
+
+  This concerns you **if you've overridden the widget's template** in your projects.
+
+  There have been a lot of changes to the template. Please `take a look at the updated template <https://github.com/bhch/django-jsonform/blob/eaf03c7e8c2fd039eb772b2a244b81d7bc142d91/django_jsonform/templates/django_jsonform/editor.html>`_.
+
+  The context variables sent by the widget have also been renamed. `Take a look at
+  the updated context variables <https://github.com/bhch/django-jsonform/blob/eaf03c7e8c2fd039eb772b2a244b81d7bc142d91/django_jsonform/widgets.py#L43-L68>`_.
+  
+
+- **JSONFormWidget class**
+
+  This concerns you **if you've subclassed the** ``JSONFormWidget`` **class** in your projects.
+
+  Specifically, the context variables returned by the ``render`` method of widget have
+  been changed/renamed. `Take a look at the updated render method <https://github.com/bhch/django-jsonform/blob/eaf03c7e8c2fd039eb772b2a244b81d7bc142d91/django_jsonform/widgets.py#L43-L68>`_.
+
+
+New features
+~~~~~~~~~~~~
+
+- **Support for django-nested-admin**
+
+  Support for `django-nested-admin <https://github.com/theatlantic/django-nested-admin>`_ is added. Code contributed by `Trent Holliday <https://github.com/trumpet2012>`_.
+
+
+Minor Changes
+~~~~~~~~~~~~~
+
+- **Dropped jQuery dependency**
+
+  Earlier releases relied upon jQuery to generate the widget for Django's Inline formsets.
+  This release get rids of the jQuery calls.
+
+- **File Clear button**
+
+  File input's *Clear* button will not send a ``DELETE`` request now. This is done
+  to state in-tune with Django's *Clear* button which only empties the file input,
+  and doesn't delete it. A dedicated Delete button may be added in future.
+
+
+Bug fixes
+~~~~~~~~~
+
+- Some bugfixes in widget's JavaScript library.
+
+
+react-json-form (JavaScript)
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+`react-json-form <https://github.com/bhch/react-json-form>`_ has been updated
+to version 2.2.0.
+
+
+Thank you
+~~~~~~~~~
+
+I want to thank all the people who contributed code, bug reports, feature requests
+and improvement suggestions.
