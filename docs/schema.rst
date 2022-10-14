@@ -149,7 +149,7 @@ The ``additionalProperties`` keyword can be:
 
     # Schema
     {
-        'type': 'dict': # or 'object'
+        'type': 'dict', # or 'object'
         'keys': { # or 'properties'
             'name': { 'type': 'string' },
         },
