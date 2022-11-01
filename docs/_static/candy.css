@@ -314,7 +314,7 @@ p.admonition-title {
 }
 .rst-content .toctree-wrapper ul li.toctree-l1 ul li a {
     font-size: 0.9em;
-    color: #605e5c;
+    color: #323130;
     text-decoration: underline dotted;
 }
 .rst-content .toctree-wrapper ul li.toctree-l1 ul li a:hover {
