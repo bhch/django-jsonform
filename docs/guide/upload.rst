@@ -1,11 +1,13 @@
 Uploading files
 =============== 
 
+For uploading files, use the ``string`` type along with the ``format`` keyword.
+
 There are two ways to keep files in a JSON data:
 
-1. Base64 string - the file will be encoded as Base64 string and all the data
+1. **Base64 string** - the file will be encoded as Base64 string and all the data
    will be kept within the JSON object.
-2. File url - the file will be uploaded on the server and only the URL of the
+2. **File URL** - the file will be uploaded on the server and only the URL of the
    file will be kept in the JSON object.
 
 
@@ -14,9 +16,13 @@ Base64 string
 
 This option is ideal for keeping small file data within a JSON object.
 
-However, there are two drawbacks: Base64 encoded data will be 33% larger than
+It is quick and easy to setup. Just by declaring the ``format`` keyword, you're
+good to go.
+
+But this convenience comes with two tradeoffs: Base64 encoded data will be 33% larger than
 the original file. Second, Base64 images and files won't be cached by the
-browsers unlike other images accessed via urls.
+browsers unlike other images accessed via urls. For small files, these tradeoffs
+shouldn't really matter.
 
 The ``type`` should be ``string`` and ``format`` should be ``'data-url'``:
 
@@ -38,7 +44,7 @@ The ``type`` should be ``string`` and ``format`` should be ``'data-url'``:
 
 
 
-File url
+File URL
 --------
 
 This option is ideal for *"uploading"* large files in JSON data. However, it
@@ -52,6 +58,12 @@ Features:
 - :ref:`Uploading files to the server <Handling file uploads>`.
 - :ref:`Listing existing files from the server <Returning a list of available files>` (Since version 2.11).
 - :ref:`Deleting files <Deleting files>` (Since version 2.12).
+
+.. tip::
+
+    By default, the ``file-url`` field will display a button which opens a modal
+    for uploading and choosing files. If you prefer a simple file input without extra
+    features, see :ref:`Overriding the file input` for details.
 
 In the schema, the ``type`` should be ``string`` and ``format`` should be
 ``'file-url'``:
@@ -556,3 +568,24 @@ Then in the template, you'll do something like this:
     {% load static %}
 
     <img src="{% get_media_prefix %}{{ data.image }}">
+
+
+Overriding the file input
+-------------------------
+
+.. versionadded:: 2.14
+
+By default, the ``file-url`` field will display a button which opens a modal
+for uploading and choosing files.
+
+If you don't want to use those features and prefer a simple file input, you can
+override that using the ``widget`` keyword:
+
+.. code-block::
+    :emphasize-lines: 4
+
+    'logo': {
+        'type': 'string',
+        'format': 'file-url',
+        'widget': 'fileinput' # will create a simple file input
+    }

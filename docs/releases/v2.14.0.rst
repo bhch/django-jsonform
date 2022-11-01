@@ -1,0 +1,33 @@
+django-jsonform 2.14.0 release notes
+====================================
+
+
+Nov 01, 2022
+------------
+
+This release brings a small feature.
+
+Like the previous version, it also supports ``Django >= 2.0`` and ``Python >= 3.4``.
+
+
+New features
+~~~~~~~~~~~~
+
+- **Overriding** ``file-url`` **input field**
+
+  Use ``widget: 'fileinput'`` to display a simple file input field for ``file-url``.
+  It is useful in those cases where you don't want to open a modal for choosing
+  images.
+
+react-json-form (JavaScript)
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+`react-json-form <https://github.com/bhch/react-json-form>`_ has been updated
+to version 2.3.0.
+
+
+Thank you
+~~~~~~~~~
+
+I want to thank my sponsors and all the people who contributed code, bug reports,
+feature requests and improvement suggestions.
