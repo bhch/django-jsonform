@@ -24,6 +24,8 @@ from django_jsonform.forms.fields import ArrayFormField
 
 
 class JSONField(DjangoJSONField):
+    form_class = JSONFormField
+
     def __init__(self, *args, **kwargs):
         self.schema = kwargs.pop('schema', {})
         self.pre_save_hook = kwargs.pop('pre_save_hook', None)
@@ -32,7 +34,7 @@ class JSONField(DjangoJSONField):
 
     def formfield(self, **kwargs):
         return super().formfield(**{
-            'form_class': JSONFormField,
+            'form_class': self.form_class,
             'schema': self.schema,
             'model_name': self.model.__name__,
             'file_handler': self.file_handler,
@@ -49,6 +51,8 @@ class JSONField(DjangoJSONField):
 
 
 class ArrayField(DjangoArrayField):
+    form_class = ArrayFormField
+
     def __init__(self, *args, **kwargs):
         if hasattr(DjangoArrayField, 'mock_field'):
             raise ImproperlyConfigured('ArrayField requires psycopg2 to be installed.')
@@ -57,4 +61,4 @@ class ArrayField(DjangoArrayField):
         super().__init__(*args, **kwargs)
 
     def formfield(self, **kwargs):
-        return super().formfield(**{'form_class': ArrayFormField, 'nested': self.nested, **kwargs})
+        return super().formfield(**{'form_class': self.form_class, 'nested': self.nested, **kwargs})
