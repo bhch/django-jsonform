@@ -1,3 +1,5 @@
+from __future__ import annotations
+
 import json
 from typing import Any, Type
 
@@ -33,8 +35,10 @@ class DataclassJSONField(JSONField):
         if value is None:
             return None
         if self._many:
-            return json.dumps([x.to_dict() for x in value])
-        return json.dumps(value.to_dict())
+            return json.dumps(
+                [x if isinstance(x, dict) else x.to_dict() for x in value]
+            )
+        return json.dumps(value if isinstance(value, dict) else value.to_dict())
 
     def validate(self, value, model_instance):
         super().validate(value, model_instance)
