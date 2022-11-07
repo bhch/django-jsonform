@@ -5,7 +5,7 @@ from typing import Any, Type
 
 from dataclasses_jsonschema import JsonSchemaMixin
 from django_jsonform.contrib.dataclasses.forms.fields import DataclassJSONFormField
-from django_jsonform.contrib.dataclasses.models.utils import json_schema_array
+from django_jsonform.contrib.dataclasses.utils import json_schema_array
 from django_jsonform.models.fields import JSONField
 
 
@@ -41,4 +41,4 @@ class DataclassJSONField(JSONField):
         return json.dumps(value if isinstance(value, dict) else value.to_dict())
 
     def validate(self, value, model_instance):
-        super().validate(value, model_instance)
+        pass
