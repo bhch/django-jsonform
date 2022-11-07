@@ -28,17 +28,17 @@ class DataclassJSONField(JSONField):
             return None
         data = json.loads(value)
         if self._many:
-            return [self._dataclass_cls.from_dict(x) for x in data]
-        return self._dataclass_cls.from_dict(data)
+            return [self._dataclass_cls.from_dict(x, validate=False) for x in data]
+        return self._dataclass_cls.from_dict(data, validate=False)
 
     def get_prep_value(self, value):
         if value is None:
             return None
         if self._many:
             return json.dumps(
-                [x if isinstance(x, dict) else x.to_dict() for x in value]
+                [x if isinstance(x, dict) else x.to_dict(validate=False) for x in value]
             )
-        return json.dumps(value if isinstance(value, dict) else value.to_dict())
+        return json.dumps(value if isinstance(value, dict) else value.to_dict(validate=False))
 
     def validate(self, value, model_instance):
         pass
