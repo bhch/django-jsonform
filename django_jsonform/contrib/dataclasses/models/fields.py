@@ -63,6 +63,10 @@ class DataclassJSONField(JSONField):
                 raise JSONSchemaValidationError("Null value in non-nullable field.")  # type: ignore
             return
         values_to_validate = value if isinstance(value, list) else [value]
+        if len(values_to_validate) == 0:
+            if not self.blank:
+                raise JSONSchemaValidationError("Blank value in non-blank field.")  # type: ignore
+            return
         errs: List[str] = []
         for i, val in enumerate(values_to_validate):
             try:
