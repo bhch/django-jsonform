@@ -1,7 +1,7 @@
 from __future__ import annotations
 
 import json
-from typing import TYPE_CHECKING, Any, List, Optional, Type
+from typing import TYPE_CHECKING, Any, Dict, List, Optional, Tuple, Type
 
 from django_jsonform.contrib.dataclasses.forms.fields import DataclassJSONFormField
 from django_jsonform.contrib.dataclasses.typedefs import DataclassJsonSchema, SerializableValue
@@ -32,6 +32,12 @@ class DataclassJSONField(JSONField):
         )
 
         super().__init__(schema=self._json_schema, **kwargs)  # type: ignore
+
+    def deconstruct(self) -> Tuple[str, str, List[Any], Dict[str, Any]]:
+        name, path, args, kwargs = super().deconstruct()
+        kwargs["dataclass_cls"] = self._dataclass_cls
+        kwargs["many"] = self._many
+        return name, path, args, kwargs
 
     def from_db_value(
         self,
