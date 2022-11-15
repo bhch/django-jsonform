@@ -1,5 +1,5 @@
 (function() {
-  window.addEventListener('DOMContentLoaded', function() {
+  document.addEventListener('DOMContentLoaded', function() {
     var _initializedCache = [];
 
     function initJSONForm(element) {
