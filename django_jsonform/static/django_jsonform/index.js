@@ -76,6 +76,9 @@
     }
 
     function initializeAllForNode(parentElement) {
+      if (parentElement.querySelectorAll === undefined)
+        return;
+
       var containers = parentElement.querySelectorAll('[data-django-jsonform]');
 
       // hacky way to filter NodeList using Array.filter
