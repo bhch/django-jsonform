@@ -72,7 +72,19 @@ class JSONFormWidget(forms.Widget):
         return mark_safe(render_to_string(self.template_name, context))
 
     def add_error(self, error_map):
-        setattr(self, 'error_map', error_map)
+        if not hasattr(self, 'error_map'):
+            setattr(self, 'error_map', error_map)
+            return
+
+        # if here, this is being called more than once
+        # therefore, extend the current error_map
+        for key in error_map:
+            if key in self.error_map:
+                if not isinstance(self.error_map[key], list):
+                    self.error_map[key] = [self.error_map[key]]
+                self.error_map[key].append(error_map[key])
+            else:
+                self.error_map[key] = error_map[key]
 
     @property
     def media(self):
