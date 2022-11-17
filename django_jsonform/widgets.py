@@ -72,7 +72,7 @@ class JSONFormWidget(forms.Widget):
         return mark_safe(render_to_string(self.template_name, context))
 
     def add_error(self, error_map):
-        setattr(self, 'error_map', json.dumps(error_map))
+        setattr(self, 'error_map', error_map)
 
     @property
     def media(self):
