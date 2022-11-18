@@ -1,3 +1,4 @@
+import copy
 import json
 from inspect import signature
 from django import forms
@@ -73,7 +74,7 @@ class JSONFormWidget(forms.Widget):
 
     def add_error(self, error_map):
         if not hasattr(self, 'error_map'):
-            setattr(self, 'error_map', error_map)
+            setattr(self, 'error_map', copy.deepcopy(error_map))
             return
 
         # if here, this is being called more than once
@@ -82,7 +83,10 @@ class JSONFormWidget(forms.Widget):
             if key in self.error_map:
                 if not isinstance(self.error_map[key], list):
                     self.error_map[key] = [self.error_map[key]]
-                self.error_map[key].append(error_map[key])
+                if isinstance(error_map[key], list):
+                    self.error_map[key] += error_map[key]
+                else:
+                    self.error_map[key].append(error_map[key])
             else:
                 self.error_map[key] = error_map[key]
 

@@ -24,9 +24,10 @@ class JSONFormWidgetTests(TestCase):
         # must be passed to callable
         schema_func.assert_called_with(1)
 
-    def test_maintains_backwards_compatibility(self):
+    def test_instance_arg_is_conditionally_passed_to_schema_callable(self):
         """The 'instance' argument must be conditionally passed
         to the schema function, i.e. only if it accepts arguments.
+        This is to ensure backwards compatibility.
         """
 
         schema_func = lambda: {} # accepts no args
@@ -35,3 +36,21 @@ class JSONFormWidgetTests(TestCase):
         widget.instance = 1
         # must not raise any exceptions
         widget.render(name='test', value='')
+
+    def test_merges_error_maps(self):
+        """error_map must be merged with the previously passed error_maps"""
+        widget = JSONFormWidget(schema={})
+
+        error_map = {'0': 'First error'}
+        widget.add_error(error_map)
+
+        error_map_2 = {'0': 'Second error'}
+        widget.add_error(error_map_2)
+
+        error_map_3 = {'0': ['Third error']} # if messages are in array
+        widget.add_error(error_map_3)
+
+        self.assertEqual(
+            widget.error_map['0'],
+            ['First error', 'Second error', 'Third error']
+        )
