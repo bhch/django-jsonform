@@ -1,5 +1,6 @@
 from django.utils.functional import Promise
 from django.conf import settings
+from django_jsonform.constants import JOIN_SYMBOL
 
 
 def normalize_schema(schema):
@@ -53,3 +54,33 @@ def get_setting(name, default=None):
         return default
 
     return settings.DJANGO_JSONFORM.get(name, default)
+
+
+def join_coords(*coords):
+    return JOIN_SYMBOL.join([str(coord) for coord in coords]).strip(JOIN_SYMBOL)
+
+
+def split_coords(coords):
+    return coords.split(JOIN_SYMBOL)
+
+
+class ErrorMap(dict):
+    def set(self, coords, msg):
+        key = join_coords(*coords)
+        
+        if not isinstance(msg, list):
+            msg = [msg]
+
+        self[key] = msg
+
+    def append(self, coords, msg):
+        key = join_coords(*coords)
+
+        if key not in self:
+            self.set(coords, msg)
+            return
+
+        if not isinstance(msg, list):
+            msg = [msg]
+
+        self[key] = self[key] + msg
