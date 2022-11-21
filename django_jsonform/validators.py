@@ -5,19 +5,20 @@ from django.utils.deconstruct import deconstructible
 from django.utils.translation import gettext, gettext_lazy as _
 from django.utils import timezone
 from django_jsonform.exceptions import JSONSchemaValidationError
-from django_jsonform.utils import normalize_keyword
+from django_jsonform.utils import normalize_keyword, join_coords, ErrorMap
+from django_jsonform.constants import JOIN_SYMBOL
 
 
 @deconstructible
 class JSONSchemaValidator:
     def __init__(self, schema):
         self.schema = schema
-        self.error_map = {}
+        self.error_map = ErrorMap()
 
     def __call__(self, value):
         # reset error_map so that this validator
         # can be reused for the same schema
-        self.error_map = {}
+        self.error_map = ErrorMap()
 
         schema_type = normalize_keyword(self.schema['type'])
 
@@ -39,13 +40,13 @@ class JSONSchemaValidator:
             )
 
     def join_coords(self, *args):
-        return '-'.join([str(i) for i in args]).strip('-')
+        return join_coords(*args)
 
     def add_error(self, key, msg):
         if key not in self.error_map:
-            self.error_map[key] = []
-
-        self.error_map[key].append(msg)
+            self.error_map.set(coords=[key], msg=msg)
+        else:
+            self.error_map.append(coords=[key], msg=msg)
 
     def get_validator(self, schema_type):
         return getattr(self, 'validate_%s' % schema_type, None)
