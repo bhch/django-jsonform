@@ -1,0 +1,50 @@
+django-jsonform 2.15.0 release notes
+====================================
+
+
+Nov 21, 2022
+------------
+
+This release brings plenty of bug fixes and one breaking change
+
+Like the previous version, it also supports ``Django >= 2.0`` and ``Python >= 3.4``.
+
+
+New features
+~~~~~~~~~~~~
+
+- :class:`~django_jsonform.utils.ErrorMap`: A new helper class for setting
+  error messages with custom validation.
+
+
+Bug fixes
+~~~~~~~~~
+
+- :issue:`69`: Allow hyphens in schema object keys.
+- :issue:`70`: Made the widget compatible with HTMX.
+- :issue:`81`: Fixed a bug due to which the error messages were not displayed under input fields.
+- :issue:`82`: Fixed a bug to display error messages from multiple validators.
+- Minor fixes: :issue:`71`, :issue:`73`, :issue:`79`
+
+
+Breaking changes
+~~~~~~~~~~~~~~~~
+
+- **Custom validation**
+
+  Due to fixing issue :issue:`69` to allow hyphens (dashes) schema object keys
+  (i.e. field names), the you should now use the :class:`~django_jsonform.utils.ErrorMap`
+  helper class to construct the ``error_map`` object.
+
+react-json-form (JavaScript)
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+`react-json-form <https://github.com/bhch/react-json-form>`_ has been updated
+to version 2.4.0.
+
+
+Thank you
+~~~~~~~~~
+
+I want to thank my sponsors and all the people who contributed code, bug reports,
+feature requests and improvement suggestions.
