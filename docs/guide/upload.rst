@@ -155,8 +155,8 @@ three ways to do that:
 3. Or by using the ``handler`` keyword in the schema to specify a separate view
    for each file input.
 
-Example 1: Using the ``FILE_HANDLER`` setting
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+Option 1: Using the ``FILE_HANDLER`` setting
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 This option is great for declaring one common handler view for all ``JSONField``
 instances.
@@ -171,8 +171,8 @@ instances.
     }
 
 
-Example 2: Using the ``file_handler`` argument
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+Option 2: Using the ``file_handler`` argument
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 This option is great for declaring a handler for a particular ``JSONfield``. This is
 especially useful if you're writing a reusable app.
@@ -202,8 +202,8 @@ the regular ``reverse`` function because urls are loaded after models. Therefore
 using ``reverse`` will lead to an error.
 
 
-Example 3: Using ``handler`` keyword in schema
-^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+Option 3: Using ``handler`` keyword in schema
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 This option is great for declaring separate handlers for separate fields within
 a schema.
@@ -274,6 +274,7 @@ Each ``POST`` request will also contain these additional arguments:
 - ``model_name``: Name of the model.
 - ``field_name``: Name of the field.
 - ``coords``: :doc:`Coordinates </guide/coordinates>` of the data input field.
+  (See also: :func:`~django_jsonform.utils.split_coords`)
 
 These arguments are useful for identifying the model and the field when you have
 one common handler for multiple JSON fields.
@@ -389,6 +390,7 @@ Each ``GET`` request will also contain these arguments:
 - ``model_name``: Name of the model.
 - ``field_name``: Name of the field.
 - ``coords``: :doc:`Coordinates </guide/coordinates>` of the data input field.
+  (See also: :func:`~django_jsonform.utils.split_coords`)
 
 Response format
 ^^^^^^^^^^^^^^^
@@ -480,6 +482,7 @@ Each ``DELETE`` request will contain these query parameters:
 - ``model_name``: Name of the model.
 - ``field_name``: Name of the field.
 - ``coords``: :doc:`Coordinates </guide/coordinates>` of the data input field.
+  (See also: :func:`~django_jsonform.utils.split_coords`)
 
 
 **Available** ``trigger`` **values**:

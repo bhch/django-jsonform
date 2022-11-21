@@ -32,6 +32,7 @@ Table of contents
    fields-and-widgets
    templatetags
    settings
+   utils
    examples
    troubleshooting
    releases/index
