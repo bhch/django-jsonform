@@ -1092,3 +1092,123 @@ div.form-row::after {
 .grp-module .rjf-help-text {
     color: #888;
 }
+
+
+/* Dark mode */
+
+@media (prefers-color-scheme: dark) {
+    .rjf-form-group-inner {
+        border-color: #3f3f3f;
+    }
+    .rjf-form-row-controls button {
+        border-color: #3f3f3f;
+    }
+    .rjf-form-row-controls button:hover {
+        background-color: #eee;
+    }
+    .rjf-form-row > .rjf-form-row-controls > button {
+        border-color: #444;
+    }
+    .rjf-form-row-controls:hover + .rjf-form-row-inner,
+    .rjf-form-row-controls:hover + .rjf-form-group {
+        background-color: #000;
+    }
+    .rjf-form-group input[readonly] {
+        background-color: #272727;
+    }
+    .rjf-multiselect-field-input {
+        background-color: transparent !important;
+    }
+    .rjf-multiselect-field-options-container {
+        background-color: #222;
+        border-color: #444;
+        box-shadow: 0 3px 15px rgb(0, 0, 0);
+    }
+    .rjf-multiselect-field-option label {
+        color: #eee;
+    }
+    .rjf-multiselect-field-option label:hover {
+        background-color: #121212;
+    }
+    .rjf-multiselect-field-option.selected label {
+        background-color: #000;
+    }
+    .rjf-multiselect-field-option.selected label:hover {
+        background-color: #000;
+    }
+    .rjf-time-picker {
+        background-color: #222;
+        border-color: #444;
+        box-shadow: 0 3px 15px rgb(0, 0, 0);
+    }
+    .rjf-time-picker-labels {
+        color: #cacaca;
+    }
+    .rjf-time-picker button {
+        background-color: #000;
+        color: #cacaca;
+    }
+    .rjf-current-file-name {
+        color: #cacaca;
+    }
+    .rjf-current-file-name > span {
+        background-color: #3f3f3f;
+        color: #e3fcff;
+    }
+    .rjf-modal__content {
+        background-color: #121212;
+        box-shadow: 0 0 16px rgba(0,0,0);
+    }
+    .rjf-modal__header {
+        background-color: #212121;
+    }
+    .rjf-upload-modal__tab-button {
+        color: #83cbed;
+        border: 1px solid #83cbed;
+    }
+    .rjf-upload-modal__tab-button:hover {
+        background-color: #121212;
+    }
+    .rjf-upload-modal__tab-button--active {
+        background-color: #417690;
+        color: #fff;
+        border-color: #417690;
+    }
+    .rjf-upload-modal__tab-button--active:hover {
+        background-color: #205067;
+    }
+    .rjf-upload-modal__media-load-button {
+        color: #83cbed;
+    }
+    .rjf-upload-modal__media-load-button:hover {
+        background-color: #000;
+    }
+    .rjf-upload-modal__open-button,
+    .rjf-modal__footer-close-button {
+        background-color: #313131;
+        color: #fff;
+        border: 1px solid #555;
+    }
+    .rjf-upload-modal__open-button:hover,
+    .rjf-modal__footer-close-button:hover {
+        background-color: #000;
+    }
+    .rjf-modal__close-button {
+        background-color: #654848;
+    }
+    .rjf-upload-modal__media-tile .rjf-dropdown-toggler {
+        background-color: rgba(0, 0, 0, 0.5);
+        color: #cacaca;
+    }
+    .rjf-upload-modal__media-tile-inner {
+        background-color: #000;
+        border: 1px solid #444;
+    }
+    .rjf-upload-modal__media-tile-inner:hover {
+        background-color: #212121;
+        border-color: #444;
+    }
+    .rjf-upload-modal__media-tile-metadata {
+        color: #cacaca;
+    }
+}
