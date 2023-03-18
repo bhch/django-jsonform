@@ -100,6 +100,18 @@ class JSONSchemaValidator:
         except ValueError:
             return None
 
+    def get_choice_values(self, choices):
+        """Returns values for given choices.
+
+        Useful for extracting choice values for object choices.
+        """
+        values = []
+        for choice in choices:
+            if isinstance(choice, dict):
+                choice = choice.get('value', '')
+            values.append(choice)
+        return values
+
     def validate_array(self, schema, data, coords):
         if not isinstance(data, list):
             data_type = type(data).__name__
@@ -134,8 +146,9 @@ class JSONSchemaValidator:
                     self.add_error(coords, 'All items in this list must be unique.')
 
         if choices:
+            choice_values = self.get_choice_values(choices)
             for item in data:
-                if item not in choices:
+                if item not in choice_values:
                     self.add_error(coords, 'Invalid choice %s' % item)
                     break
 

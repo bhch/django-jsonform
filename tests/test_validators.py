@@ -140,12 +140,22 @@ class TestJSONSchemaValidator(TestCase):
         validator(data_2) # must pass
 
     def test_validate_array_choices(self):
+        # 1. plain choices
         schema = {
             'type': 'array',
             'items': {'type': 'string', 'choices': ['1', '2', '3']}
         }
         wrong_data = ['x']
         data = ['1']
+        validator = JSONSchemaValidator(schema)
+        self.assertRaises(JSONSchemaValidationError, validator, wrong_data)
+        validator(data) # must pass
+
+        # 2. choices with labels
+        schema = {
+            'type': 'array',
+            'items': {'type': 'string', 'choices': [{'label': '1', 'value': '1'}]}
+        }
         validator = JSONSchemaValidator(schema)
         self.assertRaises(JSONSchemaValidationError, validator, wrong_data)
         validator(data) # must pass
