@@ -47,7 +47,8 @@
 .rjf-form-group-wrapper > .rjf-form-group {
     max-width: 100%;
 }
-.rjf-form-group-inner {
+.rjf-form-group-inner,
+.rjf-form-row-controls + .rjf-oneof-group {
     box-sizing: border-box;
     position: relative;
     width: 100%;
@@ -57,6 +58,15 @@
     padding: 10px;
     box-shadow: 0 0 2px rgba(0,0,0,0.075);
     transition: background-color 0.12s ease-in-out;
+}
+.rjf-form-row-controls + .rjf-oneof-group > .rjf-form-group {
+    margin-bottom: 2px;
+}
+.rjf-form-row-controls + .rjf-oneof-group > .rjf-form-group > .rjf-form-group-inner {
+    border: 0;
+    box-shadow: none;
+    padding: 5px;
+    margin-bottom: 0;
 }
 .rjf-form-group-title {
     font-weight: bold;
@@ -73,6 +83,10 @@
     padding: 5px;
     padding-right: 76px;
 }
+.rjf-oneof-selector {
+    padding: 5px;
+    padding-right: 76px;
+}
 
 .rjf-form-row input,
 .rjf-form-row select,
@@ -83,6 +97,9 @@
 .rjf-form-row input,
 .rjf-form-row select {
     max-width: 18rem;
+}
+.rjf-oneof-selector-input {
+    width: 100%;
 }
 
 .rjf-form-row input[type="date"],
@@ -99,12 +116,14 @@
     background-color: #eee;
     outline: 0;
 }
-.rjf-form-row label {
+.rjf-form-row label,
+.rjf-oneof-selector label {
     box-sizing: border-box;
     width: 33%;
     min-width: 5em;
 }
-.rjf-form-row  label + .rjf-input-group {
+.rjf-form-row label + .rjf-input-group,
+.rjf-oneof-selector label + .rjf-input-group > .rjf-oneof-selector-input {
     box-sizing: border-box;
     display: table;
     width: 66%;
@@ -934,7 +953,8 @@ div.form-row::after {
     }
 
     .rjf-input-group,
-    .rjf-form-row label + .rjf-input-group {
+    .rjf-form-row label + .rjf-input-group,
+    .rjf-oneof-selector label + .rjf-input-group > .rjf-oneof-selector-input {
         width: 100%;
     }
 
@@ -1097,7 +1117,8 @@ div.form-row::after {
 /* Dark mode */
 
 @media (prefers-color-scheme: dark) {
-    .rjf-form-group-inner {
+    .rjf-form-group-inner,
+    .rjf-form-row-controls + .rjf-oneof-group {
         border-color: #3f3f3f;
     }
     .rjf-form-row-controls button {
