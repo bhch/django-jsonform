@@ -212,6 +212,10 @@ class JSONSchemaValidator:
             if '$ref' in next_schema:
                 next_schema = self.get_ref(next_schema['$ref'])
 
+            if isinstance(schema.get('required', None), list):
+                if key in schema['required']:
+                    next_schema['required'] = True
+
             next_type = normalize_keyword(next_schema['type'])
 
             next_validator = self.get_validator(next_type)

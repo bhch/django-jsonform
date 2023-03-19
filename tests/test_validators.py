@@ -210,6 +210,19 @@ class TestJSONSchemaValidator(TestCase):
         validator(data_1) # must pass
         validator(data_2) # must pass
 
+    def test_object_required_properties(self):
+        schema = {
+            'type': 'object',
+            'properties': {'a': {'type': 'string'}},
+            'required': ['a']
+        }
+        wrong_data = {'a': ''}
+        data = {'a': 'hello'}
+
+        validator = JSONSchemaValidator(schema)
+        self.assertRaises(JSONSchemaValidationError, validator, wrong_data)
+        validator(data) # must pass
+
     def test_additionalProperties_type(self):
         schema = {
             'type': 'object',
