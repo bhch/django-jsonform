@@ -47,6 +47,27 @@ normalize_keyword.kw_map = {
     'datetime': 'date-time'
 }
 
+def get_schema_type(schema):
+    """Returns the normalized type of schema.
+
+    Will try to sensibly discern the type if 'type' keyword is not present.
+
+    Will return None on failure to guess.
+    """
+    typ = schema.get('type', None)
+
+    if typ is None:
+        if 'properties' in schema or 'keys' in schema:
+            # if schema has 'properties' or 'keys' keyword
+            # it must be an object
+            typ = 'object'
+        elif 'items' in schema:
+            # if schema as 'items' keyword
+            # it must be an array
+            typ = 'array'
+
+    return normalize_keyword(typ)
+
 
 def get_setting(name, default=None):
     """Returns settings nested inside DJANGO_JSONFORM main setting variable"""

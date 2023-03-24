@@ -303,6 +303,825 @@ class TestJSONSchemaValidator(TestCase):
         self.assertRaises(JSONSchemaValidationError, validator, wrong_data)
         validator(data)
 
+    def test_object_oneOf(self):
+        """Tests for oneOf keyword on the object level."""
+
+        # 1. data must have exactly one of the properties listed in oneOf
+        schema = {
+            'type': 'object',
+            'properties': {'a': {'type': 'string'}},
+            'oneOf': [
+                {
+                    'properties': {
+                        'b': {'type': 'string'},
+                    }
+                },
+                {
+                    'properties': {
+                        'c': {'type': 'number'}
+                    }
+                },
+                {
+                    'properties': {
+                        'd': {'type': 'string'},
+                        'e': {'type': 'number'}
+                    }
+                },
+                {
+                    '$ref': '#/$defs/common'
+                }
+            ],
+            '$defs': {
+                'common': {
+                    'properties': {
+                        'f': {'type': 'string'}
+                    }
+                }
+            }
+        }
+
+        wrong_data_1 = {'a': 'hello', 'b': 'world', 'c': 1} # more than one properties
+        wrong_data_2 = {'a': 'hello', 'b': 'world', 'f': 'sdf'} # more than one properties
+        wrong_data_3 = {'a': 'hello'} # missing all oneOf properties
+        wrong_data_4 = {'a': 'hello', 'b': 1} # incorrect data type
+        wrong_data_5 = {'a': 'hello', 'd': 'hello'} # missing same level property 'e'
+        wrong_data_6 = {'a': 'hello', 'e': 1} # missing same level property 'd'
+        data_1 = {'a': 'hello', 'b': 'world'}
+        data_2 = {'a': 'hello', 'c': 1}
+        data_3 = {'a': 'hello', 'd': 'hello', 'e': 1}
+        data_4 = {'a': 'hello', 'd': '', 'e': None} # empty values must pass if not required
+        data_5 = {'a': 'hello', 'f': 'hello'} # ref
+
+        validator = JSONSchemaValidator(schema)
+
+        # Skipping first wrong_data_1 and wrong_data_2 as currently we are not
+        # validating that exactly one and only one subschema in oneOf should match
+        # 
+        # self.assertRaises(JSONSchemaValidationError, validator, wrong_data_1)
+        # self.assertRaises(JSONSchemaValidationError, validator, wrong_data_2)
+
+        self.assertRaises(JSONSchemaValidationError, validator, wrong_data_3)
+        self.assertRaises(JSONSchemaValidationError, validator, wrong_data_4)
+        self.assertRaises(JSONSchemaValidationError, validator, wrong_data_5)
+        self.assertRaises(JSONSchemaValidationError, validator, wrong_data_6)
+        validator(data_1)
+        validator(data_2)
+        validator(data_3)
+        validator(data_4)
+        validator(data_5)
+
+    def test_object_anyOf(self):
+        """Tests for anyOf keyword on the object level."""
+
+        # 1. data must have at least one of the properties listed in anyOf
+        schema = {
+            'type': 'object',
+            'properties': {'a': {'type': 'string'}},
+            'anyOf': [
+                {
+                    'properties': {
+                        'b': {'type': 'string'},
+                    }
+                },
+                {
+                    'properties': {
+                        'c': {'type': 'number'}
+                    }
+                },
+                {
+                    'properties': {
+                        'd': {'type': 'string'},
+                        'e': {'type': 'number'}
+                    }
+                },
+                {
+                    '$ref': '#/$defs/common'
+                }
+            ],
+            '$defs': {
+                'common': {
+                    'properties': {
+                        'f': {'type': 'string'}
+                    }
+                }
+            }
+        }
+
+        wrong_data_1 = {'a': 'hello'} # missing all anyOf properties
+        wrong_data_2 = {'a': 'hello', 'b': 1} # incorrect data type
+        wrong_data_3 = {'a': 'hello', 'd': 'hello'} # missing same level property 'e'
+        wrong_data_4 = {'a': 'hello', 'e': 1} # missing same level property 'd'
+        data_1 = {'a': 'hello', 'b': 'world'}
+        data_2 = {'a': 'hello', 'c': 1}
+        data_3 = {'a': 'hello', 'b': 'world', 'c': 1}
+        data_4 = {'a': 'hello', 'd': 'hello', 'e': 1}
+        data_5 = {'a': 'hello', 'd': '', 'e': None} # empty values must pass if not required
+        data_6 = {'a': 'hello', 'f': 'hello'} # ref
+
+        validator = JSONSchemaValidator(schema)
+
+        self.assertRaises(JSONSchemaValidationError, validator, wrong_data_1)
+        self.assertRaises(JSONSchemaValidationError, validator, wrong_data_2)
+        self.assertRaises(JSONSchemaValidationError, validator, wrong_data_3)
+        self.assertRaises(JSONSchemaValidationError, validator, wrong_data_4)
+        validator(data_1)
+        validator(data_2)
+        validator(data_3)
+        validator(data_4)
+        validator(data_5)
+        validator(data_6)
+
+    def test_object_allOf(self):
+        """Tests for allOf keyword on the object level"""
+
+        # 1. data must have at least one of the properties listed in anyOf
+        schema = {
+            'type': 'object',
+            'properties': {'a': {'type': 'string'}},
+            'allOf': [
+                {
+                    'properties': {
+                        'b': {'type': 'string'},
+                    }
+                },
+                {
+                    'properties': {
+                        'c': {'type': 'number'}
+                    }
+                },
+                {
+                    'properties': {
+                        'd': {'type': 'string'},
+                        'e': {'type': 'number'}
+                    }
+                },
+                {
+                    '$ref': '#/$defs/common'
+                }
+            ],
+            '$defs': {
+                'common': {
+                    'properties': {
+                        'f': {'type': 'string'} 
+                    }
+                } 
+            }
+        }
+
+        wrong_data_1 = {'a': 'hello'} # missing all allOf properties
+        wrong_data_2 = {'a': 'hello', 'b': 'hello', 'c': 1, 'd': 'hello'} # missing same level property 'e'
+        wrong_data_3 = {'a': 'hello', 'b': 'hello', 'c': '1', 'd': 'hello', 'e': 1} # incorrect data type same level property 'e'
+        wrong_data_4 = {'a': 'hello', 'b': 'hello', 'c': 1, 'd': 1, 'e': '1'} # incorrect data type same level property 'e'
+        wrong_data_5 = {'a': 'hello', 'b': 'world', 'c': 1, 'd': 'hello', 'e': 1} # missing ref property
+        data_1 = {'a': 'hello', 'b': 'world', 'c': 1, 'd': 'hello', 'e': 1, 'f': 'hello'}
+        data_2 = {'a': 'hello', 'b': '', 'c': None, 'd': '', 'e': None, 'f': ''} # empty values must pass if not required
+
+        validator = JSONSchemaValidator(schema)
+
+        self.assertRaises(JSONSchemaValidationError, validator, wrong_data_1)
+        self.assertRaises(JSONSchemaValidationError, validator, wrong_data_2)
+        self.assertRaises(JSONSchemaValidationError, validator, wrong_data_3)
+        self.assertRaises(JSONSchemaValidationError, validator, wrong_data_4)
+        self.assertRaises(JSONSchemaValidationError, validator, wrong_data_5)
+        validator(data_1)
+        validator(data_2)
+
+    def test_object_property_oneOf(self):
+        """Tests for oneOf keyword on an object property"""
+        schema = {
+            'type': 'object',
+            'properties': {
+                'a': {
+                    'oneOf': [
+                        {'type': 'string', 'maxLength': 5},
+                        {'type': 'integer', 'maximum': 5},
+                        {
+                            'type': 'object',
+                            'keys': {
+                                'k': {'type': 'string'}
+                            }
+                        },
+                        {
+                            'type': 'array',
+                            'items': {
+                                'type': 'string'
+                            }
+                        }
+                    ]
+                },
+                'b': {
+                    'oneOf': [
+                        {'$ref': '#/$defs/b'}
+                    ]
+                }
+            },
+            '$defs': {
+                'b': {
+                    'type': 'string'
+                }
+            }
+        }
+        wrong_data_1 = {} # missing
+        wrong_data_2 = {'a': 'hello world'} # too long
+        wrong_data_3 = {'a': 10} # too large
+        data_1 = {'a': 'hello', 'b': 'adf'}
+        data_2 = {'a': 1, 'b': ''}
+        data_3 = {'a': '', 'b': ''} # empty must pass
+        data_4 = {'a': None, 'b': ''} # empty must pass
+        data_5 = {'a': {'k': 'hello'}, 'b': ''} # nested object
+        data_6 = {'a': ['hello'], 'b': ''} # nested array
+
+        validator = JSONSchemaValidator(schema)
+
+        self.assertRaises(JSONSchemaValidationError, validator, wrong_data_1)
+        self.assertRaises(JSONSchemaValidationError, validator, wrong_data_2)
+        self.assertRaises(JSONSchemaValidationError, validator, wrong_data_3)
+        validator(data_1)
+        validator(data_2)
+        validator(data_3)
+        validator(data_4)
+        validator(data_5)
+        validator(data_6)
+
+    def test_object_property_anyOf(self):
+        """Tests for anyOf keyword on an object property"""
+        schema = {
+            'type': 'object',
+            'properties': {
+                'a': {
+                    'anyOf': [
+                        {'type': 'string', 'maxLength': 5},
+                        {'type': 'string', 'minLength': 2, 'required': True},
+                        {'type': 'integer', 'maximum': 5},
+                    ]
+                }
+            },
+        }
+        wrong_data_1 = {} # missing
+        wrong_data_2 = {'a': 10} # too large
+        data_1 = {'a': 'hello'} # length = 5 (must match first subschema)
+        data_2 = {'a': 'hello world'} # length > 5 (must match second subschema)
+        data_3 = {'a': 'h'} # length < 2 )(must match second subschema)
+        data_4 = {'a': 1}
+        data_5 = {'a': ''} # empty string (must match first subschema)
+        data_6 = {'a': None} # empty must pass
+
+        validator = JSONSchemaValidator(schema)
+
+        self.assertRaises(JSONSchemaValidationError, validator, wrong_data_1)
+        self.assertRaises(JSONSchemaValidationError, validator, wrong_data_2)
+        validator(data_1)
+        validator(data_2)
+        validator(data_3)
+        validator(data_4)
+        validator(data_5)
+        validator(data_6)
+
+    def test_object_level_oneOf_with_additionalProperties(self):
+        schema = {
+            'type': 'object',
+            'properties': {
+                'name': {'type': 'string'},
+            },
+            'additionalProperties': {'type': 'string'},
+            'oneOf': [
+                {
+                    'properties': {
+                        'age': {'type': 'number'} 
+                    },
+                    'additionalProperties': {'type': 'number'}
+                }
+            ]
+        }
+
+        wrong_data_1 = {'name': 'john'} # missing oneOf
+        wrong_data_2 = {'name': 123, 'age': '123'} # wrong type
+
+        data_1 = {'name': 'john', 'age': 123}
+        data_2 = {'name': 'john', 'age': 123, 'extra': 'whatever'}
+
+        validator = JSONSchemaValidator(schema)
+
+        self.assertRaises(JSONSchemaValidationError, validator, wrong_data_1)
+        self.assertRaises(JSONSchemaValidationError, validator, wrong_data_2)
+        validator(data_1)
+        validator(data_2)
+
+    def test_object_level_anyOf_with_additionalProperties(self):
+        schema = {
+            'type': 'object',
+            'properties': {
+                'name': {'type': 'string'},
+            },
+            'additionalProperties': {'type': 'string'},
+            'anyOf': [
+                {
+                    'properties': {
+                        'age': {'type': 'number'} 
+                    },
+                    'additionalProperties': {'type': 'number'}
+                }
+            ]
+        }
+
+        wrong_data_1 = {'name': 'john'} # missing oneOf
+        wrong_data_2 = {'name': 123, 'age': '123'} # wrong type
+
+        data_1 = {'name': 'john', 'age': 123}
+        data_2 = {'name': 'john', 'age': 123, 'extra': 'whatever'}
+
+        validator = JSONSchemaValidator(schema)
+
+        self.assertRaises(JSONSchemaValidationError, validator, wrong_data_1)
+        self.assertRaises(JSONSchemaValidationError, validator, wrong_data_2)
+        validator(data_1)
+        validator(data_2)
+
+    def test_object_level_allOf_with_additionalProperties(self):
+        schema = {
+            'type': 'object',
+            'properties': {
+                'name': {'type': 'string'},
+            },
+            'additionalProperties': {'type': 'string'},
+            'allOf': [
+                {
+                    'properties': {
+                        'age': {'type': 'number'} 
+                    },
+                    'additionalProperties': {'type': 'boolean'},
+                }
+            ]
+        }
+
+        wrong_data_1 = {'name': 'john'} # missing oneOf
+        wrong_data_2 = {'name': 123, 'age': '123'} # wrong type
+
+        data_1 = {'name': 'john', 'age': 123}
+        data_2 = {'name': 'john', 'age': 123, 'extra': 'whatever', 'x': 123, 'y': True}
+
+        validator = JSONSchemaValidator(schema)
+
+        self.assertRaises(JSONSchemaValidationError, validator, wrong_data_1)
+        self.assertRaises(JSONSchemaValidationError, validator, wrong_data_2)
+        validator(data_1)
+        validator(data_2)
+
+    def test_array_items_oneOf(self):
+        """Tests oneOf inside array items"""
+        schema = {
+            'type': 'array',
+            'items': {
+                'oneOf': [
+                    {'type': 'string', 'maxLength': 5},
+                    {'$ref': '#/$defs/integer'},
+                ]
+            },
+            '$defs': {
+                'integer': {'type': 'integer'}
+            }
+        }
+
+        wrong_data = [[]]
+        data_1 = ['hello']
+        data_2 = [1]
+        data_3 = ['hello', 1]
+
+        validator = JSONSchemaValidator(schema)
+
+        self.assertRaises(JSONSchemaValidationError, validator, wrong_data)
+        validator(data_1)
+        validator(data_2)
+        validator(data_3)
+
+    def test_array_items_anyOf(self):
+        """Tests oneOf inside array items"""
+        schema = {
+            'type': 'array',
+            'items': {
+                'anyOf': [
+                    {'type': 'string', 'maxLength': 5},
+                    {'type': 'string', 'maxLength': 15},
+                ]
+            },
+        }
+
+        wrong_data = [[]]
+        wrong_data_2 = [1]
+        wrong_data_3 = ['hello', 1]
+        wrong_data_4 = ['hello world ........'] # too long
+        data_1 = ['hello'] # match first
+        data_2 = ['hello world'] # match second
+        data_3 = ['hello', 'hello world']
+
+        validator = JSONSchemaValidator(schema)
+
+        self.assertRaises(JSONSchemaValidationError, validator, wrong_data)
+        self.assertRaises(JSONSchemaValidationError, validator, wrong_data_2)
+        self.assertRaises(JSONSchemaValidationError, validator, wrong_data_3)
+        self.assertRaises(JSONSchemaValidationError, validator, wrong_data_4)
+        validator(data_1)
+        validator(data_2)
+        validator(data_3)
+
+    def test_deeply_nested_oneOf(self):
+        # 1.
+        schema = {
+            'type': 'object',
+            'properties': {
+                'name': {
+                    'oneOf': [
+                        {
+                            'type': 'object',
+                            'oneOf': [
+                                {
+                                    'properties': {
+                                        'first': {'type': 'string'},
+                                        'last': {'type': 'string'},
+                                    }
+                                },
+                                {
+                                    'properties': {
+                                        'full': {'type': 'string'}
+                                    }
+                                }
+                            ],
+                        },
+                        {
+                            'type': 'array',
+                            'items': {
+                                'type': 'string'
+                            }
+                        }
+                    ]
+                }
+            }
+        }
+
+        wrong_data_1 = {}
+        wrong_data_2 = {'name': {'first': 'john'}}
+        wrong_data_3 = {'name': {'last': 'doe'}}
+        wrong_data_4 = {'name': {}}
+        wrong_data_5 = {'name': [1, 2]}
+        data_1 = {'name': {'first': 'john', 'last': 'doe'}}
+        data_2 = {'name': {'full': 'john doe'}}
+        data_3 = {'name': ['john', 'doe']}
+
+        validator = JSONSchemaValidator(schema)
+
+        self.assertRaises(JSONSchemaValidationError, validator, wrong_data_1)
+        self.assertRaises(JSONSchemaValidationError, validator, wrong_data_2)
+        self.assertRaises(JSONSchemaValidationError, validator, wrong_data_3)
+        self.assertRaises(JSONSchemaValidationError, validator, wrong_data_4)
+        self.assertRaises(JSONSchemaValidationError, validator, wrong_data_5)
+        validator(data_1)
+        validator(data_2)
+        validator(data_3)
+
+        # 2.
+        schema = {
+            "type": "object",
+            "oneOf": [
+                {
+                    "title": "Adf",
+                    "properties": {
+                        "name": {"type": "string"},
+                        "cars": {
+                            "type": "array",
+                            "items": {
+                                "oneOf": [
+                                    {"type": "string", "required": True},
+                                    {"type": "number"}
+                                ]
+                            }
+                        }
+                    }
+                },
+                {
+                    "properties": {
+                        "age": {"type": "integer"}
+                    }
+                }
+            ]
+        }
+
+        wrong_data_1 = {'name': 'john', 'cars': ['']} # empty required
+        wrong_data_2 = {'name': 'john'} # missing all oneOf
+        data_1 = {'name': 'john', 'cars': ['hello', 1]}
+        data_2 = {'name': 'john', 'cars': []} # if empty, it should match the second subschema in items
+        data_3 = {'name': 'john', 'age': 1}
+
+        validator = JSONSchemaValidator(schema)
+
+        self.assertRaises(JSONSchemaValidationError, validator, wrong_data_1)
+        self.assertRaises(JSONSchemaValidationError, validator, wrong_data_2)
+        validator(data_1)
+        validator(data_2)
+        validator(data_3)
+
+    def test_top_level_oneOf(self):
+        # 1. when all subschemas are objects
+        schema = {
+            'oneOf': [
+                {
+                    'properties': {
+                        'name': {'type': 'string'},
+                        'age': {'type': 'number', 'required': True},
+                    }
+                },
+                {
+                    '$ref': '#/$defs/animal'
+                }
+            ],
+            '$defs': {
+                'animal': {
+                    'type': 'object',
+                    'properties': {
+                        'name': {'type': 'string'},
+                    }
+                }
+            }
+        }
+
+        wrong_data_1 = {}
+        wrong_data_2 = {'name': 1}
+        data_1 = {'name': 'john', 'age': 1}
+        data_2 = {'name': 'dog'}
+        data_3 = {'name': 'dog', 'x': 'y'} # extra key
+
+        validator = JSONSchemaValidator(schema)
+
+        self.assertRaises(JSONSchemaValidationError, validator, wrong_data_1)
+        self.assertRaises(JSONSchemaValidationError, validator, wrong_data_2)
+        validator(data_1)
+        validator(data_2)
+        validator(data_3)
+
+        # 2. when all subschemas are arrays
+        schema = {
+            'oneOf': [
+                {
+                    'items': {'type': 'string'}
+                },
+                {
+                    '$ref': '#/$defs/hello'
+                }
+            ],
+            '$defs': {
+                'hello': {
+                    'type': 'array',
+                    'items': {'type': 'number'},
+                }
+            }
+        }
+
+        wrong_data_1 = {'hello': 1}
+        data_1 = ['a', 'b']
+        data_2 = [1, 2]
+
+        validator = JSONSchemaValidator(schema)
+
+        self.assertRaises(JSONSchemaValidationError, validator, wrong_data_1)
+        validator(data_1)
+        validator(data_2)
+
+        # 3. when subschemas are of array and object types
+        schema = {
+            'oneOf': [
+                {
+                    'items': {'type': 'string'},
+                    'minItems': 1
+                },
+                {
+                    '$ref': '#/$defs/person'
+                }
+            ],
+            '$defs': {
+                'person': {
+                    'object': 'array',
+                    'properties': {
+                        'name': {'type': 'string'},
+                        'age': {'type': 'number'}
+                    },
+                }
+            }
+        }
+
+        wrong_data_1 = {}
+        wrong_data_2 = []
+        wrong_data_3 = {'name': 'john'}
+        wrong_data_4 = {'name': 'john', 'age': '1'}
+        wrong_data_5 = [1, 2]
+        data_1 = ['a', 'b']
+        data_2 = {'name': 'john', 'age': 1}
+
+        validator = JSONSchemaValidator(schema)
+
+        self.assertRaises(JSONSchemaValidationError, validator, wrong_data_1)
+        self.assertRaises(JSONSchemaValidationError, validator, wrong_data_2)
+        self.assertRaises(JSONSchemaValidationError, validator, wrong_data_3)
+        self.assertRaises(JSONSchemaValidationError, validator, wrong_data_4)
+        self.assertRaises(JSONSchemaValidationError, validator, wrong_data_5)
+        validator(data_1)
+        validator(data_2)
+
+    def test_top_level_anyOf(self):
+        # 1. when all subschemas are objects
+        schema = {
+            'anyOf': [
+                {
+                    'properties': {
+                        'name': {'type': 'string'},
+                        'age': {'type': 'number', 'required': True},
+                    }
+                },
+                {
+                    '$ref': '#/$defs/animal'
+                }
+            ],
+            '$defs': {
+                'animal': {
+                    'type': 'object',
+                    'properties': {
+                        'name': {'type': 'string'},
+                    }
+                }
+            }
+        }
+
+        wrong_data_1 = {}
+        wrong_data_2 = {'name': 1}
+        data_1 = {'name': 'john', 'age': 1}
+        data_2 = {'name': 'dog'}
+        data_3 = {'name': 'dog', 'x': 'y'} # extra key
+
+        validator = JSONSchemaValidator(schema)
+
+        self.assertRaises(JSONSchemaValidationError, validator, wrong_data_1)
+        self.assertRaises(JSONSchemaValidationError, validator, wrong_data_2)
+        validator(data_1)
+        validator(data_2)
+        validator(data_3)
+
+        # 2. when all subschemas are arrays
+        schema = {
+            'anyOf': [
+                {
+                    'items': {'type': 'string'}
+                },
+                {
+                    '$ref': '#/$defs/hello'
+                }
+            ],
+            '$defs': {
+                'hello': {
+                    'type': 'array',
+                    'items': {'type': 'number'},
+                }
+            }
+        }
+
+        wrong_data_1 = {'hello': 1}
+        data_1 = ['a', 'b']
+        data_2 = [1, 2]
+
+        validator = JSONSchemaValidator(schema)
+
+        self.assertRaises(JSONSchemaValidationError, validator, wrong_data_1)
+        validator(data_1)
+        validator(data_2)
+
+        # 3. when subschemas are of array and object types
+        schema = {
+            'anyOf': [
+                {
+                    'items': {'type': 'string'},
+                    'minItems': 1
+                },
+                {
+                    '$ref': '#/$defs/person'
+                }
+            ],
+            '$defs': {
+                'person': {
+                    'object': 'array',
+                    'properties': {
+                        'name': {'type': 'string'},
+                        'age': {'type': 'number'}
+                    },
+                }
+            }
+        }
+
+        wrong_data_1 = {}
+        wrong_data_2 = []
+        wrong_data_3 = {'name': 'john'}
+        wrong_data_4 = {'name': 'john', 'age': '1'}
+        wrong_data_5 = [1, 2]
+        data_1 = ['a', 'b']
+        data_2 = {'name': 'john', 'age': 1}
+
+        validator = JSONSchemaValidator(schema)
+
+        self.assertRaises(JSONSchemaValidationError, validator, wrong_data_1)
+        self.assertRaises(JSONSchemaValidationError, validator, wrong_data_2)
+        self.assertRaises(JSONSchemaValidationError, validator, wrong_data_3)
+        self.assertRaises(JSONSchemaValidationError, validator, wrong_data_4)
+        self.assertRaises(JSONSchemaValidationError, validator, wrong_data_5)
+        validator(data_1)
+        validator(data_2)
+
+    def test_top_level_allOf(self):
+        # 1. when subschemas are 
+        schema = {
+            'allOf': [
+                {
+                    'properties': {
+                        'name': {'type': 'string'},
+                    }
+                },
+                {
+                    '$ref': '#/$defs/animal'
+                }
+            ],
+            '$defs': {
+                'animal': {
+                    'type': 'object',
+                    'properties': {
+                        'age': {'type': 'number', 'required': True},
+                    }
+                }
+            }
+        }
+
+        wrong_data_1 = {}
+        wrong_data_2 = {'name': 'john'} # missing key
+        wrong_data_3 = {'name': 1, 'age': 'adf'} # invalid type
+        data_1 = {'name': 'john', 'age': 1}
+        data_2 = {'name': 'dog', 'age': 1, 'x': 'y'} # extra key
+
+        validator = JSONSchemaValidator(schema)
+
+        self.assertRaises(JSONSchemaValidationError, validator, wrong_data_1)
+        self.assertRaises(JSONSchemaValidationError, validator, wrong_data_2)
+        self.assertRaises(JSONSchemaValidationError, validator, wrong_data_3)
+        validator(data_1)
+        validator(data_2)
+
+        # 2. when all subschemas are arrays
+        schema = {
+            'allOf': [
+                {
+                    'type': 'array',
+                    'items': {'type': 'string'}   
+                },
+                {
+                    'type': 'array',
+                    'items': {'type': 'number'}   
+                }
+            ]
+        }
+
+        wrong_data_1 = {'a': 1} # bad data type
+        data_1 = ['a', 'b']
+
+        validator = JSONSchemaValidator(schema)
+
+        # we currently don't support allOf inside array
+        # so the validation should just be skipped even for wrong data
+        validator(wrong_data_1)
+        validator(data_1)
+
+        # 3. when subschemas are both array and object
+        schema = {
+            'allOf': [
+                {
+                    'type': 'array',
+                    'items': {'type': 'string'}
+                },
+                {
+                    'type': 'object',
+                    'properties': {
+                        'name': {'type': 'string'}
+                    }
+                }
+            ]
+        }
+
+        wrong_data_1 = {'name': 123} # wrong type
+        wrong_data_2 = [1, 2, 3] # wrong type
+        data_1 = {'name': 'john'}
+        data_2 = ['a', 'b']
+
+        validator = JSONSchemaValidator(schema)
+
+        self.assertRaises(JSONSchemaValidationError, validator, wrong_data_1)
+
+        # wrong array data validation should be skipped
+        validator(wrong_data_2)
+        validator(data_1)
+        validator(data_2)
+
     def test_validate_string_method(self):
         schema = {
             'type': 'object',
