@@ -1254,6 +1254,8 @@ class TestJSONSchemaValidator(TestCase):
         }
         wrong_data_1 = {'a': '1'}
         wrong_data_2 = {'a': 1.1}
+        wrong_data_3 = {'a': True}
+        wrong_data_4 = {'a': False}
         data_1 = {'a': 1}
         data_2 = {'a': 0}
         data_3 = {'a': -1}
@@ -1261,6 +1263,8 @@ class TestJSONSchemaValidator(TestCase):
         validator = JSONSchemaValidator(schema)
         self.assertRaises(JSONSchemaValidationError, validator, wrong_data_1)
         self.assertRaises(JSONSchemaValidationError, validator, wrong_data_2)
+        self.assertRaises(JSONSchemaValidationError, validator, wrong_data_3)
+        self.assertRaises(JSONSchemaValidationError, validator, wrong_data_4)
         validator(data_1)
         validator(data_2)
         validator(data_3)
@@ -1371,13 +1375,17 @@ class TestJSONSchemaValidator(TestCase):
             'type': 'object',
             'properties': {'a': {'type': 'number'}}
         }
-        wrong_data = {'a': '1'}
+        wrong_data_1 = {'a': '1'}
+        wrong_data_2 = {'a': True}
+        wrong_data_3 = {'a': False}
         data_1 = {'a': 1.0}
         data_2 = {'a': 0}
         data_3 = {'a': -1.5}
         data_4 = {'a': None}
         validator = JSONSchemaValidator(schema)
-        self.assertRaises(JSONSchemaValidationError, validator, wrong_data)
+        self.assertRaises(JSONSchemaValidationError, validator, wrong_data_1)
+        self.assertRaises(JSONSchemaValidationError, validator, wrong_data_2)
+        self.assertRaises(JSONSchemaValidationError, validator, wrong_data_3)
         validator(data_1)
         validator(data_2)
         validator(data_3)

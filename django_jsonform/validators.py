@@ -336,7 +336,12 @@ class JSONSchemaValidator:
             return
 
         # 1.0 and 1 must be treated equal
-        if isinstance(data, float) and data != int(data):
+        if (isinstance(data, float) and data != int(data)):
+            self.add_error(coords, 'Invalid value. Only integers allowed.', raise_exc=raise_exc)
+            return
+
+        # must not be boolean
+        if isinstance(data, bool):
             self.add_error(coords, 'Invalid value. Only integers allowed.', raise_exc=raise_exc)
             return
 
@@ -352,6 +357,11 @@ class JSONSchemaValidator:
             return
 
         if not isinstance(data, (float, int)) and data is not None:
+            self.add_error(coords, 'Invalid value. Only numbers allowed.', raise_exc=raise_exc)
+            return
+
+        # must not be boolean
+        if isinstance(data, bool):
             self.add_error(coords, 'Invalid value. Only numbers allowed.', raise_exc=raise_exc)
             return
 
