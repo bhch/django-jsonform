@@ -493,6 +493,8 @@ which contains more links and a sub-sub-menu and so on...
     Infinite loop error handling will be improved in a future release.
 
 
+.. _oneof-anyof-allof:
+
 ``oneOf``, ``anyOf`` and ``allOf``
 ----------------------------------
 

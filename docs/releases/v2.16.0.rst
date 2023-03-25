@@ -1,0 +1,47 @@
+django-jsonform 2.16.0 release notes
+====================================
+
+
+Mar 25, 2023
+------------
+
+This release brings some new features and some bug fixes.
+
+Like the previous version, it also supports ``Django >= 2.0`` and ``Python >= 3.4``.
+
+
+New features
+~~~~~~~~~~~~
+
+- **oneOf, anyOf, allOf**
+
+  Support for ``oneOf``, ``anyOf`` and ``allOf`` has been added. :ref:`See Docs <oneof-anyof-allof>`.
+
+- **Required properties**
+
+  Support for ``required`` keyword for object properties.
+
+- **Dark mode**
+
+  Support for dark mode.
+
+
+Bug fixes
+~~~~~~~~~
+
+- :issue:`92`: Fixed validation for ``choices``.
+- :issue:`94`: Fixed a bug due to which ``True``/``False`` were treated as valid numbers.
+
+
+react-json-form (JavaScript)
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+`react-json-form <https://github.com/bhch/react-json-form>`_ has been updated
+to version 2.7.1.
+
+
+Thank you
+~~~~~~~~~
+
+I want to thank all the people who contributed code, bug reports, feature requests
+and improvement suggestions.
