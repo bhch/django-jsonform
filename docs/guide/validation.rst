@@ -20,6 +20,18 @@ Keyword         Description
 ``uniqueItems`` (*Boolean*) Whether all items must be unique or not.
 =============== ===========
 
+For ``object`` type
+~~~~~~~~~~~~~~~~~~
+
+=============== ===========
+Keyword         Description
+=============== ===========
+``required``    (*List*) A list containing names of required object properties (keys).
+=============== ===========
+
+.. versionchanged:: 2.16.0
+    Support for ``required`` keyword for object properties was added.
+
 
 For ``string`` type
 ~~~~~~~~~~~~~~~~~~~
@@ -96,6 +108,13 @@ error messages for particular input fields.
 The error message you return will be displayed above the JSON form widget.
 
 
+Basic validation
+~~~~~~~~~~~~~~~~
+
+- ``Model.clean()``: Refer to Django docs on using `Model.clean() <https://docs.djangoproject.com/en/4.1/ref/models/instances/#django.db.models.Model.clean>`__ method.
+- ``validators``: Refer Django docs on using `Validators <https://docs.djangoproject.com/en/4.1/ref/validators/>`__.
+
+
 Advanced validation
 ~~~~~~~~~~~~~~~~~~~
 
@@ -103,7 +122,7 @@ Advanced validation allows you to provide error messages for each input field
 which will be displayed right below them.
 
 Creating a form
-~~~~~~~~~~~~~~~
+^^^^^^^^^^^^^^^
 
 For this, you're required to create a custom form class for the admin page.
 
@@ -132,7 +151,7 @@ For this, you're required to create a custom form class for the admin page.
 
 
 Writing the validator
-~~~~~~~~~~~~~~~~~~~~~
+^^^^^^^^^^^^^^^^^^^^^
 
 In your validator function, instead of raising ``ValidationError``
 you must raise :class:`~django_jsonform.exceptions.JSONSchemaValidationError`. This exception allows you to pass
@@ -181,7 +200,7 @@ usage.
 
 
 Providing errors for deeply nested inputs
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
 
 The keys in the ``error_map`` dict are *"coordinates"* of the invalid input fields
 (see :doc:`/guide/coordinates` page to learn more).

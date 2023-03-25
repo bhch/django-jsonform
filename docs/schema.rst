@@ -93,7 +93,11 @@ Keyword                            Description
 ``properties`` (alias ``keys``)    Specifies the keys (or fields) in a dict/object.
 ``additionalProperties``           Allow users to add extra keys not declared in the schema.
 ``title``                          Specify a title for the dict.
+``required``                       A list containing names of required object properties (keys).
 ================================== ===========
+
+.. versionchanged:: 2.16.0
+    Support for ``required`` keyword for object properties was added.
 
 This example shows a schema of a basic dict:
 
@@ -115,7 +119,8 @@ This example shows a schema of a basic dict:
                 'default': 50, # default value for age
                 'readonly': True, # make it readonly
             }
-        }
+        },
+        'required': ['email']
     }
 
 
@@ -488,11 +493,94 @@ which contains more links and a sub-sub-menu and so on...
     Infinite loop error handling will be improved in a future release.
 
 
-Unsupported features
---------------------
+``oneOf``, ``anyOf`` and ``allOf``
+----------------------------------
 
-These features are not supported by django-jsonform yet. These are planned to be
-added in future but there's no definite ETA: 
+.. versionadded:: 2.16.0
 
-- Validation
-- ``anyOf`` / ``allOf`` / ``oneOf``
+The widget provides support for ``oneOf``, ``anyOf`` and ``allOf``, however, with
+certain limitations.
+
+``oneOf``
+~~~~~~~~~
+
+.. versionadded:: 2.16.0
+
+
+**Limitations:**
+
+1. The default built-in validation is very basic. You are advised to write
+   :ref:`custom validation <custom validation>` if you want something rigorous.
+2. Can't be used with ``additionalProperties``.
+
+.. code-block:: python
+
+    {
+        'type': 'object',
+        'oneOf': [
+            {
+                'properties': {
+                    'age': {'type': 'number'} 
+                }
+            },
+            {
+                'properties': {
+                    'date_of_birth': {'type': 'string', 'format': 'date-time'} 
+                }
+            }
+        ]
+    }
+
+
+``anyOf``
+~~~~~~~~~
+
+.. versionadded:: 2.16.0
+
+
+**Limitations:**
+
+1. The default built-in validation is very basic. You are advised to write
+   :ref:`custom validation <custom validation>` if you want something rigorous.
+2. Can't be used with ``additionalProperties``.
+
+.. code-block:: python
+
+    {
+        'type': 'array',
+        'items': {
+            'anyOf': [
+                {'type': 'number'},
+                {'type': 'string'}
+            ]
+        }
+    }
+
+
+``allOf``
+~~~~~~~~~
+
+.. versionadded:: 2.16.0
+
+
+**Limitations:**
+
+1. The default built-in validation is very basic. You are advised to write
+   :ref:`custom validation <custom validation>` if you want something rigorous.
+2. Can only be used inside ``object`` type. Will not work inside arrays or other
+   types as it may lead to conflicting subschemas.
+
+.. code-block:: python
+
+    {
+        'type': 'object',
+        'allOf': {
+            'properties': {
+                'age': {'type': 'number'} 
+            },
+            'properties': {
+                'date_of_birth': {'type': 'string', 'format': 'date-time'} 
+            },
+        },
+        'additionalProperties': True # additionalProperties can be used with allOf
+    }
