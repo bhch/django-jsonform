@@ -67,7 +67,7 @@ Generates a string by joining the given coordinates.
 
 Internally, we use the section sign (``§``) for joining the coordinates. Earlier,
 a hyphen (``-``) was used, but that caused some complications when a key in a 
-scheka (i.e. a field name) had a hyphen in it as it was impossible to know whether the
+schema (i.e. a field name) had a hyphen in it as it was impossible to know whether the
 hyphen was the separator or part of the key.
 
 Now, this symbol is chosen because it's very rarely used.
