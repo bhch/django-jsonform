@@ -511,8 +511,11 @@ certain limitations.
 
 **Limitations:**
 
-1. The default built-in validation is very basic. You are advised to write
-   :ref:`custom validation <custom validation>` if you want something rigorous.
+1. As per the JSON schema specification, ``oneOf`` means exactly one subschema
+   should match the data. If multiple matches are found, then that should be treated
+   as invalid. But the built-in validation doesn't make that check. It only checks
+   for *at least one* match (not *exactly one* match). If this is something you
+   care about, you are advised to write :ref:`custom validation <custom validation>`.
 2. Can't be used with ``additionalProperties``.
 
 .. code-block:: python
@@ -542,9 +545,7 @@ certain limitations.
 
 **Limitations:**
 
-1. The default built-in validation is very basic. You are advised to write
-   :ref:`custom validation <custom validation>` if you want something rigorous.
-2. Can't be used with ``additionalProperties``.
+1. Can't be used with ``additionalProperties``.
 
 .. code-block:: python
 
@@ -567,9 +568,7 @@ certain limitations.
 
 **Limitations:**
 
-1. The default built-in validation is very basic. You are advised to write
-   :ref:`custom validation <custom validation>` if you want something rigorous.
-2. Can only be used inside ``object`` type. Will not work inside arrays or other
+1. Can only be used inside ``object`` type. Will not work inside arrays or other
    types as it may lead to conflicting subschemas.
 
 .. code-block:: python
