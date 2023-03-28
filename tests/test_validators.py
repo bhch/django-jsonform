@@ -211,6 +211,7 @@ class TestJSONSchemaValidator(TestCase):
         validator(data_2) # must pass
 
     def test_object_required_properties(self):
+        # 1.
         schema = {
             'type': 'object',
             'properties': {'a': {'type': 'string'}},
@@ -222,6 +223,49 @@ class TestJSONSchemaValidator(TestCase):
         validator = JSONSchemaValidator(schema)
         self.assertRaises(JSONSchemaValidationError, validator, wrong_data)
         validator(data) # must pass
+
+        # 2. Nested
+        schema = {
+            'properties': {
+                'object1': {
+                    'type': 'object',
+                    'properties': {
+                        'prop1':{'type': 'string'}
+                    },
+                    'required':['prop1'],
+                },
+                'object2': {
+                    'type': 'object',
+                    'properties': {
+                        'prop3': {
+                            'type': 'string'
+                        },
+                        'object3': {
+                            'type': 'object',
+                            'properties': {
+                                'prop4': {'type': 'string'}
+                            },
+                            'required': ['prop4']
+                        }
+                    },
+                    'required': ['prop3', 'object3']
+                }
+            },
+           'required': ['object1'],
+        }
+
+        wrong_data_1 = {'object1': {'prop1': ''}, 'object2': {'prop3': '', 'object3': {'prop4': ''}}}
+        wrong_data_2 = {'object1': {'prop1': 'x'}, 'object2': {'prop3': '', 'object3': {'prop4': ''}}}
+        wrong_data_3 = {'object1': {'prop1': 'x'}, 'object2': {'prop3': 'x', 'object3': {'prop4': ''}}}
+        wrong_data_4 = {'object1': {'prop1': ''}, 'object2': {'prop3': 'x', 'object3': {'prop4': 'x'}}}
+        data = {'object1': {'prop1': 'x'}, 'object2': {'prop3': 'x', 'object3': {'prop4': 'x'}}}
+
+        validator = JSONSchemaValidator(schema)
+        self.assertRaises(JSONSchemaValidationError, validator, wrong_data_1)
+        self.assertRaises(JSONSchemaValidationError, validator, wrong_data_2)
+        self.assertRaises(JSONSchemaValidationError, validator, wrong_data_3)
+        self.assertRaises(JSONSchemaValidationError, validator, wrong_data_4)
+        validator(data)
 
     def test_additionalProperties_type(self):
         schema = {
