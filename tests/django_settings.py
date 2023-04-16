@@ -1,8 +1,17 @@
+SECRET_KEY = "secret for test"
+
 ROOT_URLCONF='django_jsonform.urls'
 
 INSTALLED_APPS=[
     'django_jsonform',
 ]
+
+DATABASES = {
+    'default': {
+        'ENGINE': 'django.db.backends.sqlite3',
+        'NAME': ":memory:",
+    },
+}
 
 TEMPLATES = [
     {
