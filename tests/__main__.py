@@ -2,7 +2,6 @@ import os
 import sys
 import unittest
 import django
-import django_settings
 
 
 TEST_DIR = os.path.dirname(os.path.abspath(__file__))

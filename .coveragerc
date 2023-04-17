@@ -1,0 +1,4 @@
+[run]
+branch = True
+source = django_jsonform
+omit = *tests*,__main__
