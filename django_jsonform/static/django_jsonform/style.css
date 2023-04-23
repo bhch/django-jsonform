@@ -77,6 +77,9 @@
     width: 100%;
     position: relative;
 }
+.rjf-form-row-hidden {
+    display: none;
+}
 .rjf-form-row-controls + .rjf-form-row-inner {
     box-sizing: border-box;
     transition: background-color 0.12s ease-in-out;
