@@ -45,6 +45,7 @@ Widget           Description
 ``multiselect``  A multiselect drowpdown input (:doc:`useful for choices </guide/choices>`)
 ``autocomplete`` Useful for fetching options via AJAX requests (:doc:`See usage </guide/autocomplete>`)
 ``fileinput``    A file input. Useful for overriding ``file-url`` input (:ref:`See usage <Overriding the file input>`)
+``hidden``       A hidden input
 ================ ===========
 
 

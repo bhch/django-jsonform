@@ -1,0 +1,32 @@
+django-jsonform 2.17.0 release notes
+====================================
+
+
+Apr 25, 2023
+------------
+
+This release brings only one new feature.
+
+Like the previous version, it also supports ``Django >= 2.0`` and ``Python >= 3.4``.
+
+
+New features
+~~~~~~~~~~~~
+
+- **Hidden input**
+
+  Support for hidden inputs using ``"widget": "hidden"``.
+
+
+react-json-form (JavaScript)
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+`react-json-form <https://github.com/bhch/react-json-form>`_ has been updated
+to version 2.8.0.
+
+
+Thank you
+~~~~~~~~~
+
+I want to thank all the people who contributed code, bug reports, feature requests
+and improvement suggestions.
