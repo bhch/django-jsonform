@@ -575,13 +575,17 @@ certain limitations.
 
     {
         'type': 'object',
-        'allOf': {
-            'properties': {
-                'age': {'type': 'number'} 
+        'allOf': [
+            {
+                'properties': {
+                    'age': {'type': 'number'} 
+                }
             },
-            'properties': {
-                'date_of_birth': {'type': 'string', 'format': 'date-time'} 
-            },
-        },
+            {
+                'properties': {
+                    'date_of_birth': {'type': 'string', 'format': 'date-time'} 
+                }
+            }
+        ],
         'additionalProperties': True # additionalProperties can be used with allOf
     }
