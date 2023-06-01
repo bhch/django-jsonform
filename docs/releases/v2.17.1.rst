@@ -1,0 +1,21 @@
+django-jsonform 2.17.1 release notes
+====================================
+
+
+Jun 01, 2023
+------------
+
+This is a minor release.
+
+
+Bugfixes
+^^^^^^^^
+
+- :issue:`102`: Fixed a bug due to which the type of subschema was determined incorrectly if it had a ``$ref``.
+
+
+react-json-form (JavaScript)
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+`react-json-form <https://github.com/bhch/react-json-form>`_ has been updated
+to version 2.8.1.
