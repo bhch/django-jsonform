@@ -1,4 +1,4 @@
-"""Constants for the frontent widget"""
+"""Constants for the frontend widget"""
 
 # Symbol for joining coordinates.
 # Earlier, a hyphen (-) was used. But that caused problems when
