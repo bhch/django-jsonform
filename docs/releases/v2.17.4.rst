@@ -1,0 +1,22 @@
+django-jsonform 2.17.4 release notes
+====================================
+
+
+Jul 24, 2023
+------------
+
+This is a minor release.
+
+
+Bugfixes
+^^^^^^^^
+
+- Fix a crash caused when the `type` was an array of multiple types (i.e. `{'type': ['string', 'number']}`).
+  This only fixes the bug and doesn't add support for multiple types.
+
+
+react-json-form (JavaScript)
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+`react-json-form <https://github.com/bhch/react-json-form>`_ has been updated
+to version 2.8.4.
