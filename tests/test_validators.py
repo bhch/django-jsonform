@@ -1215,6 +1215,13 @@ class TestJSONSchemaValidator(TestCase):
         data = {'a': ''}
         validator(data)
 
+        # 7. test choices
+        schema['properties']['a']['choices'] = ['one', 'two']
+        wrong_data = {'a': 'xxx'}
+        data = {'a': 'two'}
+        self.assertRaises(JSONSchemaValidationError, validator, wrong_data)
+        validator(data)
+
     def test_validate_string_formats(self):
         # 1. email
         schema = {
@@ -1412,6 +1419,14 @@ class TestJSONSchemaValidator(TestCase):
         self.assertRaises(JSONSchemaValidationError, validator, wrong_data)
         validator(data)
 
+        # 11. test choices
+        del schema['properties']['a']['multipleOf']
+        schema['properties']['a']['choices'] = [1, 2]
+        wrong_data = {'a': 3}
+        data = {'a': 1}
+        self.assertRaises(JSONSchemaValidationError, validator, wrong_data)
+        validator(data)
+
 
     def test_validate_number_method(self):
         # 1. type (either float or int or None)
@@ -1528,5 +1543,13 @@ class TestJSONSchemaValidator(TestCase):
         wrong_data = {'a': 4.15}
         data = {'a': 4.0}
         validator = JSONSchemaValidator(schema)
+        self.assertRaises(JSONSchemaValidationError, validator, wrong_data)
+        validator(data)
+
+        # 10. test choices
+        del schema['properties']['a']['multipleOf']
+        schema['properties']['a']['choices'] = [1, 2]
+        wrong_data = {'a': 3}
+        data = {'a': 1}
         self.assertRaises(JSONSchemaValidationError, validator, wrong_data)
         validator(data)

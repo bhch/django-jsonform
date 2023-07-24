@@ -128,6 +128,20 @@ class JSONSchemaValidator:
             values.append(choice)
         return values
 
+    def is_value_in_choices(self, schema, value):
+        """Checks whether the given value is present in choices or not.
+        If the schema doesn't have choices/enum, it returns True.
+        """
+        choices = schema.get('choices', schema.get('enum', None))
+
+        if not choices:
+            return True
+
+        choices = self.get_choice_values(choices)
+
+        return value in choices
+
+
     def validate_array(self, schema, data, coords, *, raise_exc=False):
         if not isinstance(data, list):
             data_type = type(data).__name__
@@ -294,6 +308,10 @@ class JSONSchemaValidator:
             # data not required and is empty
             return
 
+        if not self.is_value_in_choices(schema, data):
+            self.add_error(coords, 'Invalid choice "%s"' % data, raise_exc=raise_exc)
+            return
+
         if isinstance(schema.get('minLength'), int) and len(data) < int(schema['minLength']):
             self.add_error(coords, 'Minumum length must be %s' % schema['minLength'], raise_exc=raise_exc)
 
@@ -363,6 +381,10 @@ class JSONSchemaValidator:
         # must not be boolean
         if isinstance(data, bool):
             self.add_error(coords, 'Invalid value. Only numbers allowed.', raise_exc=raise_exc)
+            return
+
+        if not self.is_value_in_choices(schema, data):
+            self.add_error(coords, 'Invalid choice "%s"' % data, raise_exc=raise_exc)
             return
 
         data = float(data)
