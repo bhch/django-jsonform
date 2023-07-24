@@ -18,6 +18,16 @@ class TestJSONSchemaValidator(TestCase):
     def test_get_ref_method(self):
         pass
 
+    def test_doesn_crash_when_schema_type_is_an_array(self):
+        schema = {
+            'type': 'object',
+            'properties': {
+                'a': {'type': ['string', 'null']}
+            }
+        }
+        validator = JSONSchemaValidator(schema)
+        validator({'a': 'hello'}) # must not fail
+
     def test_only_array_and_object_allowed_in_top_level(self):
         schema = {'type': 'string'}
         validator = JSONSchemaValidator(schema)

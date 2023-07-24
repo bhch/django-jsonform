@@ -56,6 +56,9 @@ def get_schema_type(schema):
     """
     typ = schema.get('type', None)
 
+    if isinstance(typ, list):
+        typ = typ[0]
+
     if typ is None:
         if 'properties' in schema or 'keys' in schema:
             # if schema has 'properties' or 'keys' keyword
