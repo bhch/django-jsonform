@@ -1,0 +1,22 @@
+django-jsonform 2.17.3 release notes
+====================================
+
+
+Jul 24, 2023
+------------
+
+This is a minor release.
+
+
+Bugfixes
+^^^^^^^^
+
+- Reset select input's value to blank if the value is not present in choices.
+- :issue:`111`: Add choice validation for string and number types.
+
+
+react-json-form (JavaScript)
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+`react-json-form <https://github.com/bhch/react-json-form>`_ has been updated
+to version 2.8.3.
