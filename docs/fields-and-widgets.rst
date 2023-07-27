@@ -1,6 +1,11 @@
 Fields and Widgets
 ==================
 
+.. note::
+    This document is for model fields and widgets.
+    If you're looking for HTML form input fields, see:
+    :doc:`User's guide on Input field types <guide/inputs>`.
+
 Contents:
 
 .. contents::
