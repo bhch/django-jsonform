@@ -71,6 +71,14 @@
 .rjf-form-group-title {
     font-weight: bold;
 }
+.rjf-form-group-description {
+    font-size: 12px;
+    color: var(--body-quiet-color);
+    margin-bottom: 8px;
+}
+.rjf-form-group-title + .rjf-form-group-description {
+    margin-top: 4px;
+}
 .rjf-form-row {
     padding: 5px 0;
     display: table;
