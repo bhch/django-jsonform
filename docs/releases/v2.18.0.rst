@@ -1,0 +1,30 @@
+django-jsonform 2.18.0 release notes
+====================================
+
+
+Jul 27, 2023
+------------
+
+This is a minor release.
+
+
+New features
+^^^^^^^^^^^^
+
+- Support for the ``description`` keyword. This will allow for adding helpful text
+  for objects and arrays.
+
+
+Minor changes
+^^^^^^^^^^^^^
+
+- :issue:`115`: Manually added keys (when using ``additionalProperties``) will display
+  their key name as it is. Earlier, the name was *prettified* (i.e. capitalized, underscores removed)
+  for display purposes, but that will no longer happen.
+
+
+react-json-form (JavaScript)
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+`react-json-form <https://github.com/bhch/react-json-form>`_ has been updated
+to version 2.9.0.
