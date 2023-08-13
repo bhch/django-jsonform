@@ -117,7 +117,8 @@
 }
 
 .rjf-form-row input[type="date"],
-.rjf-form-row input[type="time"] {
+.rjf-form-row input[type="time"],
+.rjf-multiselect-field-input {
     border: 1px solid var(--border-color);
     border-radius: 4px;
     padding: 4px 6px;
@@ -426,12 +427,55 @@
 }
 .rjf-multiselect-field-input {
     cursor: pointer;
+    padding: 5px 6px;
     padding-right: 28px !important;
     background-color: #fff !important;
     background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3e%3cpath fill='none' stroke='%23777777' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='M2 5l6 6 6-6'/%3e%3c/svg%3e");
     background-repeat: no-repeat;
     background-position: right 6px center;
     background-size: 16px 12px;
+}
+.rjf-multiselect-field-input:focus {
+    border-color: var(--body-quiet-color);
+}
+.rjf-multiselect-field-input-placeholder {
+    -webkit-touch-callout: none; /* iOS Safari */
+    -webkit-user-select: none; /* Safari */
+     -khtml-user-select: none; /* Konqueror HTML */
+       -moz-user-select: none; /* Old versions of Firefox */
+        -ms-user-select: none; /* Internet Explorer/Edge */
+            user-select: none;
+}
+.rjf-multiselect-field-input-item {
+    display: inline-block;
+    background-color: #e9e9eb;
+    margin-right: 4px;
+    margin-top: 2px;
+    margin-bottom: 2px;
+    border-radius: 4px;
+    white-space: nowrap;
+}
+.rjf-multiselect-field-input-item > span {
+    display: inline-block;
+    vertical-align: middle;
+    padding: 4px 6px;
+    line-height: 1;
+    cursor: default;
+}
+.rjf-multiselect-field-input-item > button {
+    display: inline-block;
+    vertical-align: middle;
+    background-color: transparent;
+    padding: 4px 6px;
+    font-size: 16px;
+    line-height: 1;
+    border: 0;
+    border-radius: 0 4px 4px 0;
+    cursor: pointer;
+}
+.rjf-multiselect-field-input-item > button:hover {
+    color: #ba2121;
+    background-color: #ffd4d4;
 }
 .rjf-multiselect-field-options-container {
     position: absolute;
@@ -451,7 +495,7 @@
 So, if the options container is at the bottom,
 it will not be fully visible.
 Threfore, we'll override the overflow property.
-Another solution is to user portals in React.
+Another solution is to use portals in React.
 */
 .form-row {
     overflow: visible !important;
@@ -1153,6 +1197,16 @@ div.form-row::after {
     }
     .rjf-multiselect-field-input {
         background-color: transparent !important;
+    }
+    .rjf-multiselect-field-input-item {
+        background-color: #2f3436;
+    }
+    .rjf-multiselect-field-input-item > button {
+        color: inherit;
+    }
+    .rjf-multiselect-field-input-item > button:hover {
+        color: inherit;
+        background-color: #a41515;
     }
     .rjf-multiselect-field-options-container {
         background-color: #222;
