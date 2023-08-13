@@ -156,6 +156,21 @@
     float: none;
     width: auto;
 }
+.rjf-check-input .rjf-radio-option {
+    display: -ms-inline-flexbox;
+    display: inline-flex;
+    -ms-flex-align: center;
+    align-items: center;
+    padding-right: 0;
+    margin-right: 16px;
+    width: auto;
+    min-width: 0;
+}
+.rjf-check-input .rjf-radio-option > input {
+    width: auto;
+    padding: 0;
+    margin-right: 4px;
+}
 
 .rjf-text-danger {
     color: var(--error-fg);
