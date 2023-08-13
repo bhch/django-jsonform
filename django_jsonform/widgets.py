@@ -57,6 +57,7 @@ class JSONFormWidget(forms.Widget):
                 },
                 'errorMap': getattr(self, 'error_map', {}),
                 'validateOnSubmit': self.validate_on_submit,
+                'readonly': attrs.get('disabled', False),
             },
         })
 
