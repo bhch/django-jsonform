@@ -127,7 +127,11 @@
     background-color: var(--body-bg);
     font-size: 13px;
 }
-.rjf-form-group input[readonly] {
+.rjf-form-group input[readonly],
+.rjf-form-group select[readonly],
+.rjf-form-group textarea[readonly],
+.rjf-multiselect-field.readonly .rjf-multiselect-field-input,
+.rjf-datetime-field-inputs.readonly .rjf-datetime-field-time input[readonly] {
     background-color: #eee;
     outline: 0;
 }
@@ -388,7 +392,7 @@
     padding: 2px 2px;
     outline: 0;
 }
-.rjf-datetime-field input[readonly] {
+.rjf-datetime-field-time input[readonly] {
     background-color: var(--body-bg);
 }
 .rjf-time-picker-row {
@@ -444,7 +448,7 @@
     cursor: pointer;
     padding: 5px 6px;
     padding-right: 28px !important;
-    background-color: #fff !important;
+    background-color: #fff;
     background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3e%3cpath fill='none' stroke='%23777777' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='M2 5l6 6 6-6'/%3e%3c/svg%3e");
     background-repeat: no-repeat;
     background-position: right 6px center;
@@ -469,6 +473,9 @@
     margin-bottom: 2px;
     border-radius: 4px;
     white-space: nowrap;
+}
+.rjf-multiselect-field.readonly .rjf-multiselect-field-input-item {
+    background-color: #d9d9da;
 }
 .rjf-multiselect-field-input-item > span {
     display: inline-block;
@@ -551,7 +558,8 @@ div.form-row::after {
 .rjf-multiselect-field-option.selected label:hover {
     background-color: #f3f3d9;
 }
-.rjf-multiselect-field-option.disabled label {
+.rjf-multiselect-field-option.disabled label,
+.rjf-multiselect-field-option.selected.disabled label {
     cursor: not-allowed;
     background-color: #fff;
 }
@@ -1207,14 +1215,21 @@ div.form-row::after {
     .rjf-form-row-controls:hover + .rjf-form-group {
         background-color: #000;
     }
-    .rjf-form-group input[readonly] {
+    .rjf-form-group input[readonly],
+    .rjf-form-group select[readonly],
+    .rjf-form-group textarea[readonly],
+    .rjf-multiselect-field.readonly .rjf-multiselect-field-input,
+    .rjf-datetime-field-inputs.readonly .rjf-datetime-field-time input[readonly] {
         background-color: #272727;
     }
     .rjf-multiselect-field-input {
-        background-color: transparent !important;
+        background-color: transparent;
     }
     .rjf-multiselect-field-input-item {
         background-color: #2f3436;
+    }
+    .rjf-multiselect-field.readonly .rjf-multiselect-field-input-item {
+        background-color: #4b4b4d;
     }
     .rjf-multiselect-field-input-item > button {
         color: inherit;
@@ -1239,6 +1254,13 @@ div.form-row::after {
     }
     .rjf-multiselect-field-option.selected label:hover {
         background-color: #000;
+    }
+    .rjf-multiselect-field-option.disabled label,
+    .rjf-multiselect-field-option.selected.disabled label {
+        background-color: transparent;
+    }
+    .rjf-datetime-field-time input[readonly] {
+        background-color: var(--body-bg);
     }
     .rjf-time-picker {
         background-color: #222;
