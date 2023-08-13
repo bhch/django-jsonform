@@ -168,6 +168,11 @@ You can make inputs uneditable using a ``readonly`` (alias ``readOnly``) keyword
         }
     }
 
+.. seealso::
+
+    To make the whole form readonly instead of individual fields, see:
+    :ref:`Making the whole JSON form readonly`.
+
 Datetime field
 --------------
 

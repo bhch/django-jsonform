@@ -1,0 +1,31 @@
+django-jsonform 2.19.0 release notes
+====================================
+
+
+Aug 13, 2023
+------------
+
+This release brings a some new features and some bugfixes.
+
+
+New features
+^^^^^^^^^^^^
+
+- :issue:`116`: Multiselect input will now display the selected items for a better user experience.
+- :issue:`119`: Support for making the whole form readonly. See docs: :ref:`Making the whole JSON form readonly`.
+- Support for ``readonly`` keyword on lists and dicts (arrays and objects).
+
+
+Bugfixes
+^^^^^^^^
+
+- Fixed :issue:`117`: Error messages for top-level arrays were not displayed.
+- Fixed :issue:`118`: Radio inputs' placement and styling.
+- Fixed: The ``readonly`` keyword had no effect on datetime and range inputs.
+
+
+react-json-form (JavaScript)
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+`react-json-form <https://github.com/bhch/react-json-form>`_ has been updated
+to version 2.11.0.

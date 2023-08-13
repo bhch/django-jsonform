@@ -297,7 +297,7 @@ attribute on the widget.
 
 To do this, you are required to create a custom form class for your model:
 
-.. code-block::
+.. code-block:: python
 
     # models.py
 
@@ -337,3 +337,43 @@ To do this, you are required to create a custom form class for your model:
 
 Your callable schema function will get the current model ``instance`` on *Edit/Change*
 admin page. It will be ``None`` on the *Add new* page (*i.e.* while creating new objects).
+
+
+Making the whole JSON form readonly
+-----------------------------------
+
+.. versionadded:: 2.19
+
+It is possible to make the whole JSON form readonly dynamically on a per user or
+per request basis.
+
+This can be done by setting the ``disabled`` attribute on the JSON form field.
+Note that this attribute is set on the form field itself, not on the field's widget.
+
+You are also required to create a custom form class for your model:
+
+.. code-block:: python
+    :emphasize-lines: 8
+
+    # admin.py
+
+    # create a custom modelform
+    class MyModelForm(forms.ModelForm):
+        def __init__(self, *args, **kwargs):
+            super().__init__(*args, **kwargs)
+
+            self.fields['my_json_field'].disabled = True # disable the field
+
+
+    # set the form on the admin class
+    class MyAdmin(admin.ModelAdmin):
+        form = MyModelForm
+
+
+    admin.site.register(MyModel, MyAdmin)
+
+
+Now the whole form will be rendered in readonly mode.
+
+Security wise this works just as well because the ``disabled`` attribute on a form field tells
+Django to ignore that field's value on form submission. See also: `Django docs on Field.disabled <https://docs.djangoproject.com/en/4.2/ref/forms/fields/#disabled>`__.
