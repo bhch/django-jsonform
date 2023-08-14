@@ -21,7 +21,7 @@ Keyword         Description
 =============== ===========
 
 For ``object`` type
-~~~~~~~~~~~~~~~~~~
+~~~~~~~~~~~~~~~~~~~
 
 =============== ===========
 Keyword         Description

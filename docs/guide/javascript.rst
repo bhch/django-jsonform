@@ -99,7 +99,7 @@ The ``config`` is a JavaScript object (dict) which looks like this:
 Returns the current data of the form instance.
 
 ``formInstance.getSchema()``      
-~~~~~~~~~~~~~~~~~~~~~~~~~~
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 Returns the current schema of the form instance.
 
