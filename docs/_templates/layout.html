@@ -4,4 +4,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:ital,wght@0,400;0,700;1,400&family=IBM+Plex+Sans:wght@400;500&family=Inter&display=swap" rel="stylesheet">
+  {%- if google_search_console_verification %}
+  <meta name="google-site-verification" content="{{ google_search_console_verification }}" />
+  {% endif -%}
 {% endblock %}

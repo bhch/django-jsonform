@@ -52,6 +52,9 @@ html_css_files = [
     # "preconnect" and "crossorigin" attributes on the tags.
 ]
 html_show_sphinx = False
+html_context = {
+    'google_search_console_verification': '8Isauv2ltEzkMMhQeMjQedq39VQFeKa0sZXqnPEHpFg'
+}
 
 extlinks = {
     'issue': (
