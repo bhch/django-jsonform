@@ -5,7 +5,7 @@ django-jsonform 2.19.0 release notes
 Aug 13, 2023
 ------------
 
-This release brings a some new features and some bugfixes.
+This release brings some new features and some bugfixes.
 
 
 New features

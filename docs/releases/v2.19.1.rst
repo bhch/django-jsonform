@@ -1,0 +1,22 @@
+django-jsonform 2.19.1 release notes
+====================================
+
+
+Sep 06, 2023
+------------
+
+This release fixes some minor bugs.
+
+
+Bugfixes
+^^^^^^^^
+
+- Corrected the error message for the ``maximum`` keyword (on browser-side validation).
+- Fixed a bug which didn't display array description when the array items were objects or arrays.
+
+
+react-json-form (JavaScript)
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+`react-json-form <https://github.com/bhch/react-json-form>`_ has been updated
+to version 2.11.1.
