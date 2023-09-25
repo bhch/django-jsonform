@@ -143,8 +143,8 @@ Form fields
 
 .. _form-jsonfield:
 
-``JSONField``
-~~~~~~~~~~~~~
+``JSONFormField``
+~~~~~~~~~~~~~~~~~
 
 .. class:: JSONFormField(schema=None, model_name='', field_name='', **options)
     
