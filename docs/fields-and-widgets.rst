@@ -143,10 +143,10 @@ Form fields
 
 .. _form-jsonfield:
 
-``JSONField``
-~~~~~~~~~~~~~
+``JSONFormField``
+~~~~~~~~~~~~~~~~~
 
-.. class:: JSONField(schema=None, model_name='', field_name='', **options)
+.. class:: JSONFormField(schema=None, model_name='', field_name='', **options)
     
 .. versionadded:: 2.0
 
@@ -181,10 +181,10 @@ Usage:
 
 .. code-block:: python
 
-    from django_jsonform.forms.fields import JSONField
+    from django_jsonform.forms.fields import JSONFormField
 
     class MyForm(forms.Form):
-        my_field = JSONField(schema=schema)
+        my_field = JSONFormField(schema=schema)
 
 Widgets
 -------
