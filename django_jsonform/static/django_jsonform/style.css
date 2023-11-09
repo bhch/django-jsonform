@@ -336,6 +336,39 @@
     border: 0;
 }
 
+.rjf-collapse-button {
+    font-size: 0.8rem;
+    color: #777;
+    padding-left: 3px;
+    padding-right: 3px;
+    border: 0;
+    background-color: transparent;
+    cursor: pointer;
+}
+.rjf-collapse-button:hover {
+    background-color: #eee;
+    color: #000;
+}
+.rjf-collapsed {
+    display: none;
+}
+.rjf-collapsed-indicator {
+    text-align: center;
+    background-image: url('./img/collapsed-indicator-bg.svg');
+    background-repeat: repeat-x;
+    background-position: center;
+}
+.rjf-collapsed-indicator span {
+    display: inline-block;
+    font-style: italic;
+    padding: 3px 6px;
+    color: #888;
+    background-color: var(--body-bg);
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    cursor: default;
+}
+
 .rjf-icon {
     width: 1.2em;
     height: 1.2em;
@@ -458,6 +491,7 @@
     border-color: var(--body-quiet-color);
 }
 .rjf-multiselect-field-input-placeholder {
+    white-space: pre-wrap;
     -webkit-touch-callout: none; /* iOS Safari */
     -webkit-user-select: none; /* Safari */
      -khtml-user-select: none; /* Konqueror HTML */
@@ -901,6 +935,11 @@ div.form-row::after {
 .rjf-autocomplete-field-option:focus {
     background-color: #eee;
 }
+.rjf-autocomplete-field-option.selected,
+.rjf-autocomplete-field-option.selected:hover {
+    background-color: #fffedd;
+    cursor: default;
+}
 .rjf-autocomplete-field-option.disabled {
     color: #999;
     cursor: default;
@@ -1215,6 +1254,21 @@ div.form-row::after {
     .rjf-form-row-controls:hover + .rjf-form-group {
         background-color: #000;
     }
+    .rjf-collapse-button {
+        color: #bbb;
+    }
+    .rjf-collapse-button:hover {
+        background-color: #333;
+        color: #eee;
+    }
+    .rjf-collapsed-indicator {
+        background-image: url('./img/collapsed-indicator-bg-dark.svg');
+    }
+    .rjf-collapsed-indicator span {
+        color: #aaa;
+        background-color: var(--body-bg);
+        border-color: #444;
+    }
     .rjf-form-group input[readonly],
     .rjf-form-group select[readonly],
     .rjf-form-group textarea[readonly],
@@ -1298,6 +1352,10 @@ div.form-row::after {
     }
     .rjf-autocomplete-field-option:hover,
     .rjf-autocomplete-field-option:focus {
+        background-color: #000;
+    }
+    .rjf-autocomplete-field-option.selected,
+    .rjf-autocomplete-field-option.selected:hover {
         background-color: #000;
     }
     .rjf-autocomplete-field-clear-button:hover {
