@@ -1,11 +1,12 @@
 import json
-import pkg_resources
 import django
 from django.db import models
 from django.conf import settings
 from django.core.exceptions import ImproperlyConfigured, ValidationError
 
-if pkg_resources.parse_version(django.get_version()) >= pkg_resources.parse_version("3.1"):
+django_major, django_minor = map(int, django.get_version().split('.')[:2])
+
+if django_major > 3 or (django_major == 3 and django_minor >= 1):
     # Django >= 3.1
     from django.forms import JSONField as DjangoJSONFormField
 else:
