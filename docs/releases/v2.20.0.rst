@@ -1,0 +1,39 @@
+django-jsonform 2.20.0 release notes
+====================================
+
+
+Nov 10, 2023
+------------
+
+This release brings some new features and improvements.
+
+
+New Features
+^^^^^^^^^^^^
+
+- **Constant values**
+
+  Support for the ``const`` keyword. (:ref:`See docs <const>`).
+
+- **Multiselect + Autocomplete**
+
+  Support multiselect autocomplete input using ``"widget": "multiselect-autocomplete"``.
+
+- **Collapsible sections**
+
+  You will now see ``[-]`` and ``[+]`` icons in section titles which can be used
+  for collapsing and expanding array or object sections.
+
+
+Improvements
+^^^^^^^^^^^^
+
+- :issue:`121`: The form is more tolerant now when it receives ``null`` data for array or object types.
+  The form will implicitly replace ``null`` with the appropriate blank data instead of throwing an error.
+
+
+react-json-form (JavaScript)
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+`react-json-form <https://github.com/bhch/react-json-form>`_ has been updated
+to version 2.12.0.
