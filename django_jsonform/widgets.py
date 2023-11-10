@@ -46,6 +46,9 @@ class JSONFormWidget(forms.Widget):
 
         context = self.get_context(name, value, attrs)
 
+        if attrs is None:
+            attrs = {}
+
         context['widget'].update({
             'config': {
                 'data': value or json.dumps(''),
