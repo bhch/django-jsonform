@@ -36,6 +36,15 @@ requests.
 You can use ``django.urls.reverse_lazy`` instead of hard-coding the handler url.
 
 
+Multiselect + Autocomplete
+--------------------------
+
+.. vsersionadded:: 2.20
+
+You can use ``"widget": "multiselect-autocomplete"`` to get an autocomplete input
+with multiple selections.
+
+
 Handling AJAX requests
 ----------------------
 

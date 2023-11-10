@@ -42,7 +42,6 @@ Widget           Description
 ================ ===========
 ``textarea``     A textarea input
 ``radio``        A radio input (:doc:`useful for choices </guide/choices>`)
-``multiselect``  A multiselect drowpdown input (:doc:`useful for choices </guide/choices>`)
 ``autocomplete`` Useful for fetching options via AJAX requests (:doc:`See usage </guide/autocomplete>`)
 ``fileinput``    A file input. Useful for overriding ``file-url`` input (:ref:`See usage <Overriding the file input>`)
 ``hidden``       A hidden input
@@ -104,6 +103,14 @@ customized to another input type.
 
 However, you can use :doc:`choices <choices>` to display a ``radio`` or ``select``
 input with *Yes/No* options to choose from.
+
+
+Input for ``const`` keyword
+---------------------------
+
+.. versionadded:: 2.20
+
+The ``const`` keyword gets a readonly input. It can also be hidden by using a ``hidden`` widget.
 
 
 Default values
@@ -172,6 +179,24 @@ You can make inputs uneditable using a ``readonly`` (alias ``readOnly``) keyword
 
     To make the whole form readonly instead of individual fields, see:
     :ref:`Making the whole JSON form readonly`.
+
+
+Multiselect inputs
+------------------
+
+Multiselect inputs are only supported on ``array`` type.
+
+
+Available multiselect ``widgets``:
+
+============================ ===========
+Widget                       Description
+============================ ===========
+``multiselect``              A multiselect drowpdown input (:ref:`useful for choices <Multiple selections>`)
+``multiselect-autocomplete`` A multiselect autocomplete input (:doc:`See usage </guide/autocomplete>`)
+============================ ===========
+
+
 
 Datetime field
 --------------

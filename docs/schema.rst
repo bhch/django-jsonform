@@ -19,7 +19,7 @@ For data validation, see :doc:`Validation page </guide/validation>`.
 Types
 -----
 
-Currently, only these six types are supported:
+Currently, only these seven types are supported:
 
 .. contents::
     :depth: 1
@@ -363,6 +363,33 @@ Keyword              Description
 
 .. versionchanged:: 2.12
     Support for ``required`` keyword was added.
+
+
+.. _const-keyword:
+
+``const``
+~~~~~~~~~
+
+.. versionadded:: 2.20
+
+A constant value.
+
+It gets a readonly input by default. It can also be hidden using the ``hidden`` widget.
+
+Usage:
+
+.. code-block:: python
+    :emphasize-lines: 6
+
+    # Schema
+    {
+        'type': 'object',
+        'title': 'Human',
+        'properties': {
+            'species': { 'const': 'Homo sapiens' },
+            'name': { 'type': 'string' },
+        },
+    }
 
 
 Referencing schema
