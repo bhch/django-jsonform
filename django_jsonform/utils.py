@@ -56,6 +56,9 @@ def get_schema_type(schema):
     """
     typ = schema.get('type', None)
 
+    if 'const' in schema:
+        return 'const'
+
     if isinstance(typ, list):
         typ = typ[0]
 

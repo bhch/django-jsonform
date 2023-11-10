@@ -508,5 +508,10 @@ class JSONSchemaValidator:
         subdata = {key: data[key] for key in allOf_keys.keys()}
         self.validate_object(allOf_combined_schema, subdata, coords, raise_exc=raise_exc)
 
+    def validate_const(self, schema, data, coords, raise_exc=False):
+        const = schema['const']
+        if data != const:
+            self.add_error(coords, 'Constant values cannot be changed', raise_exc=raise_exc)
+
     def __eq__(self, other):
         return self.schema == other.schema

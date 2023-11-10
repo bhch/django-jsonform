@@ -1437,7 +1437,6 @@ class TestJSONSchemaValidator(TestCase):
         self.assertRaises(JSONSchemaValidationError, validator, wrong_data)
         validator(data)
 
-
     def test_validate_number_method(self):
         # 1. type (either float or int or None)
         schema = {
@@ -1562,4 +1561,23 @@ class TestJSONSchemaValidator(TestCase):
         wrong_data = {'a': 3}
         data = {'a': 1}
         self.assertRaises(JSONSchemaValidationError, validator, wrong_data)
+        validator(data)
+
+    def test_validate_const_method(self):
+        schema = {
+            'type': 'object',
+            'properties': {'a': {'const': 'hello'}}
+        }
+        wrong_data_1 = {'a': 'Hello'}
+        wrong_data_2 = {'a': 123}
+        wrong_data_3 = {'a': True}
+        wrong_data_4 = {'a': None}
+        wrong_data_5 = {'a': ''}
+        data = {'a': 'hello'}
+        validator = JSONSchemaValidator(schema)
+        self.assertRaises(JSONSchemaValidationError, validator, wrong_data_1)
+        self.assertRaises(JSONSchemaValidationError, validator, wrong_data_2)
+        self.assertRaises(JSONSchemaValidationError, validator, wrong_data_3)
+        self.assertRaises(JSONSchemaValidationError, validator, wrong_data_4)
+        self.assertRaises(JSONSchemaValidationError, validator, wrong_data_5)
         validator(data)
