@@ -3,8 +3,9 @@ import django
 from django.db import models
 from django.conf import settings
 from django.core.exceptions import ImproperlyConfigured, ValidationError
+from django_jsonform.utils import _get_django_version
 
-django_major, django_minor = map(int, django.get_version().split('.')[:2])
+django_major, django_minor = _get_django_version()
 
 if django_major > 3 or (django_major == 3 and django_minor >= 1):
     # Django >= 3.1

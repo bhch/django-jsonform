@@ -1,6 +1,9 @@
+import django
 from django.utils.functional import Promise
 from django.conf import settings
 from django_jsonform.constants import JOIN_SYMBOL
+import itertools
+import string
 
 
 def normalize_schema(schema):
@@ -112,3 +115,22 @@ class ErrorMap(dict):
             msg = [msg]
 
         self[key] = self[key] + msg
+
+
+def _get_django_version():
+    """Returns django version as a 2-tuple of (major, minor) segments.
+
+    It disregards the patch, alpha, beta, rc, etc. identifiers.
+
+    For internal use only.
+    """
+    return tuple(
+        map(
+            int,
+            ''.join(
+                itertools.takewhile(
+                    lambda x: x not in string.ascii_letters, django.get_version()
+                )
+            ).split('.')[:2]
+        )
+    )
