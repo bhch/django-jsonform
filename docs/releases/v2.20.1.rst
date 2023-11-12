@@ -1,0 +1,16 @@
+django-jsonform 2.20.1 release notes
+====================================
+
+
+Nov 12, 2023
+------------
+
+This is a patch release.
+
+
+Bugfixes
+^^^^^^^^
+
+- Fixed Django version check logic. The previous release's check logic would 
+  throw and error for Django's alpha/beta versions. This release fixes that.
+- Improved schema type checking when multiple types are provided.
