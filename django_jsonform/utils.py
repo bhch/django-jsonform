@@ -60,7 +60,8 @@ def get_schema_type(schema):
         return 'const'
 
     if isinstance(typ, list):
-        typ = typ[0]
+        # find first element that's not null or None
+        typ = next(filter(lambda x: x not in ['null', None, 'None', 'none'], typ), None)
 
     if typ is None:
         if 'properties' in schema or 'keys' in schema:
