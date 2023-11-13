@@ -1,0 +1,15 @@
+django-jsonform 2.20.2 release notes
+====================================
+
+
+Nov 14, 2023
+------------
+
+This is a patch release which fixes a critical bug.
+
+
+Bugfixes
+^^^^^^^^
+
+- :issue:`130`: When initial data was null, the form was not automatically populating 
+  the appropriate data structure for it.
