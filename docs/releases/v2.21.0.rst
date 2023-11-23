@@ -1,0 +1,32 @@
+django-jsonform 2.21.0 release notes
+====================================
+
+
+Nov 23, 2023
+------------
+
+This is a minor release.
+
+
+New Features
+^^^^^^^^^^^^
+
+- **Overriding references**
+
+  While using ``$ref``, you can now override the properties set by the reference,
+  like setting custom titles for the reference.
+
+
+Bugfixes
+^^^^^^^^
+
+- Earlier, when the schema didn't have a ``type`` at the top level but did have a ``$ref``,
+  the form raised an error without considering the ``$ref``. Now, it will infer the type
+  from ``$ref`` if ``type`` is not provided.
+
+
+react-json-form (JavaScript)
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+`react-json-form <https://github.com/bhch/react-json-form>`_ has been updated
+to version 2.13.0.
