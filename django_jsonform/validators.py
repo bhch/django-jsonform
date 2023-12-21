@@ -172,7 +172,7 @@ class JSONSchemaValidator:
                 # TypeError is raised when trying to make a set from unashable types
                 # i.e. lists and dicts
                 # so we JSON-ify each item to make it a string
-                if len(data) != len(set([json.dumps(item) for item in data])): 
+                if len(data) != len(set([json.dumps(item) for item in data])):
                     self.add_error(coords, 'All items in this list must be unique.', raise_exc=raise_exc)
 
         if choices:
@@ -261,6 +261,7 @@ class JSONSchemaValidator:
                     next_schema['required'] = True
 
             next_type = get_schema_type(next_schema)
+            next_validator = None
 
             if next_type is None:
                 # property type isn't provided
@@ -335,7 +336,7 @@ class JSONSchemaValidator:
             elif format_ == 'date-time':
                 if not self.get_datetime(data):
                     self.add_error(coords, 'Enter a valid date and time.', raise_exc=raise_exc)
- 
+
     def validate_boolean(self, schema, data, coords, raise_exc=False):
         if schema.get('required') and data is None:
             self.add_error(coords, 'This field is required.', raise_exc=raise_exc)
@@ -429,7 +430,7 @@ class JSONSchemaValidator:
                     matches_found += 1
                     # if matches_found > 1:
                     #    break
-                    # 
+                    #
                     # TODO: validate that one and only one subschema matches
                     # currently it's a bit hard to do, so we'll just match
                     # one item and don't care wheter more than one match
