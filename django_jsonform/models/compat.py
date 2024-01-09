@@ -33,6 +33,7 @@ SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 
 import json
 from django.db import models
+from django.core import exceptions
 from django_jsonform.forms.fields import JSONFormField
 
 
@@ -95,4 +96,3 @@ class JSONField(models.TextField):
             'decoder': self.decoder,
             **kwargs,
         })
-
