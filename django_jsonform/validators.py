@@ -188,6 +188,7 @@ class JSONSchemaValidator:
             next_schema = self.get_ref(next_schema['$ref'])
 
         next_type = get_schema_type(next_schema)
+        next_validator = None
 
         if next_type is None:
             # property type isn't provided
