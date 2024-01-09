@@ -74,6 +74,13 @@ class JSONFormField(DjangoJSONFormField):
         self.widget.add_error(error_map)
 
 
+class UUIDCompatibleEncoder(json.JSONEncoder):
+    def default(self, obj):
+        if isinstance(obj, UUID):
+            return str(obj)
+        return json.JSONEncoder.default(self, obj)
+
+
 class ArrayFormField(SimpleArrayField):
     def __init__(self, base_field, **kwargs):
         if hasattr(SimpleArrayField, 'mock_field'):
@@ -95,7 +102,7 @@ class ArrayFormField(SimpleArrayField):
 
     def prepare_value(self, value):
         if isinstance(value, list):
-            return json.dumps(value)
+            return json.dumps(value, cls=UUIDCompatibleEncoder)
         return value
 
     def to_python(self, value):
