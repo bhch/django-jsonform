@@ -1,3 +1,7 @@
+.flex-container .django-jsonform-container {
+    flex-grow: 1;
+}
+
 .rjf-form-wrapper > .module.aligned {
     min-width: 20rem;
     margin-bottom: 0;
@@ -400,6 +404,7 @@
 .rjf-datetime-field-time label + .rjf-input-group {
     width: 100%;
     min-width: 0;
+    display: block;
 }
 .rjf-time-picker {
     width: 18em;

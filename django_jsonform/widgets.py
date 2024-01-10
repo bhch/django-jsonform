@@ -74,6 +74,12 @@ class JSONFormWidget(forms.Widget):
         # Turn widget config into json string
         context['widget']['config'] = json.dumps(context['widget']['config'])
 
+        html_container_class = 'django-jsonform-container'
+        if 'class' in context['widget']['attrs']:
+            context['widget']['attrs']['class'] = '%s %s' % (context['widget']['attrs']['class'], html_container_class)
+        else:
+            context['widget']['attrs'].update({'class': html_container_class})
+
         return mark_safe(render_to_string(self.template_name, context))
 
     def add_error(self, error_map):
