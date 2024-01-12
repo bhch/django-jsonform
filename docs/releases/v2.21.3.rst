@@ -1,0 +1,31 @@
+django-jsonform 2.21.3 release notes
+====================================
+
+
+Jan 12, 2024
+------------
+
+This release brings some important bugfixes.
+
+
+Bugfixes
+^^^^^^^^
+
+- :issue:`132`: Added missing imports and also fixed errors in validators (by `Nicolas Forstner <https://github.com/nlsfnr>`__).
+- :issue:`135`: Fixed layout issues in DJango 4.x which caused the form to render very narrowly.
+- :issue:`136`: Fixed display title of selected choices of multiselect input. Earlier, selected choices displayed their value
+  instead of the custom title.
+- :issue:`137`: Fixed JSON encoder errors when encoding UUID values in ``ArrayField`` (by `Andrés Reverón Molina <https://github.com/andres-holvi>`__).
+
+
+react-json-form (JavaScript)
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+`react-json-form <https://github.com/bhch/react-json-form>`_ has been updated
+to version 2.13.4.
+
+
+Thank you
+^^^^^^^^^
+
+Huge thanks to people who contributed code and reported these issues.
