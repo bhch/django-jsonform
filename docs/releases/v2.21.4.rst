@@ -1,0 +1,21 @@
+django-jsonform 2.21.4 release notes
+====================================
+
+
+Jan 15, 2024
+------------
+
+This release fixes a bug introduced in the previous release.
+
+
+Bugfixes
+^^^^^^^^
+- Fixed a bug which caused the form to crash when using the ``autocomplete`` and
+  ``multiselect-autocomplete`` widgets.
+
+
+react-json-form (JavaScript)
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+`react-json-form <https://github.com/bhch/react-json-form>`_ has been updated
+to version 2.13.5.
