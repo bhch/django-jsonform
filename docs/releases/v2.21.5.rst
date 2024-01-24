@@ -1,0 +1,14 @@
+django-jsonform 2.21.5 release notes
+====================================
+
+
+Jan 24, 2024
+------------
+
+This release fixes a bug introduced in the last couple of releases.
+
+
+Bugfixes
+^^^^^^^^
+
+- Added missing UUID import lack of which caused a ``NameError`` exception.
