@@ -1,4 +1,6 @@
 import json
+from uuid import UUID
+
 import django
 from django.db import models
 from django.conf import settings
