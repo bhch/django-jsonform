@@ -1,9 +1,9 @@
 import json
-from uuid import UUID
 import django
 from django.db import models
 from django.conf import settings
 from django.core.exceptions import ImproperlyConfigured, ValidationError
+from django.core.serializers.json import DjangoJSONEncoder
 from django_jsonform.utils import _get_django_version
 
 django_major, django_minor = _get_django_version()
@@ -75,15 +75,6 @@ class JSONFormField(DjangoJSONFormField):
         self.widget.add_error(error_map)
 
 
-class UUIDCompatibleEncoder(json.JSONEncoder):
-    def default(self, obj):
-        if isinstance(obj, UUID):
-            return str(obj)
-        elif isinstance(obj, Decimal):
-            return float(obj)
-        return json.JSONEncoder.default(self, obj)
-
-
 class ArrayFormField(SimpleArrayField):
     def __init__(self, base_field, **kwargs):
         if hasattr(SimpleArrayField, 'mock_field'):
@@ -105,7 +96,7 @@ class ArrayFormField(SimpleArrayField):
 
     def prepare_value(self, value):
         if isinstance(value, list):
-            return json.dumps(value, cls=UUIDCompatibleEncoder)
+            return json.dumps(value, cls=DjangoJSONEncoder)
         return value
 
     def to_python(self, value):
