@@ -148,7 +148,7 @@ class JSONSchemaValidator:
             data_type_norm = normalize_keyword(data_type)
             raise JSONSchemaValidationError(
                 _(
-                    'Data sturcture does not match schema. '
+                    'Data structure does not match schema. '
                     'Expected an array (list) but got %(schema_type)s instead.'
                 ),
                 params={'schema_type': '%s (%s)' % (data_type_norm, data_type) if data_type_norm else data_type}
@@ -215,7 +215,7 @@ class JSONSchemaValidator:
             data_type_norm = normalize_keyword(data_type)
             raise JSONSchemaValidationError(
                 _(
-                    'Data sturcture does not match schema. '
+                    'Data structure does not match schema. '
                     'Expected an object (dict) but got %(schema_type)s instead.'
                 ),
                 params={'schema_type': '%s (%s)' % (data_type_norm, data_type) if data_type_norm else data_type}
