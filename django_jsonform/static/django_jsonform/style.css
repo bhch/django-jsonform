@@ -1,3 +1,32 @@
+html[data-theme="light"], :root {
+    --rjf-panel-shadow: 0 0 2px rgba(0,0,0,0.075);
+    --rjf-popup-shadow-sm: 0 3px 15px rgba(0,0,0,0.12);
+    --rjf-popup-shadow-lg: 0 0 16px rgba(0,0,0,.25);
+    --rjf-opacity-bg: rgba(255, 255, 255, 0.4);
+    --rjf-modal-close-btn-fg: #ff4444;
+    --rjf-modal-close-btn-bg: #ffeeee;
+    --rjf-collapsed-indicator: url('./img/collapsed-indicator-bg.svg');
+    --rjf-search-icon: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='1em' height='1em' fill='%23444444' viewBox='0 0 16 16'%3E%3Cpath d='M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001c.03.04.062.078.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1.007 1.007 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0z'/%3E%3C/svg%3E");
+}
+html[data-theme="dark"] {
+    --rjf-popup-shadow-sm: 0 3px 15px rgb(0, 0, 0);
+    --rjf-popup-shadow-lg: 0 0 16px rgba(0,0,0);
+    --rjf-opacity-bg: rgba(0, 0, 0, 0.4);
+    --rjf-modal-close-btn-bg: #654848;
+    --rjf-collapsed-indicator: url('./img/collapsed-indicator-bg-dark.svg');
+    --rjf-search-icon: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='1em' height='1em' fill='%23999999' viewBox='0 0 16 16'%3E%3Cpath d='M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001c.03.04.062.078.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1.007 1.007 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0z'/%3E%3C/svg%3E");
+}
+@media (prefers-color-scheme: dark) {
+    :root {
+        --rjf-popup-shadow-sm: 0 3px 15px rgb(0, 0, 0);
+        --rjf-popup-shadow-lg: 0 0 16px rgba(0,0,0);
+        --rjf-opacity-bg: rgba(0, 0, 0, 0.4);
+        --rjf-modal-close-btn-bg: #654848;
+        --rjf-collapsed-indicator: url('./img/collapsed-indicator-bg-dark.svg');
+        --rjf-search-icon: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='1em' height='1em' fill='%23999999' viewBox='0 0 16 16'%3E%3Cpath d='M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001c.03.04.062.078.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1.007 1.007 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0z'/%3E%3C/svg%3E");
+    }
+}
+
 .flex-container .django-jsonform-container {
     flex-grow: 1;
 }
@@ -27,14 +56,14 @@
     background: url(./img/icon-addlink.svg) 0 1px no-repeat;
     padding-left: 16px;
     font-size: 12px;
-    color: #447e9b;
+    color: var(--link-fg);
     cursor: pointer;
     margin-top: 8px;
     border: 0px none;
 }
 .rjf-add-button:hover {
-    color: #036;
-    background-color: #f0faff;
+    color: var(--link-hover-color);
+    background-color: var(--darkened-bg);
 }
 
 .rjf-form-group-wrapper {
@@ -57,10 +86,10 @@
     position: relative;
     width: 100%;
     margin-bottom: 10px;
-    border: 1px solid #e5e5e5;
+    border: 1px solid var(--hairline-color);
     border-radius: 4px;
     padding: 10px;
-    box-shadow: 0 0 2px rgba(0,0,0,0.075);
+    box-shadow: var(--rjf-panel-shadow);
     transition: background-color 0.12s ease-in-out;
 }
 .rjf-form-row-controls + .rjf-oneof-group > .rjf-form-group {
@@ -136,7 +165,7 @@
 .rjf-form-group textarea[readonly],
 .rjf-multiselect-field.readonly .rjf-multiselect-field-input,
 .rjf-datetime-field-inputs.readonly .rjf-datetime-field-time input[readonly] {
-    background-color: #eee;
+    background-color: var(--hairline-color);
     outline: 0;
 }
 .rjf-form-row label,
@@ -144,6 +173,7 @@
     box-sizing: border-box;
     width: 33%;
     min-width: 5em;
+    float: left;
 }
 .rjf-form-row label + .rjf-input-group,
 .rjf-oneof-selector label + .rjf-input-group > .rjf-oneof-selector-input {
@@ -207,7 +237,7 @@
 .rjf-file-field {
     box-sizing: border-box;
     width: 66%;
-    color: #666;
+    color: var(--body-quiet-color);
     display: table;
 }
 
@@ -217,13 +247,13 @@
 }
 
 .rjf-current-file-name {
-    color: #666;
+    color: var(--body-quiet-color);
     width: 100%;
     margin-bottom: 0.5em;
 }
 .rjf-current-file-name > span {
-    background-color: #fbfbde;
-    color: #071d1f;
+    background-color: var(--selected-row);
+    color: var(--body-fg);
     padding: 1px 4px;
     border-radius: 3px;
     display: inline-block;
@@ -243,7 +273,7 @@
     padding: 0 1px;
 }
 .rjf-remove-file-button:hover {
-    background-color: #eee;
+    background-color: var(--darkened-bg);
     color: var(--link-hover-color);
 }
 
@@ -267,7 +297,7 @@
 }
 .rjf-form-row-controls:hover + .rjf-form-row-inner,
 .rjf-form-row-controls:hover + .rjf-form-group {
-    background-color: #fffedd;
+    background-color: var(--selected-row);
 }
 .rjf-form-row-controls button {
     position: relative;
@@ -280,13 +310,13 @@
     background-color: transparent;
     background-repeat: no-repeat;
     background-size: 40px;
-    border: 1px solid #ddd;
+    border: 1px solid var(--border-color);
 }
 .rjf-form-group-wrapper > .rjf-form-row-controls button {
     border-top: 0;
 }
 .rjf-form-row > .rjf-form-row-controls > button {
-    border-color: #ccc;
+    border-color: var(--border-color);
     border-radius: 10rem;
 }
 .rjf-form-group-wrapper > .rjf-form-row-controls > button:first-child {
@@ -301,8 +331,8 @@
     border-bottom-left-radius: 0;
 }
 .rjf-form-row-controls button:hover {
-    background-color: #fff;
-    border-color: #666;
+    background-color: var(--body-bg);
+    border-color: var(--border-color);
     z-index: 1;
 }
 .rjf-form-row-controls button > span {
@@ -342,7 +372,7 @@
 
 .rjf-collapse-button {
     font-size: 0.8rem;
-    color: #777;
+    color: var(--body-quiet-color);
     padding-left: 3px;
     padding-right: 3px;
     border: 0;
@@ -350,15 +380,15 @@
     cursor: pointer;
 }
 .rjf-collapse-button:hover {
-    background-color: #eee;
-    color: #000;
+    background-color: var(--darkened-bg);
+    color: var(--body-fg);
 }
 .rjf-collapsed {
     display: none;
 }
 .rjf-collapsed-indicator {
     text-align: center;
-    background-image: url('./img/collapsed-indicator-bg.svg');
+    background-image: var(--rjf-collapsed-indicator);
     background-repeat: repeat-x;
     background-position: center;
 }
@@ -366,9 +396,9 @@
     display: inline-block;
     font-style: italic;
     padding: 3px 6px;
-    color: #888;
+    color: var(--body-quiet-color);
     background-color: var(--body-bg);
-    border: 1px solid #ccc;
+    border: 1px solid var(--border-color);
     border-radius: 4px;
     cursor: default;
 }
@@ -411,12 +441,12 @@
     position: absolute;
     margin-left: -4.5em;
     margin-top: 3px;
-    background-color: #fff;
+    background-color: var(--darkened-bg);
     z-index: 10;
     border-radius: 4px;
     padding: 10px;
-    border: 1px solid #bbb;
-    box-shadow: 0 3px 12px rgba(0,0,0,0.12);
+    border: 1px solid var(--border-color);
+    box-shadow: var(--rjf-popup-shadow-sm);
     box-sizing: border-box;
 }
 .rjf-time-picker * {
@@ -457,20 +487,19 @@
 .rjf-time-picker button {
     display: block;
     width: 100%;
-    background-color: #fff;
-    color: #666;
+    background-color: transparent;
+    color: var(--body-quiet-color);
     border: 1px solid transparent;
     line-height: 1;
     cursor: pointer;
 }
 .rjf-time-picker button:hover {
-    color: #000;
-    background-color: #eee;
-    border-color: #ccc;
+    background-color: var(--body-bg);
+    border-color: var(--border-color);
 }
 .rjf-time-picker-labels {
     text-align: center;
-    color: #999;
+    color: var(--body-quiet-color);
     font-size: 0.9em;
     margin-bottom: 5px;
 }
@@ -486,7 +515,6 @@
     cursor: pointer;
     padding: 5px 6px;
     padding-right: 28px !important;
-    background-color: #fff;
     background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3e%3cpath fill='none' stroke='%23777777' stroke-linecap='round' stroke-linejoin='round' stroke-width='2' d='M2 5l6 6 6-6'/%3e%3c/svg%3e");
     background-repeat: no-repeat;
     background-position: right 6px center;
@@ -506,7 +534,7 @@
 }
 .rjf-multiselect-field-input-item {
     display: inline-block;
-    background-color: #e9e9eb;
+    background-color: var(--hairline-color);
     margin-right: 4px;
     margin-top: 2px;
     margin-bottom: 2px;
@@ -514,7 +542,7 @@
     white-space: nowrap;
 }
 .rjf-multiselect-field.readonly .rjf-multiselect-field-input-item {
-    background-color: #d9d9da;
+    background-color: var(--body-bg);
 }
 .rjf-multiselect-field-input-item > span {
     display: inline-block;
@@ -524,6 +552,7 @@
     cursor: default;
 }
 .rjf-multiselect-field-input-item > button {
+    color: inherit;
     display: inline-block;
     vertical-align: middle;
     background-color: transparent;
@@ -535,18 +564,18 @@
     cursor: pointer;
 }
 .rjf-multiselect-field-input-item > button:hover {
-    color: #ba2121;
-    background-color: #ffd4d4;
+    color: var(--primary-fg);
+    background-color: var(--delete-button-bg);
 }
 .rjf-multiselect-field-options-container {
     position: absolute;
-    background-color: #fff;
-    border: 1px solid #ccc;
+    background-color: var(--darkened-bg);
+    border: 1px solid var(--body-bg);
     width: 22em;
     padding: 5px 0;
     margin-bottom: 15px;
     border-radius: 4px;
-    box-shadow: 0 3px 15px rgba(0,0,0,0.12);
+    box-shadow: var(--rjf-popup-shadow-sm);
     max-height: 187px;
     overflow: auto;
     z-index: 100;
@@ -568,7 +597,7 @@ div.form-row::after {
     clear: both;
 }
 .rjf-multiselect-field-option.disabled {
-    color: #999;
+    color: var(--body-quiet-color);
 }
 .rjf-multiselect-field-option label {
     display: block;
@@ -576,7 +605,7 @@ div.form-row::after {
     width: 100%;
     box-sizing: border-box;
     padding: 8px 8px !important;
-    color: #333;
+    color: var(--body-fg);
     cursor: pointer;
     -webkit-touch-callout: none; /* iOS Safari */
     -webkit-user-select: none; /* Safari */
@@ -589,18 +618,18 @@ div.form-row::after {
     display: none !important;
 }
 .rjf-multiselect-field-option label:hover {
-    background-color: #f3f3f3;
+    background-color: var(--body-bg);
 }
 .rjf-multiselect-field-option.selected label {
-    background-color: #fffedd;
+    background-color: var(--selected-row);
 }
 .rjf-multiselect-field-option.selected label:hover {
-    background-color: #f3f3d9;
+    background-color: var(--selected-row);
 }
 .rjf-multiselect-field-option.disabled label,
 .rjf-multiselect-field-option.selected.disabled label {
     cursor: not-allowed;
-    background-color: #fff;
+    background-color: transparent;
 }
 .rjf-multiselect-field-option label > input[type="checkbox"] {
     vertical-align: middle;
@@ -684,11 +713,11 @@ div.form-row::after {
     transition: all 0.1s ease-in-out;
 }
 .rjf-modal__content {
-    background-color: #fff;
+    background-color: var(--body-bg);
     overflow: auto;
     border-radius: 4px;
     width: 100%;
-    box-shadow: 0 0 16px rgba(0,0,0,.25);
+    box-shadow: var(--rjf-popup-shadow-lg);
     pointer-events: auto;
     box-sizing: border-box;
 }
@@ -696,7 +725,7 @@ div.form-row::after {
     padding: 15px;
     font-size: 1.2rem;
     font-weight: 700;
-    background-color: #f8f8f8;
+    background-color: var(--darkened-bg);
 }
 .rjf-modal__close-button {
     float: right;
@@ -704,8 +733,8 @@ div.form-row::after {
     font-weight: bold;
     padding: 5px;
     margin-top: -0.2em;
-    color: #ff4444;
-    background-color: #ffeeee;
+    color: var(--rjf-modal-close-btn-fg);
+    background-color: var(--rjf-modal-close-btn-bg);
     border: 1px solid transparent;
     border-radius: 100%;
     cursor: pointer;
@@ -713,9 +742,9 @@ div.form-row::after {
     line-height: 1;
 }
 .rjf-modal__close-button:hover {
-    color: #ff4444;
-    border-color: #ff4444;
-    background-color: #fff;
+    color: var(--rjf-modal-close-btn-fg);
+    border-color: var(--rjf-modal-close-btn-fg);
+    background-color: var(--body-bg);
 }
 .rjf-modal__close-button > .rjf-icon {
     width: 1.5em;
@@ -726,16 +755,16 @@ div.form-row::after {
 }
 .rjf-upload-modal__open-button,
 .rjf-modal__footer-close-button {
-    background-color: #e8e8e8;
-    color: #000;
-    border: 1px solid #e8e8e8;
+    background-color: var(--darkened-bg);
+    color: var(--body-fg);
+    border: 1px solid var(--border-color);
     padding: 3px 8px;
     border-radius: 3px;
     cursor: pointer;
 }
 .rjf-upload-modal__open-button:hover,
 .rjf-modal__footer-close-button:hover {
-    background-color: #ddd;
+    background-color: var(--selected-bg);
 }
 .rjf-modal__body {
     padding: 15px;
@@ -750,22 +779,37 @@ div.form-row::after {
 }
 .rjf-upload-modal__tab-button {
     background-color: transparent;
-    color: #1f546d;
-    border: 1px solid #1f546d;
+    color: var(--link-fg);
+    border: 1px solid var(--link-fg);
     padding: 3px 6px;
     border-radius: 3px;
     cursor: pointer;
 }
 .rjf-upload-modal__tab-button:hover {
-    background-color: #dcecf4;
+    background-color: var(--body-bg);
 }
 .rjf-upload-modal__tab-button--active {
-    background-color: #417690;
+    background-color: var(--secondary);
     color: #fff;
-    border-color: #417690;
+    border-color: var(--secondary);
 }
 .rjf-upload-modal__tab-button--active:hover {
     background-color: #205067;
+}
+.rjf-upload-modal__media-load-button {
+    display: table;
+    margin: auto;
+    margin-top: 2em;
+    font-size: 1em;
+    padding: 4px 8px;
+    border: 1px solid;
+    border-radius: 3px;
+    background-color: transparent;
+    cursor: pointer;
+    color: var(--link-fg);
+}
+.rjf-upload-modal__media-load-button:hover {
+    background-color: var(--darkened-bg);
 }
 .rjf-upload-modal__media-container {
     box-sizing: border-box;
@@ -788,16 +832,16 @@ div.form-row::after {
 }
 .rjf-upload-modal__media-tile-inner {
     width: 100%;
-    background-color: #fff;
+    background-color: var(--body-bg);
     box-sizing: border-box;
-    border: 1px solid #ddd;
+    border: 1px solid var(--border-color);
     border-radius: 3px;
     padding: 5px;
     cursor: pointer;
 }
 .rjf-upload-modal__media-tile-inner:hover {
-    background-color: #f8f8f8;
-    border-color: #777;
+    background-color: var(--darkened-bg);
+    border-color: var(--primary);
 }
 .rjf-upload-modal__media-tile-inner > img {
     max-width: 100%;
@@ -807,7 +851,7 @@ div.form-row::after {
     box-sizing: border-box;
 }
 .rjf-upload-modal__media-tile-metadata {
-    color: #777;
+    color: var(--body-quiet-color);
     font-size: 0.9em;
     padding-top: 15px;
     word-break: break-word;
@@ -833,13 +877,30 @@ div.form-row::after {
 .rjf-upload-modal__media-tile .rjf-dropdown-toggler {
     padding: 3px;
     border: 0;
-    background-color: transparent;
+    color: var(--body-fg);
+    background-color: var(--rjf-opacity-bg);
     float: right;
 }
 .rjf-upload-modal__media-tile .rjf-dropdown-toggler:hover {
     background-color: #eee;
     color: #000;
     cursor: pointer;
+}
+.rjf-upload-modal__media-end-message {
+    font-size: 1.2em;
+    text-align: center;
+    margin-top: 2em;
+    color: var(--body-quiet-color);
+    font-weight: bold;
+    opacity: 0.5;
+}
+.rjf-loader.rjf-upload-modal__media-loader {
+    width: 2.2em;
+    height: 2.2em;
+    border-width: 5px;
+    display: block;
+    margin: auto;
+    margin-top: 2em;
 }
 .rjf-dropdown-items {
     display: table;
@@ -866,7 +927,7 @@ div.form-row::after {
 .rjf-autocomplete-field-input {
     cursor: pointer;
     padding-right: 40px !important;
-    background-color: #fff !important;
+    background-color: transparent !important;
 }
 .rjf-autocomplete-field-clear-button {
     position: absolute;
@@ -884,7 +945,7 @@ div.form-row::after {
     top: 5px;
 }
 .rjf-autocomplete-field-clear-button:hover {
-    background-color: #eee;
+    background-color: var(--darkened-bg);
     color: var(--link-hover-color);
 }
 .rjf-autocomplete-field-clear-button > .rjf-icon {
@@ -896,13 +957,13 @@ div.form-row::after {
 .rjf-autocomplete-field-popup {
     position: absolute;
     left: 0;
-    background-color: #fff;
-    border: 1px solid #ccc;
+    background-color: var(--darkened-bg);
+    border: 1px solid var(--border-color);
     width: 100%;
     max-width: 18rem;
     margin-bottom: 15px;
     border-radius: 4px;
-    box-shadow: 0 3px 15px rgba(0,0,0,0.12);
+    box-shadow: var(--rjf-popup-shadow-sm);
     z-index: 100;
 }
 .rjf-autocomplete-field.has-label .rjf-autocomplete-field-popup {
@@ -915,11 +976,12 @@ div.form-row::after {
 }
 .rjf-autocomplete-field-search input {
     width: 100%;
-    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='1em' height='1em' fill='%23444444' viewBox='0 0 16 16'%3E%3Cpath d='M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001c.03.04.062.078.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1.007 1.007 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0z'/%3E%3C/svg%3E");
+    background-image: var(--rjf-search-icon);
     background-repeat: no-repeat;
     background-position: 6px center;
     padding-left: 30px;
     padding-right: 30px;
+    outline: 0;
 }
 .rjf-autocomplete-field-search .rjf-loader {
     position: absolute;
@@ -928,7 +990,7 @@ div.form-row::after {
 }
 .rjf-autocomplete-field-options {
     padding: 8px 0;
-    border-top: 1px solid #ccc;
+    border-top: 1px solid var(--border-color);
     max-height: 156px;
     overflow: auto;
 }
@@ -938,11 +1000,11 @@ div.form-row::after {
 }
 .rjf-autocomplete-field-option:hover,
 .rjf-autocomplete-field-option:focus {
-    background-color: #eee;
+    background-color: var(--body-bg);
 }
 .rjf-autocomplete-field-option.selected,
 .rjf-autocomplete-field-option.selected:hover {
-    background-color: #fffedd;
+    background-color: var(--selected-row);
     cursor: default;
 }
 .rjf-autocomplete-field-option.disabled {
@@ -952,37 +1014,6 @@ div.form-row::after {
 .rjf-autocomplete-field-option.disabled:hover,
 .rjf-autocomplete-field-option.disabled:focus {
     background-color: transparent;
-}
-
-.rjf-upload-modal__media-load-button {
-    display: table;
-    margin: auto;
-    margin-top: 2em;
-    font-size: 1em;
-    padding: 4px 8px;
-    border: 1px solid;
-    border-radius: 3px;
-    background-color: transparent;
-    cursor: pointer;
-    color: #417690;
-}
-.rjf-upload-modal__media-load-button:hover {
-    background-color: #dcecf4;
-}
-.rjf-upload-modal__media-end-message {
-    font-size: 1.2em;
-    text-align: center;
-    margin-top: 2em;
-    color: #999;
-    font-weight: bold;
-}
-.rjf-loader.rjf-upload-modal__media-loader {
-    width: 2.2em;
-    height: 2.2em;
-    border-width: 5px;
-    display: block;
-    margin: auto;
-    margin-top: 2em;
 }
 
 .rjf-file-field-loading {
@@ -1071,6 +1102,11 @@ div.form-row::after {
     .rjf-form-row select,
     .rjf-form-row textarea {
         width: 100%;
+    }
+
+    .rjf-form-row label,
+    .rjf-oneof-selector label {
+        float: none;
     }
 
     .rjf-form-row label input[type="checkbox"] {
@@ -1236,190 +1272,4 @@ div.form-row::after {
 }
 .grp-module .rjf-help-text {
     color: #888;
-}
-
-
-/* Dark mode */
-
-@media (prefers-color-scheme: dark) {
-    .rjf-form-group-inner,
-    .rjf-form-row-controls + .rjf-oneof-group {
-        border-color: #3f3f3f;
-    }
-    .rjf-form-row-controls button {
-        border-color: #3f3f3f;
-    }
-    .rjf-form-row-controls button:hover {
-        background-color: #eee;
-    }
-    .rjf-form-row > .rjf-form-row-controls > button {
-        border-color: #444;
-    }
-    .rjf-form-row-controls:hover + .rjf-form-row-inner,
-    .rjf-form-row-controls:hover + .rjf-form-group {
-        background-color: #000;
-    }
-    .rjf-collapse-button {
-        color: #bbb;
-    }
-    .rjf-collapse-button:hover {
-        background-color: #333;
-        color: #eee;
-    }
-    .rjf-collapsed-indicator {
-        background-image: url('./img/collapsed-indicator-bg-dark.svg');
-    }
-    .rjf-collapsed-indicator span {
-        color: #aaa;
-        background-color: var(--body-bg);
-        border-color: #444;
-    }
-    .rjf-form-group input[readonly],
-    .rjf-form-group select[readonly],
-    .rjf-form-group textarea[readonly],
-    .rjf-multiselect-field.readonly .rjf-multiselect-field-input,
-    .rjf-datetime-field-inputs.readonly .rjf-datetime-field-time input[readonly] {
-        background-color: #272727;
-    }
-    .rjf-multiselect-field-input {
-        background-color: transparent;
-    }
-    .rjf-multiselect-field-input-item {
-        background-color: #2f3436;
-    }
-    .rjf-multiselect-field.readonly .rjf-multiselect-field-input-item {
-        background-color: #4b4b4d;
-    }
-    .rjf-multiselect-field-input-item > button {
-        color: inherit;
-    }
-    .rjf-multiselect-field-input-item > button:hover {
-        color: inherit;
-        background-color: #a41515;
-    }
-    .rjf-multiselect-field-options-container {
-        background-color: #222;
-        border-color: #444;
-        box-shadow: 0 3px 15px rgb(0, 0, 0);
-    }
-    .rjf-multiselect-field-option label {
-        color: #eee;
-    }
-    .rjf-multiselect-field-option label:hover {
-        background-color: #121212;
-    }
-    .rjf-multiselect-field-option.selected label {
-        background-color: #000;
-    }
-    .rjf-multiselect-field-option.selected label:hover {
-        background-color: #000;
-    }
-    .rjf-multiselect-field-option.disabled label,
-    .rjf-multiselect-field-option.selected.disabled label {
-        background-color: transparent;
-    }
-    .rjf-datetime-field-time input[readonly] {
-        background-color: var(--body-bg);
-    }
-    .rjf-time-picker {
-        background-color: #222;
-        border-color: #444;
-        box-shadow: 0 3px 15px rgb(0, 0, 0);
-    }
-    .rjf-time-picker-labels {
-        color: #cacaca;
-    }
-    .rjf-time-picker button {
-        background-color: #000;
-        color: #cacaca;
-    }
-    .rjf-current-file-name {
-        color: #cacaca;
-    }
-    .rjf-current-file-name > span {
-        background-color: #3f3f3f;
-        color: #e3fcff;
-    }
-    .rjf-autocomplete-field-input {
-        background-color: transparent !important;
-    }
-    .rjf-autocomplete-field-search input {
-        background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='1em' height='1em' fill='%23999999' viewBox='0 0 16 16'%3E%3Cpath d='M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001c.03.04.062.078.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1.007 1.007 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0z'/%3E%3C/svg%3E");
-        outline: 0;
-    }
-    .rjf-autocomplete-field-popup {
-        background-color: #222;
-        border-color: #444;
-        box-shadow: 0 3px 15px rgb(0, 0, 0);
-    }
-    .rjf-autocomplete-field-options {
-        border-top-color: #444; 
-    }
-    .rjf-autocomplete-field-option:hover,
-    .rjf-autocomplete-field-option:focus {
-        background-color: #000;
-    }
-    .rjf-autocomplete-field-option.selected,
-    .rjf-autocomplete-field-option.selected:hover {
-        background-color: #000;
-    }
-    .rjf-autocomplete-field-clear-button:hover {
-        background-color: #000;
-    }
-    .rjf-modal__content {
-        background-color: #121212;
-        box-shadow: 0 0 16px rgba(0,0,0);
-    }
-    .rjf-modal__header {
-        background-color: #212121;
-    }
-    .rjf-upload-modal__tab-button {
-        color: #83cbed;
-        border: 1px solid #83cbed;
-    }
-    .rjf-upload-modal__tab-button:hover {
-        background-color: #121212;
-    }
-    .rjf-upload-modal__tab-button--active {
-        background-color: #417690;
-        color: #fff;
-        border-color: #417690;
-    }
-    .rjf-upload-modal__tab-button--active:hover {
-        background-color: #205067;
-    }
-    .rjf-upload-modal__media-load-button {
-        color: #83cbed;
-    }
-    .rjf-upload-modal__media-load-button:hover {
-        background-color: #000;
-    }
-    .rjf-upload-modal__open-button,
-    .rjf-modal__footer-close-button {
-        background-color: #313131;
-        color: #fff;
-        border: 1px solid #555;
-    }
-    .rjf-upload-modal__open-button:hover,
-    .rjf-modal__footer-close-button:hover {
-        background-color: #000;
-    }
-    .rjf-modal__close-button {
-        background-color: #654848;
-    }
-    .rjf-upload-modal__media-tile .rjf-dropdown-toggler {
-        background-color: rgba(0, 0, 0, 0.5);
-        color: #cacaca;
-    }
-    .rjf-upload-modal__media-tile-inner {
-        background-color: #000;
-        border: 1px solid #444;
-    }
-    .rjf-upload-modal__media-tile-inner:hover {
-        background-color: #212121;
-        border-color: #444;
-    }
-    .rjf-upload-modal__media-tile-metadata {
-        color: #cacaca;
-    }
 }
