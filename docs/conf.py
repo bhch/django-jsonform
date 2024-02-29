@@ -60,5 +60,9 @@ extlinks = {
     'issue': (
         'https://github.com/bhch/django-jsonform/issues/%s',
         '#' # verions 4+ also require '%s' in this value
+    ),
+    'pr': (
+        'https://github.com/bhch/django-jsonform/pull/%s',
+        '#' # verions 4+ also require '%s' in this value
     )
 }
