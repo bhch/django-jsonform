@@ -1,0 +1,31 @@
+django-jsonform 2.22.0 release notes
+====================================
+
+
+Feb 29, 2024
+------------
+
+This release brings some new features and a few bug fixes.
+
+
+New features
+^^^^^^^^^^^^
+
+- :pr:`142`: Improved support for UUID, datetime, Decimal, etc. types on ArrayField (by `Gyuri <https://github.com/nullcode>`__).
+- Support for ``uri`` and ``uri-reference`` formats. The input for this format will also display a clickable link to open
+  the input's link value in new tab.
+- :issue:`156`: Support for clickable links for ``URLField`` inside ``ArrayField``.
+
+
+Bugfixes
+^^^^^^^^
+
+- Fixed dark mode CSS for Django 4 and 5.
+- :pr:`154`: Fixed typo in validation error message (by `Garret Heaton <https://github.com/powdahound>`__).
+
+
+react-json-form (JavaScript)
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+`react-json-form <https://github.com/bhch/react-json-form>`_ has been updated
+to version 2.14.0.
