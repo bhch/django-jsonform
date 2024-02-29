@@ -921,7 +921,7 @@ div.form-row::after {
     cursor: pointer;
 }
 
-.rjf-autocomplete-field {
+.rjf-autocomplete-field, .rjf-url-field {
     position: relative;
 }
 .rjf-autocomplete-field-input {
@@ -929,7 +929,7 @@ div.form-row::after {
     padding-right: 40px !important;
     background-color: transparent !important;
 }
-.rjf-autocomplete-field-clear-button {
+.rjf-autocomplete-field-clear-button, .rjf-url-field-link {
     position: absolute;
     right: 6px;
     top: 5px;
@@ -941,10 +941,12 @@ div.form-row::after {
     z-index: 10;
     cursor: pointer;
 }
-.rjf-autocomplete-field.has-label .rjf-autocomplete-field-clear-button {
+.rjf-autocomplete-field.has-label .rjf-autocomplete-field-clear-button,
+.rjf-url-field.has-label .rjf-url-field-link {
     top: 5px;
 }
-.rjf-autocomplete-field-clear-button:hover {
+.rjf-autocomplete-field-clear-button:hover,
+.rjf-url-field-link:hover {
     background-color: var(--darkened-bg);
     color: var(--link-hover-color);
 }
@@ -1016,6 +1018,20 @@ div.form-row::after {
     background-color: transparent;
 }
 
+.rjf-url-field-input {
+    padding-right: 34px !important;
+}
+.rjf-url-field-link {
+    right: 4px;
+    padding-right: 4px;
+}
+.rjf-url-field-link > span {
+    display: none;
+}
+.rjf-url-field-link > .rjf-icon {
+    vertical-align: middle;
+}
+
 .rjf-file-field-loading {
     margin-top: 0.6em;
     vertical-align: middle;
@@ -1072,7 +1088,9 @@ div.form-row::after {
     }
 
     .rjf-autocomplete-field.has-label .rjf-autocomplete-field-clear-button,
-    .rjf-autocomplete-field-clear-button {
+    .rjf-autocomplete-field-clear-button,
+    .rjf-url-field.has-label .rjf-url-field-link,
+    .rjf-url-field-link {
         top: 8px;
     }
     .rjf-autocomplete-field-search input {
@@ -1162,7 +1180,8 @@ div.form-row::after {
         width: calc(100% + 60px);
     }
 
-    .rjf-autocomplete-field.has-label .rjf-autocomplete-field-clear-button {
+    .rjf-autocomplete-field.has-label .rjf-autocomplete-field-clear-button,
+    .rjf-url-field.has-label .rjf-url-field-link {
         top: 32px;
     }
 

@@ -109,10 +109,12 @@ class ArrayFormField(SimpleArrayField):
 
         if isinstance(self.base_field, ArrayFormField):
             items = self.base_field.get_schema()
-        elif  isinstance(self.base_field, models.IntegerField):
+        elif isinstance(self.base_field, django.forms.IntegerField):
             items = {'type': 'number'}
         else:
             items = {'type': 'string'}
+            if isinstance(self.base_field, django.forms.URLField):
+                items['format'] = 'uri-reference'
 
         schema['items'] = items
 
