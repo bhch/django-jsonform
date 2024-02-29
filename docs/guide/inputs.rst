@@ -21,19 +21,21 @@ and ``widget`` keywords.
 
 Available ``format`` values for ``string`` type:
 
-============= ===========
-Format        Description
-============= ===========
-``color``     A colour input
-``date``      A date input
-``date-time`` A datetime input. See :ref:`Datetime field` for details.
-``datetime``  Alias for ``date-time``
-``email``     An email input
-``password``  A password input
-``time``      A time input
-``data-url``  A file input. See :doc:`Uploading files <upload>` for usage.
-``file-url``  A file input. See :doc:`Uploading files <upload>` for usage.
-============= ===========
+================= ===========
+Format            Description
+================= ===========
+``color``         A colour input
+``date``          A date input
+``date-time``     A datetime input. See :ref:`Datetime field` for details.
+``datetime``      Alias for ``date-time``
+``email``         An email input
+``password``      A password input
+``time``          A time input
+``data-url``      A file input. See :doc:`Uploading files <upload>` for usage.
+``file-url``      A file input. See :doc:`Uploading files <upload>` for usage.
+``uri``           A URL input for absolute links only.
+``uri-reference`` A URL input for absolute as well as relative links.
+================= ===========
 
 Available ``widget`` values for ``string`` type:
 
