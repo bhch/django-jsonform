@@ -90,7 +90,9 @@ class ArrayFormField(SimpleArrayField):
             self.widget = JSONFormWidget(schema=self.get_schema())
         else:
             self.widget = TextInput
-        kwargs['widget'] = self.widget
+
+        if not kwargs.get('widget'):
+            kwargs['widget'] = self.widget
 
         super().__init__(base_field, **kwargs)
 
