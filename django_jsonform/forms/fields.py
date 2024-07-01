@@ -113,6 +113,8 @@ class ArrayFormField(SimpleArrayField):
             items = self.base_field.get_schema()
         elif isinstance(self.base_field, django.forms.IntegerField):
             items = {'type': 'number'}
+        elif isinstance(self.base_field, JSONFormField):
+            items = self.base_field.widget.get_schema()
         else:
             items = {'type': 'string'}
             if isinstance(self.base_field, django.forms.URLField):
