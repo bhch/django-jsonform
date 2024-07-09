@@ -105,7 +105,7 @@ This example shows a schema of a basic dict:
 
     # Schema
     {
-        'type': 'dict': # or 'object'
+        'type': 'dict', # or 'object'
         'keys': { # or 'properties'
             'name': {
                 'type': 'string'
@@ -158,11 +158,11 @@ The ``additionalProperties`` keyword can be:
         'keys': { # or 'properties'
             'name': { 'type': 'string' },
         },
-        
+
         'addtionalProperties': True
 
         # or
-        
+
         'additionalProperties': { 'type': 'string' }
     }
 
@@ -497,7 +497,7 @@ which contains more links and a sub-sub-menu and so on...
                 },
                 'children': { '$ref': '#' }
             }
-        }        
+        }
     }
 
 .. caution::
@@ -552,12 +552,12 @@ certain limitations.
         'oneOf': [
             {
                 'properties': {
-                    'age': {'type': 'number'} 
+                    'age': {'type': 'number'}
                 }
             },
             {
                 'properties': {
-                    'date_of_birth': {'type': 'string', 'format': 'date-time'} 
+                    'date_of_birth': {'type': 'string', 'format': 'date-time'}
                 }
             }
         ]
@@ -605,12 +605,12 @@ certain limitations.
         'allOf': [
             {
                 'properties': {
-                    'age': {'type': 'number'} 
+                    'age': {'type': 'number'}
                 }
             },
             {
                 'properties': {
-                    'date_of_birth': {'type': 'string', 'format': 'date-time'} 
+                    'date_of_birth': {'type': 'string', 'format': 'date-time'}
                 }
             }
         ],
