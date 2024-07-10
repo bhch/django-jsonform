@@ -296,9 +296,13 @@ class JSONSchemaValidator:
 
     def validate_string(self, schema, data, coords, raise_exc=False):
         if isinstance(data, str):
-            data = data.strip()
+            trimmed_data = data.strip()
+        else:
+            trimmed_data = data
 
-        if schema.get('required') and not data:
+        is_empty = not trimmed_data
+
+        if schema.get('required') and is_empty:
             self.add_error(coords, 'This field is required.', raise_exc=raise_exc)
             return
 
@@ -306,7 +310,7 @@ class JSONSchemaValidator:
             self.add_error(coords, 'This value is invalid. Must be a valid string.', raise_exc=raise_exc)
             return
 
-        if not data:
+        if is_empty:
             # data not required and is empty
             return
 
