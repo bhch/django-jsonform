@@ -1226,9 +1226,9 @@ class TestJSONSchemaValidator(TestCase):
         validator(data)
 
         # 7. test choices
-        schema['properties']['a']['choices'] = ['one', 'two']
+        schema['properties']['a']['choices'] = ['one', 'two ']
         wrong_data = {'a': 'xxx'}
-        data = {'a': 'two'}
+        data = {'a': 'two '}  # White space in choices is valid
         self.assertRaises(JSONSchemaValidationError, validator, wrong_data)
         validator(data)
 
