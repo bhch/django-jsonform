@@ -85,6 +85,7 @@ class ArrayFormField(SimpleArrayField):
         self.min_items = kwargs.get('min_length')
 
         self.nested = kwargs.pop('nested', False)
+        self.schema = kwargs.pop('schema', None)
 
         if not self.nested:
             self.widget = JSONFormWidget(schema=self.get_schema())
@@ -107,6 +108,9 @@ class ArrayFormField(SimpleArrayField):
         return super().to_python(value)
 
     def get_schema(self):
+        if self.schema:
+            return self.schema
+
         schema = {'type': 'array'}
 
         if isinstance(self.base_field, ArrayFormField):

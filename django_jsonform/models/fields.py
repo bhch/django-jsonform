@@ -56,7 +56,13 @@ class ArrayField(DjangoArrayField):
             raise ImproperlyConfigured('ArrayField requires psycopg2 to be installed.')
 
         self.nested = kwargs.pop('nested', False)
+        self.schema = kwargs.pop('schema', None)
         super().__init__(*args, **kwargs)
 
     def formfield(self, **kwargs):
-        return super().formfield(**{'form_class': ArrayFormField, 'nested': self.nested, **kwargs})
+        return super().formfield(**{
+            'form_class': ArrayFormField,
+            'nested': self.nested,
+            'schema': self.schema,
+            **kwargs,
+        })
