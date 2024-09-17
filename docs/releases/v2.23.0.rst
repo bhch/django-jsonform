@@ -1,0 +1,43 @@
+django-jsonform 2.23.0 release notes
+====================================
+
+
+Sep 17, 2024
+------------
+
+This release fixes some bugs and brings a couple of new features.
+
+
+New features
+^^^^^^^^^^^^
+
+- :issue:`72`: ``ArrayField`` now accepts a custom schema. More in docs. :ref:`See usage docs <arrayfield custom schema>`.
+
+- :pr:`162`: ``ArrayField``'s widget can be overridden now (by Willard Nilges). :ref:`See usage docs <arrayfield custom widget>`.
+
+
+Bugfixes
+^^^^^^^^
+
+- :issue:`172`: Fixed a bug that prevented using ``JSONField`` as an item of the ``ArrayField``.
+
+- :pr:`175`: Fixed a bug which caused issues when choices had whitespace in them (by Kyle Perik).
+
+- :issue:`165`: Excluded the tests from PyPI wheel package (by Bruno Alla in PR :pr:`176`).
+
+
+Browser side improvements
+^^^^^^^^^^^^^^^^^^^^^^^^^
+
+- Fixed (suppressed for the time being) buggy validation of ``oneOf``/``anyOf`` within an object.
+
+- Fixed crashes when using ``oneOf``.
+
+- Fixed number input validation. Some browsers need ``step=any`` for decimal values.
+
+
+react-json-form (JavaScript)
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+`react-json-form <https://github.com/bhch/react-json-form>`_ has been updated
+to version 2.14.2.
