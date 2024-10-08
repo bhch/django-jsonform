@@ -1,0 +1,19 @@
+django-jsonform 2.23.1 release notes
+====================================
+
+
+Oct 08, 2024
+------------
+
+
+Bugfixes
+^^^^^^^^
+
+- Fixed a bug related to in-browser validation for arrays with choices.
+
+
+react-json-form (JavaScript)
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+`react-json-form <https://github.com/bhch/react-json-form>`_ has been updated
+to version 2.14.3.
