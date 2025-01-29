@@ -1,0 +1,20 @@
+django-jsonform 2.23.2 release notes
+====================================
+
+
+Jan 30, 2025
+------------
+
+
+Bugfixes
+^^^^^^^^
+
+- :issue:`180`: Use ``step="1"`` for integer fields and ``step="any"`` for number fields.
+- Make anyOf/oneOf fields readonly in case the parent schema is also readonly (fix provided by (by `Jon Winsley <https://github.com/glitchassassin>`__).
+
+
+react-json-form (JavaScript)
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+`react-json-form <https://github.com/bhch/react-json-form>`_ has been updated
+to version 2.14.4.
